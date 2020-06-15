@@ -15,4 +15,7 @@ public interface IEspectadorService {
 
     public void remove(long idPersona);
 
+    public abstract Espectador findByIdPersona(long idPersona);
+
+
 }

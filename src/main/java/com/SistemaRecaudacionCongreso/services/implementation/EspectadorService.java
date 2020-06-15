@@ -25,4 +25,9 @@ public class EspectadorService implements IEspectadorService{
          espectadorRepository.deleteById(idPersona);
     }
 
+    public Espectador findByIdPersona(long idPersona){
+        return espectadorRepository.findByIdPersona(idPersona);
+    }
+
+
 }
