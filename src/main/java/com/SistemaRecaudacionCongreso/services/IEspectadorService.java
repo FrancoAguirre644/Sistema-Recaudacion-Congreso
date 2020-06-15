@@ -13,4 +13,6 @@ public interface IEspectadorService {
 
     public List<Espectador> getAll();
 
+    public void remove(long idPersona);
+
 }

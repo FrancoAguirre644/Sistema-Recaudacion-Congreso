@@ -4,10 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Espectadores</title>
+
+    <link rel="stylesheet" href="style.css" th:href="@{/css/bootstrap.css}">
+
+
 </head>
 
 <body>
+
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Tipo Documento</th>
+                <th scope="col">Nro. Documento</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="e : ${espectadores}">
+                <th th:text="${e.idPersona}" scope="row"></th>
+                <td th:text="${e.nombre}"></td>
+                <td th:text="${e.apellido}"></td>
+                <td th:text="${e.tipoDocumento}"></td>
+                <td th:text="${e.nroDocumento}"></td>
+                <td th:text="${e.email}"></td>
+                <td th:text="${e.movil}"></td>
+                <td><a href="" th:href="@{/espectadores/delete/{id}(id=${e.idPersona})}">Eliminar</a></td>
+            </tr>
+
+        </tbody>
+    </table>
 
 </body>
 

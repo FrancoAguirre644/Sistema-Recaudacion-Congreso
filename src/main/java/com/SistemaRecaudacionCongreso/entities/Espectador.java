@@ -19,6 +19,10 @@ public class Espectador extends Persona{
     private long nroDocumento;
 
 
+public Espectador(){
+    
+}
+
 public Espectador(long idPersona,String movil,String email,String nombre, String apellido,String tipoDocumento,long nroDocumento) {
     super(idPersona,movil,email);
     this.nombre = nombre;
