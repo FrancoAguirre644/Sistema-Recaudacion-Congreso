@@ -7,14 +7,10 @@ import javax.persistence.Id;
 
 public class PersonaModel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected long idPersona;
 
-	@Column(name = "movil")
 	protected String movil;
 
-	@Column(name = "email")
 	protected String email;
 
 	public PersonaModel() {
@@ -53,4 +49,11 @@ public class PersonaModel {
 		this.email = email;
 	}
 
+	@Override
+	public String toString() {
+		return "PersonaModel [idPersona=" + idPersona + ", movil=" + movil + ", email=" + email + "]";
+	}
+
+	
+	
 }

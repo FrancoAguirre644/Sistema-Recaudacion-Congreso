@@ -53,8 +53,6 @@
 		</tbody>
 	</table>
 
-
-
 	<div class="form">
 		<form action="#" method="post" th:action="@{espectadores/save}">
 			<div aria-hidden="true" aria-labelledby="exampleModalLabel"
@@ -116,7 +114,7 @@
 	</div>
 
 	<div class="form-add">
-		<form action="#" method="post" th:action="@{espectadores/save}">
+		<form action="#" class="form-agregar" method="post" th:action="@{espectadores/save}">
 			<div aria-hidden="true" aria-labelledby="exampleModalLabel"
 				class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
 				<div class="modal-dialog" role="document">
@@ -165,7 +163,7 @@
 						<div class="modal-footer">
 							<button class="btn btn-secondary" data-dismiss="modal"
 								type="button">Close</button>
-							<input class="btn btn-primary" type="submit" value="save" />
+							<input class="btn btn-primary btn-save" type="submit" value="save" />
 						</div>
 					</div>
 				</div>
@@ -200,8 +198,8 @@
 			$('.btn-add').on('click', function(event) {
 				event.preventDefault();
 				$('.form-add #exampleModal-add').modal();
-
 			});
+			
 		});
 	</script>
 </body>
