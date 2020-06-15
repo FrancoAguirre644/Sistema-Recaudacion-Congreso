@@ -1,10 +1,9 @@
-package com.SistemaRecaudacionCongreso.entities;
+package com.SistemaRecaudacionCongreso.models;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 
-@Entity
-public class Espectador extends Persona {
+
+public class EspectadorModel extends PersonaModel {
 
 	@Column(name = "nombre")
 	private String nombre;
@@ -18,11 +17,11 @@ public class Espectador extends Persona {
 	@Column(name = "nroDocumento")
 	private long nroDocumento;
 
-	public Espectador() {
+	public EspectadorModel() {
 
 	}
 
-	public Espectador(long idPersona, String movil, String email, String nombre, String apellido, String tipoDocumento,
+	public EspectadorModel(long idPersona, String movil, String email, String nombre, String apellido, String tipoDocumento,
 			long nroDocumento) {
 		super(idPersona, movil, email);
 		this.nombre = nombre;
