@@ -1,14 +1,16 @@
 package com.SistemaRecaudacionCongreso.services.implementation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import com.SistemaRecaudacionCongreso.converters.EspectadorConverter;
+import com.SistemaRecaudacionCongreso.entities.Espectador;
+import com.SistemaRecaudacionCongreso.models.EspectadorModel;
 import com.SistemaRecaudacionCongreso.repositories.IEspectadorRepository;
 import com.SistemaRecaudacionCongreso.services.IEspectadorService;
-
-import java.util.List;
-
-import com.SistemaRecaudacionCongreso.entities.*;
 
 @Service("espectadorService")
 public class EspectadorService implements IEspectadorService{
@@ -16,6 +18,10 @@ public class EspectadorService implements IEspectadorService{
     @Autowired
     @Qualifier("espectadorRepository")
     private IEspectadorRepository espectadorRepository;
+    
+    @Autowired
+    @Qualifier("espectadorConverter")
+    private EspectadorConverter espectadorConverter;
 
     public List<Espectador> getAll(){
         return espectadorRepository.findAll();
@@ -28,6 +34,14 @@ public class EspectadorService implements IEspectadorService{
     public Espectador findByIdPersona(long idPersona){
         return espectadorRepository.findByIdPersona(idPersona);
     }
+    
+    @Override
+	public EspectadorModel insertOrUpdate(EspectadorModel espectadorModel) {
+		
+		Espectador espectador= espectadorRepository.save(espectadorConverter.modelToEntity(espectadorModel));
+		return espectadorConverter.entityToModel(espectador);
+		
+	}
 
 
 }
