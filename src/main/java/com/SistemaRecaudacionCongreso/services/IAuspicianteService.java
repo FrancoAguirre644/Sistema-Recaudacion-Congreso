@@ -8,4 +8,8 @@ public interface IAuspicianteService {
 	
 	public List<Auspiciante> getAll();
 
+	public void remove(long idPersona);
+
+	public Auspiciante findByIdPersona(long idPersona);
+
 }
