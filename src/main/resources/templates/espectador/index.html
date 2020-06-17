@@ -49,7 +49,7 @@
         </tbody>
     </table>
 
-    <div class="form">
+    <div class="form-update">
         <form action="#" method="post" th:action="@{espectadores/save}">
             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
                 <div class="modal-dialog" role="document">
@@ -79,6 +79,7 @@
                                 <label class="col-form-label" for="name">Tipo Documento:</label>
                                 <input class="form-control" id="tipoDocumento" name="tipoDocumento" type="text" value="" />
                             </div>
+
                             <div class="form-group">
                                 <label class="col-form-label" for="name">Nro Documento:</label>
                                 <input class="form-control" id="nroDocumento" name="nroDocumento" type="text" value="" />
@@ -149,18 +150,17 @@
             $('.table .eBtn').on('click', function(event) {
                 event.preventDefault();
                 var href = $(this).attr('href');
-                //var text = $(this).text(); //return New or Edit
 
                 $.get(href, function(espectador, status) {
-                    $('.form #id').val(espectador.idPersona);
-                    $('.form #nombre').val(espectador.nombre);
-                    $('.form #apellido').val(espectador.apellido);
-                    $('.form #movil').val(espectador.movil);
-                    $('.form #email').val(espectador.email);
-                    $('.form #tipoDocumento').val(espectador.tipoDocumento);
-                    $('.form #nroDocumento').val(espectador.nroDocumento);
+                    $('.form-update #id').val(espectador.idPersona);
+                    $('.form-update #nombre').val(espectador.nombre);
+                    $('.form-update #apellido').val(espectador.apellido);
+                    $('.form-update #movil').val(espectador.movil);
+                    $('.form-update #email').val(espectador.email);
+                    $('.form-update #tipoDocumento').val(espectador.tipoDocumento);
+                    $('.form-update #nroDocumento').val(espectador.nroDocumento);
                 });
-                $('.form #exampleModal').modal();
+                $('.form-update #exampleModal').modal();
 
             });
 
