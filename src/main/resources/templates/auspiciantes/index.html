@@ -39,42 +39,130 @@
 
                 <td><a href="" th:href="@{/auspiciantes/delete/{id}(id=${a.idPersona})}">Eliminar</a></td>
 
-                <td><a class="btn btn-primary eBtn" th:href="@{/espectadores/{id}(id=${a.idPersona})}">Edit</a></td>
+                <td><a class="btn btn-primary edit" th:href="@{/auspiciantes/{id}(id=${a.idPersona})}">Edit</a></td>
 
             </tr>
 
         </tbody>
     </table>
 
+    <button class="btn-add">Add</button>
+
+    <div class="form-update">
+        <form action="#" method="post" th:action="@{auspiciantes/save}">
+            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update or Create
+                            </h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                        </div>
+                        <div class="modal-body">
+                            <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
+
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">Monto Aportado:</label>
+                                <input class="form-control" id="montoAportado" name="montoAportado" type="text" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">Movil:</label>
+                                <input class="form-control" id="movil" name="movil" type="text" value="" />
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                            <input class="btn btn-primary" type="submit" value="save" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="form-add">
+        <form action="#" method="post" th:action="@{auspiciantes/save}">
+            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update or Create
+                            </h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">Monto Aportado:</label>
+                                <input class="form-control" id="montoAportado" name="montoAportado" type="number" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label" for="name">Movil:</label>
+                                <input class="form-control" id="movil" name="movil" type="text" value="" />
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                            <input class="btn btn-primary" type="submit" value="save" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
 
     <script type="text/javascript">
         $(document).ready(function() {
-            /*
-                        $('.table .eBtn').on('click', function(event) {
-                            event.preventDefault();
-                            var href = $(this).attr('href');
 
-                            $.get(href, function(espectador, status) {
-                                $('.form #id').val(espectador.idPersona);
-                                $('.form #nombre').val(espectador.nombre);
-                                $('.form #apellido').val(espectador.apellido);
-                                $('.form #movil').val(espectador.movil);
-                                $('.form #email').val(espectador.email);
-                                $('.form #tipoDocumento').val(espectador.tipoDocumento);
-                                $('.form #nroDocumento').val(espectador.nroDocumento);
-                            });
-                            $('.form #exampleModal').modal();
+            $('.table .edit').on('click', function(event) {
+                event.preventDefault();
+                var href = $(this).attr('href');
 
-                        });
+                $.get(href, function(auspiciante, status) {
+                    $('.form-update #id').val(auspiciante.idPersona);
+                    $('.form-update #movil').val(auspiciante.movil);
+                    $('.form-update #email').val(auspiciante.email);
+                    $('.form-update #razonSocial').val(auspiciante.razonSocial);
+                    $('.form-update #cuit').val(auspiciante.cuit);
+                    $('.form-update #montoAportado').val(auspiciante.montoAportado);
+                });
+                $('.form-update #exampleModal').modal();
 
-                        /*
+            });
 
-                        $('.btn-add').on('click', function(event) {
-                            event.preventDefault();
-                            $('.form-add #exampleModal-add').modal();
-                        });
-                        
-                        */
+
+            $('.btn-add').on('click', function(event) {
+                event.preventDefault();
+                $('.form-add #exampleModal-add').modal();
+            });
+
+
         });
     </script>
 
