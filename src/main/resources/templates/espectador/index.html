@@ -75,10 +75,13 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
                             </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">Tipo Documento:</label>
-                                <input class="form-control" id="tipoDocumento" name="tipoDocumento" type="text" value="" />
-                            </div>
+
+                            <select class="form-control" name="tipoDocumento" id="tipoDocumento">
+                                <option value="DNI">Documento Nacional de Identidad(DNI)</option>
+                                <option value="CI">Cedula de Identidad(CI)</option>
+                                <option value="LE">Libreta de Enrolamiento(LE)</option>
+                                <option value="LC">Libreta Civica(LC)</option>
+                              </select>
 
                             <div class="form-group">
                                 <label class="col-form-label" for="name">Nro Documento:</label>
@@ -121,10 +124,15 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
                             </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">Tipo Documento:</label>
-                                <input class="form-control" id="tipoDocumento" name="tipoDocumento" type="text" value="" />
-                            </div>
+
+                            <select class="form-control" name="tipoDocumento" id="tipoDocumento">
+                                <option disabled selected>Tipo de documento</option>
+                                <option value="DNI">Documento Nacional de Identidad(DNI)</option>
+                                <option value="CI">Cedula de Identidad(CI)</option>
+                                <option value="LE">Libreta de Enrolamiento(LE)</option>
+                                <option value="LC">Libreta Civica(LC)</option>
+                              </select>
+
                             <div class="form-group">
                                 <label class="col-form-label" for="name">Nro Documento:</label>
                                 <input class="form-control" id="nroDocumento" name="nroDocumento" type="text" value="" />
