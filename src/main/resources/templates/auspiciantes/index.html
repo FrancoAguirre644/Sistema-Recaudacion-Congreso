@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Home</title>
+    <title>Auspiciantes</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
@@ -211,220 +211,295 @@
 
                 </nav>
                 <!-- End of Topbar -->
-                
-                
+
+
                 <div class="container-fluid">
-                
+
                     <table class="table table-striped table-light">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">razon Social</th>
-                <th scope="col">Cuit</th>
-                <th scope="col">Monto Aportado</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Movil</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="a : ${auspiciantes}">
-                <th th:text="${a.idPersona}" scope="row"></th>
-                <td th:text="${a.razonSocial}"></td>
-                <td th:text="${a.cuit}"></td>
-                <td th:text="${a.montoAportado}"></td>
-                <td th:text="${a.email}"></td>
-                <td th:text="${a.movil}"></td>
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">razon Social</th>
+                                <th scope="col">Cuit</th>
+                                <th scope="col">Monto Aportado</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Movil</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="a : ${auspiciantes}">
+                                <th th:text="${a.idPersona}" scope="row"></th>
+                                <td th:text="${a.razonSocial}"></td>
+                                <td th:text="${a.cuit}"></td>
+                                <td th:text="${a.montoAportado}"></td>
+                                <td th:text="${a.email}"></td>
+                                <td th:text="${a.movil}"></td>
 
-                <td><a href="" th:href="@{/auspiciantes/delete/{id}(id=${a.idPersona})}">Eliminar</a></td>
+                                <td>
 
-                <td><a class="btn btn-primary edit" th:href="@{/auspiciantes/{id}(id=${a.idPersona})}">Edit</a></td>
+                                    <a href="#" th:href="@{/auspiciantes/delete/{id}(id=${a.idPersona})}" class="btn btn-danger btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                      <i class="fas fa-trash"></i>
+                                    </span>
+                                        <span class="text">Eliminar</span>
+                                    </a>
+                                </td>
 
-            </tr>
+                                <td>
 
-        </tbody>
-    </table>
+                                    <a href="#" th:href="@{/auspiciantes/{id}(id=${a.idPersona})}" class="btn btn-info btn-icon-split btn-sm edit">
+                                        <span class="icon text-white-50">
+                                      <i class="fas fa-edit"></i>
+                                    </span>
+                                        <span class="text">Editar</span>
+                                    </a>
 
-    <button class="btn-add">Add</button>
+                                </td>
+                            </tr>
 
-    <div class="form-update">
-        <form action="#" method="post" th:action="@{auspiciantes/save}">
-            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Update or Create
-                            </h5>
-                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        </tbody>
+                    </table>
+
+
+                    <a href="#" class="btn btn-success btn-icon-split btn-add">
+                        <span class=" icon text-white-50 ">
+                          <i class="fas fa-check "></i>
+                        </span>
+                        <span class="text ">Agregar Auspiciante</span>
+                    </a>
+
+
+
+                    <div class="form-update">
+                        <form action="#" method="post" th:action="@{auspiciantes/save}">
+                            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar Auspiciante
+                                            </h5>
+                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
 								<span aria-hidden="true">&times;</span>
 							</button>
-                        </div>
-                        <div class="modal-body">
-                            <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
+                                        </div>
+                                        <div class="modal-body">
+                                            <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
 
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">Monto Aportado:</label>
-                                <input class="form-control" id="montoAportado" name="montoAportado" type="text" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">Movil:</label>
-                                <input class="form-control" id="movil" name="movil" type="text" value="" />
-                            </div>
+                                            <div class="form-row">
 
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                            <input class="btn btn-primary" type="submit" value="save" />
-                        </div>
+                                                <div class="col-7">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <div class="col">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Movil:</label>
+                                                        <input class="form-control" id="movil" name="movil" type="text" value="" />
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Monto Aportado:</label>
+                                                        <input class="form-control" id="montoAportado" name="montoAportado" type="text" value="" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                            <input class="btn btn-primary" type="submit" value="Save" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-            </div>
-        </form>
-    </div>
 
-    <div class="form-add">
-        <form action="#" method="post" th:action="@{auspiciantes/save}">
-            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Update or Create
-                            </h5>
-                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <div class="form-add">
+                        <form action="#" method="post" th:action="@{auspiciantes/save}">
+                            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Agregar Auspiciante
+                                            </h5>
+                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
 								<span aria-hidden="true">&times;</span>
 							</button>
-                        </div>
-                        <div class="modal-body">
+                                        </div>
+                                        <div class="modal-body">
 
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">Monto Aportado:</label>
-                                <input class="form-control" id="montoAportado" name="montoAportado" type="number" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
-                            </div>
-                            <div class="form-group">
-                                <label class="col-form-label" for="name">Movil:</label>
-                                <input class="form-control" id="movil" name="movil" type="text" value="" />
-                            </div>
+                                            <div class="form-row">
 
+                                                <div class="col-7">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
+                                            </div>
+
+                                            <div class="form-row">
+
+                                                <div class="col">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Movil:</label>
+                                                        <input class="form-control" id="movil" name="movil" type="text" value="" />
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Monto Aportado:</label>
+                                                        <input class="form-control" id="montoAportado" name="montoAportado" type="text" value="" />
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                                <input class="btn btn-primary" type="submit" value="Save" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
                         </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                            <input class="btn btn-primary" type="submit" value="save" />
-                        </div>
+
                     </div>
-                </div>
-            </div>
-        </form>
-    </div>
-                
-                </div>
-                
-                
-                
-                
-                
-            </div>
-            <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
+
+
+
+
                 </div>
-            </footer>
-            <!-- End of Footer -->
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="../../vendor/jquery/jquery.min.js"></script>
-    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="../../js/sb-admin-2.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="../../js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="../../vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="../../vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="../../js/demo/chart-area-demo.js"></script>
-    <script src="../../js/demo/chart-pie-demo.js"></script>
-    
+        <!-- Page level custom scripts -->
+        <script src="../../js/demo/chart-area-demo.js"></script>
+        <script src="../../js/demo/chart-pie-demo.js"></script>
+
         <script type="text/javascript">
-        $(document).ready(function() {
+            $(document).ready(function() {
 
-            $('.table .edit').on('click', function(event) {
-                event.preventDefault();
-                var href = $(this).attr('href');
+                $('.table .edit').on('click', function(event) {
+                    event.preventDefault();
+                    var href = $(this).attr('href');
 
-                $.get(href, function(auspiciante, status) {
-                    $('.form-update #id').val(auspiciante.idPersona);
-                    $('.form-update #movil').val(auspiciante.movil);
-                    $('.form-update #email').val(auspiciante.email);
-                    $('.form-update #razonSocial').val(auspiciante.razonSocial);
-                    $('.form-update #cuit').val(auspiciante.cuit);
-                    $('.form-update #montoAportado').val(auspiciante.montoAportado);
+                    $.get(href, function(auspiciante, status) {
+                        $('.form-update #id').val(auspiciante.idPersona);
+                        $('.form-update #movil').val(auspiciante.movil);
+                        $('.form-update #email').val(auspiciante.email);
+                        $('.form-update #razonSocial').val(auspiciante.razonSocial);
+                        $('.form-update #cuit').val(auspiciante.cuit);
+                        $('.form-update #montoAportado').val(auspiciante.montoAportado);
+                    });
+                    $('.form-update #exampleModal').modal();
+
                 });
-                $('.form-update #exampleModal').modal();
+
+
+                $('.btn-add').on('click', function(event) {
+                    event.preventDefault();
+                    $('.form-add #exampleModal-add').modal();
+                });
+
 
             });
-
-
-            $('.btn-add').on('click', function(event) {
-                event.preventDefault();
-                $('.form-add #exampleModal-add').modal();
-            });
-
-
-        });
-    </script>
+        </script>
 
 </body>
 
