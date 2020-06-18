@@ -18,6 +18,9 @@ public class Conferencia {
 	@Column(name="titulo")
 	private String titulo;
 	
+	@Column(name="descripcion")
+	private String descripcion;
+	
 	@Column(name="fecha")
 	private Date fecha;
 	
@@ -28,10 +31,12 @@ public class Conferencia {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Conferencia(long idConferencia, String titulo, Date fecha, double costo) {
+
+	public Conferencia(long idConferencia, String titulo, String descripcion, Date fecha, double costo) {
 		super();
 		this.idConferencia = idConferencia;
 		this.titulo = titulo;
+		this.descripcion = descripcion;
 		this.fecha = fecha;
 		this.costo = costo;
 	}
@@ -43,6 +48,16 @@ public class Conferencia {
 	public void setIdConferencia(long idConferencia) {
 		this.idConferencia = idConferencia;
 	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 
 	public String getTitulo() {
 		return titulo;

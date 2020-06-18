@@ -6,17 +6,19 @@ public class ConferenciaModel {
 	
 	private long idConferencia;
 	private String titulo;
+	private String descripcion;
 	private Date fecha;
 	private double costo;
 	
 	public ConferenciaModel() {
 		// TODO Auto-generated constructor stub
 	}
-
-	public ConferenciaModel(long idConferencia, String titulo, Date fecha, double costo) {
+	
+	public ConferenciaModel(long idConferencia, String titulo, String descripcion, Date fecha, double costo) {
 		super();
 		this.idConferencia = idConferencia;
 		this.titulo = titulo;
+		this.descripcion = descripcion;
 		this.fecha = fecha;
 		this.costo = costo;
 	}
@@ -28,6 +30,16 @@ public class ConferenciaModel {
 	public void setIdConferencia(long idConferencia) {
 		this.idConferencia = idConferencia;
 	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
 
 	public String getTitulo() {
 		return titulo;
@@ -55,11 +67,10 @@ public class ConferenciaModel {
 
 	@Override
 	public String toString() {
-		return "Conferencia [idConferencia=" + idConferencia + ", titulo=" + titulo + ", fecha=" + fecha + ", costo="
-				+ costo + "]";
+		return "ConferenciaModel [idConferencia=" + idConferencia + ", titulo=" + titulo + ", descripcion="
+				+ descripcion + ", fecha=" + fecha + ", costo=" + costo + "]";
 	}
-	
-	
+
 
 
 }
