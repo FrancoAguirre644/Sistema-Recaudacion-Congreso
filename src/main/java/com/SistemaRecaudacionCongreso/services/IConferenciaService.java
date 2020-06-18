@@ -7,5 +7,7 @@ import com.SistemaRecaudacionCongreso.entities.Conferencia;
 public interface IConferenciaService {
 	
 	public List<Conferencia> getAll();
+	
+	public void remove(long idConferencia);
 
 }

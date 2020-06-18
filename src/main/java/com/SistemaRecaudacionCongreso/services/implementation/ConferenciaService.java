@@ -23,7 +23,9 @@ public class ConferenciaService implements IConferenciaService{
 		return conferenciaRepository.findAll();
 	}
 	
-	
+	public void remove(long idConferencia) {
+		conferenciaRepository.deleteById(idConferencia);
+	}
 	
 
 }

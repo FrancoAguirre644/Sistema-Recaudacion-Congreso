@@ -29,7 +29,7 @@ public class ConferenciaController {
 	
 	@GetMapping("/delete/{id}")
 	public RedirectView delete(@PathVariable("id") long idConferencia) {
-		
+		conferenciaService.remove(idConferencia);
 		return new RedirectView(ViewRouteHelpers.CONFERENCIA_ROOT);
 	}
 
