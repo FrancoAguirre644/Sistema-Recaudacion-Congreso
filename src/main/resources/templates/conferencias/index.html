@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Auspiciantes</title>
+    <title>Conferencias</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
@@ -229,7 +229,7 @@
                             <div class="card-body text-primary">
                                 <p class="card-text" th:text="${c.descripcion}"></p>
                                 <p class="card-text" th:text="${c.fecha}"></p>
-                                <p class="card-text" th:text="${c.costo}"></p>
+                                <p class="card-text" th:text="'$'+ ${c.costo}"></p>
 
                                 <a href="#" th:href="@{/conferencias/{id}(id=${c.idConferencia})}" class="btn btn-info btn-icon-split btn-sm edit">
                                     <span class="icon text-white-50">
@@ -269,15 +269,35 @@
                                         <div class="form-group">
                                             <label class="col-form-label" for="name">Titulo:</label> <input class="form-control" id="titulo" name="titulo" type="text" value="" />
                                         </div>
+
+
+
                                         <div class="form-group">
                                             <label class="col-form-label" for="name">Descripcion:</label> <input class="form-control" id="descripcion" name="descripcion" type="text" value="" />
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-form-label" for="name">Fecha:</label> <input class="form-control" id="fecha" name="fecha" type="date" value="" />
+
+
+
+                                        <div class="form-row">
+
+                                            <div class="col">
+
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="name">Fecha:</label> <input class="form-control" id="fecha" name="fecha" type="date" value="" />
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col">
+
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="name">Costo:</label> <input class="form-control" id="costo" name="costo" type="number" value="" />
+                                                </div>
+
+                                            </div>
+
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-form-label" for="name">Costo:</label> <input class="form-control" id="costo" name="costo" type="number" value="" />
-                                        </div>
+
 
                                     </div>
                                     <div class="modal-footer">
@@ -305,17 +325,37 @@
                                     <div class="modal-body">
                                         <input class="form-control" id="id" name="idConferencia" type="hidden" value="" />
 
+
                                         <div class="form-group">
                                             <label class="col-form-label" for="name">Titulo:</label> <input class="form-control" id="titulo" name="titulo" type="text" value="" />
                                         </div>
+
+
+
                                         <div class="form-group">
                                             <label class="col-form-label" for="name">Descripcion:</label> <input class="form-control" id="descripcion" name="descripcion" type="text" value="" />
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-form-label" for="name">Fecha:</label> <input class="form-control" id="fecha" name="fecha" type="date" value="" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-form-label" for="name">Costo:</label> <input class="form-control" id="costo" name="costo" type="number" value="" />
+
+
+
+                                        <div class="form-row">
+
+                                            <div class="col">
+
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="name">Fecha:</label> <input class="form-control" id="fecha" name="fecha" type="date" value="" />
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col">
+
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="name">Costo:</label> <input class="form-control" id="costo" name="costo" type="number" value="" />
+                                                </div>
+
+                                            </div>
+
                                         </div>
 
                                     </div>
