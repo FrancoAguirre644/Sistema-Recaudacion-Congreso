@@ -22,6 +22,12 @@ public class EntradaService implements IEntradaService{
 		// TODO Auto-generated method stub
 		return entradaRepository.findAll();
 	}
+
+	@Override
+	public void remove(long idEntrada) {
+		// TODO Auto-generated method stub
+		entradaRepository.deleteById(idEntrada);
+	}
 	
 
 }

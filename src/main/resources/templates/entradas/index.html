@@ -43,11 +43,24 @@
                                 <td th:text="${e.Espectador.Nombre} +' '+ ${e.Espectador.apellido}"></td>
                                 <td th:text="${e.Conferencia.titulo}"></td>
                                 
+                                <td>
+
+                                    <a href="#" th:href="@{/entradas/delete/{id}(id=${e.idEntrada})}" class="btn btn-danger btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                      <i class="fas fa-trash"></i>
+                                    </span>
+                                        <span class="text">Eliminar</span>
+                                    </a>
+                                </td>
+                                
 
                                 <td>
                                 
                          </tbody>
                     </table>
+    	
+    	
+    	
     	
     	
 

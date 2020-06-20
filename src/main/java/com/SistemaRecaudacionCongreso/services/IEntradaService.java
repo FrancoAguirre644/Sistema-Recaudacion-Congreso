@@ -7,5 +7,7 @@ import com.SistemaRecaudacionCongreso.entities.Entrada;
 public interface IEntradaService {
 	
 	public List<Entrada> getAll();
+	
+	public void remove(long idEntrada);
 
 }
