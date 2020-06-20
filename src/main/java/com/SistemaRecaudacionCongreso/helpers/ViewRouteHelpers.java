@@ -13,5 +13,9 @@ public class ViewRouteHelpers {
     //Conferencias
     public static final String CONFERENCIA_INDEX = "/conferencias/index";
     public static final String CONFERENCIA_ROOT = "/conferencias";
+    
+    //Entradas
+    public static final String ENTRADA_INDEX = "/entradas/index";
+    public static final String ENTRADA_ROOT = "/entradas";
 
 }
