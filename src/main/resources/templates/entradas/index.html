@@ -21,48 +21,122 @@
 </head>
 
 <body id="page-top">
-    	
-    	<div class="container-fluid">
 
-                    <table class="table table-striped table-light">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Fecha Compra</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Espectador</th>
-                                <th scope="col">Conferencia</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="e : ${entradas}">
-                                <th th:text="${e.idEntrada}" scope="row"></th>
-                                <td th:text="${e.fechaCompra}"></td>
-                                <td th:text="${e.precio}"></td>
-                                <td th:text="${e.Espectador.Nombre} +' '+ ${e.Espectador.apellido}"></td>
-                                <td th:text="${e.Conferencia.titulo}"></td>
-                                
-                                <td>
+    <div class="container-fluid">
 
-                                    <a href="#" th:href="@{/entradas/delete/{id}(id=${e.idEntrada})}" class="btn btn-danger btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
+        <table class="table table-striped table-light">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha Compra</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Espectador</th>
+                    <th scope="col">Conferencia</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="e : ${entradas}">
+                    <th th:text="${e.idEntrada}" scope="row"></th>
+                    <td th:text="${e.fechaCompra}"></td>
+                    <td th:text="${e.precio}"></td>
+                    <td th:text="${e.Espectador.Nombre} +' '+ ${e.Espectador.apellido}"></td>
+                    <td th:text="${e.Conferencia.titulo}"></td>
+
+                    <td>
+
+                        <a href="#" th:href="@{/entradas/delete/{id}(id=${e.idEntrada})}" class="btn btn-danger btn-icon-split btn-sm">
+                            <span class="icon text-white-50">
                                       <i class="fas fa-trash"></i>
                                     </span>
-                                        <span class="text">Eliminar</span>
-                                    </a>
-                                </td>
-                                
+                            <span class="text">Eliminar</span>
+                        </a>
+                    </td>
 
-                                <td>
-                                
-                         </tbody>
-                    </table>
-    	
-    	
-    	
-    	
-    	
+
+                    <td>
+
+                        <a href="#" th:href="@{/entradas/{id}(id=${e.idEntrada})}" class="btn btn-info btn-icon-split btn-sm edit">
+                            <span class="icon text-white-50">
+                          <i class="fas fa-edit"></i>
+                        </span>
+                            <span class="text">Editar</span>
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+
+
+        <div class="form-update">
+            <form action="#" method="post" th:action="@{auspiciantes/save}">
+                <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Actualizar Entrada
+                                </h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
+
+                                <div class="form-row">
+
+                                    <div class="col-7">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="name">FechaCompra:</label> <input class="form-control" id="fechaCompra" name="fechaCompra" type="date" value="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="precio" name="precio" type="number" value="" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-form-label" for="name">Espectador:</label>
+
+                                    <select class="form-control " name="espectador" id="espectador">
+                                    <option th:each="es : ${espectadores}" th:value="${es.idPersona}" th:text="${es.nombre} + ' ' + ${es.apellido}"></option>
+                                </select>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-form-label" for="name">Conferencia:</label>
+
+                                    <select class="form-control " name="conferencia" id="conferencia">
+                                    <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
+                                </select>
+
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                <input class="btn btn-primary" type="submit" value="Save" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
 
         <!-- Bootstrap core JavaScript-->
         <script src="../../vendor/jquery/jquery.min.js"></script>
@@ -84,26 +158,28 @@
         <script type="text/javascript">
             $(document).ready(function() {
 
-                $('.card-group .edit').on('click', function(event) {
+                $('.table .edit').on('click', function(event) {
                     event.preventDefault();
                     var href = $(this).attr('href');
 
-                    $.get(href, function(conferencia, status) {
-                        $('.form-update #id').val(conferencia.idConferencia);
-                        $('.form-update #titulo').val(conferencia.titulo);
-                        $('.form-update #descripcion').val(conferencia.descripcion);
-                        $('.form-update #fecha').val(conferencia.fecha);
-                        $('.form-update #costo').val(conferencia.costo);
+                    $.get(href, function(entrada, status) {
+
+                        $('.form-update #id').val(entrada.idConferencia);
+                        $('.form-update #fechaCompra').val(entrada.fechaCompra);
+                        $('.form-update #precio').val(entrada.precio);
+                        $('.form-update #espectador').val(entrada.espectador.idPersona);
+                        $('.form-update #conferencia').val(entrada.conferencia.idConferencia);
+
                     });
                     $('.form-update #exampleModal').modal();
 
                 });
-
+                /*
 
                 $('.btn-add').on('click', function(event) {
                     event.preventDefault();
                     $('.form-add #exampleModal-add').modal();
-                });
+                }); */
 
             });
         </script>
@@ -112,4 +188,3 @@
 </body>
 
 </html>
-

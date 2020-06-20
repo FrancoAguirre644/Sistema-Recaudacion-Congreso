@@ -3,6 +3,9 @@ package com.SistemaRecaudacionCongreso.converters;
 import com.SistemaRecaudacionCongreso.entities.Entrada;
 import com.SistemaRecaudacionCongreso.models.EntradaModel;
 
+import org.springframework.stereotype.Component;
+
+@Component("entradaConverter")
 public class EntradaConverter {
 	
 	public Entrada modelToEntity(EntradaModel entradaModel) {
