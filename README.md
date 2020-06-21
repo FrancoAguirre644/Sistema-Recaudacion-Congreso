@@ -2,7 +2,7 @@
 
 # [ Tareas a realizar ]
 
-Comenzar con el crud de entradas. </br>
-Añadir template en el index de conferencias. </br>
+Comenzar con los casos de uso correspondientes. </br>
+Hacer que solo se pueda añadir una entrada mediante la validacion de un codigo. </br>
 Realizar las correspondientes relaciones entre las clases. </br>
 Corregir los links de la barra de tareas del template.
