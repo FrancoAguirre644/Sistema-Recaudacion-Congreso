@@ -39,7 +39,7 @@
                 <tr th:each="e : ${entradas}">
                     <th th:text="${e.idEntrada}" scope="row"></th>
                     <td th:text="${e.fechaCompra}"></td>
-                    <td th:text="${e.precio}"></td>
+                    <td th:text="'$' + ${e.precio}"></td>
                     <td th:text="${e.Espectador.nombre} +' '+ ${e.Espectador.apellido}"></td>
                     <td th:text="${e.Conferencia.titulo}"></td>
 
@@ -69,6 +69,13 @@
 
             </tbody>
         </table>
+
+        <a href="#" class="btn btn-success btn-icon-split btn-add">
+            <span class=" icon text-white-50 ">
+              <i class="fas fa-plus "></i>
+            </span>
+            <span class="text ">Agregar Entrada</span>
+        </a>
 
 
         <div class="form-update">
@@ -104,23 +111,36 @@
 
                                 </div>
 
+                                <div class="form-row">
 
-                                <div class="form-group">
-                                    <label class="col-form-label" for="name">Espectador:</label>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="name">Espectador:</label>
 
-                                    <select class="form-control " id="espectador" name="espectador.idPersona">
+                                            <select class="form-control " id="espectador" name="espectador.idPersona">
                                     <option th:each="es : ${espectadores}" th:value="${es.idPersona}"  th:text="${es.nombre} + ' ' + ${es.apellido}" ></option>
                                 </select>
 
-                                </div>
 
-                                <div class="form-group">
+                                        </div>
 
-                                    <label class="col-form-label" for="name">Conferencia:</label>
+                                    </div>
 
-                                    <select class="form-control " id="conferencia" name="conferencia.idConferencia">
+                                    <div class="col">
+
+
+                                        <div class="form-group">
+
+                                            <label class="col-form-label" for="name">Conferencia:</label>
+
+                                            <select class="form-control " id="conferencia" name="conferencia.idConferencia">
                                     <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
                                 </select>
+
+                                        </div>
+
+                                    </div>
+
 
                                 </div>
 
@@ -128,7 +148,85 @@
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                                <input class="btn btn-primary" type="submit" value="Save" />
+                                <input class="btn btn-success" type="submit" value="Save" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="form-add">
+            <form action="#" method="post" th:action="@{entradas/save}">
+                <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Agregar Entrada
+                                </h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="form-row">
+
+                                    <div class="col-7">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="name">Fecha Compra:</label> <input class="form-control" id="fechaCompra" name="fechaCompra" type="date" value="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="name">Precio:</label> <input class="form-control" id="precio" name="precio" type="number" value="" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row">
+
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label class="col-form-label" for="name">Espectador:</label>
+
+                                            <select class="form-control " id="espectador" name="espectador.idPersona">
+                                    <option th:each="es : ${espectadores}" th:value="${es.idPersona}"  th:text="${es.nombre} + ' ' + ${es.apellido}" ></option>
+                                </select>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col">
+
+
+                                        <div class="form-group">
+
+                                            <label class="col-form-label" for="name">Conferencia:</label>
+
+                                            <select class="form-control " id="conferencia" name="conferencia.idConferencia">
+                                    <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
+                                </select>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                <input class="btn btn-success" type="submit" value="Save" />
                             </div>
                         </div>
                     </div>
@@ -174,12 +272,12 @@
                     $('.form-update #exampleModal').modal();
 
                 });
-                /*
+
 
                 $('.btn-add').on('click', function(event) {
                     event.preventDefault();
                     $('.form-add #exampleModal-add').modal();
-                }); */
+                });
 
             });
         </script>
