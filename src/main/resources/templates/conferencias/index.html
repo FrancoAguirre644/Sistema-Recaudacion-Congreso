@@ -244,6 +244,19 @@
 								</span>
                                     <span class="text">Eliminar</span>
                                 </a>
+                                
+                                
+                              <div class="text-center" style="margin-top: 10px">
+                                
+                                <a href="#" th:href="@{/conferencias/costoReal/{id}(id=${c.idConferencia})}" class="btn btn-dark btn-icon-split btn-sm btn-costo">
+                                    <span class="icon text-white-50">
+								  <i class="fas fa-dollar-sign"></i>
+								</span>
+                                    <span class="text">Costo Real</span>
+                                </a>
+                                
+                               </div>
+                               
 
 
                             </div>
@@ -367,6 +380,28 @@
                             </div>
                         </div>
                     </form>
+                    
+                    
+                    
+                    <!-- Modal -->
+<div class="modal fade" id="exampleModal-costo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Costo Real</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body show-costo">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -450,6 +485,18 @@
                 $('.btn-add').on('click', function(event) {
                     event.preventDefault();
                     $('.form-add #exampleModal-add').modal();
+                });
+                
+                $('.btn-costo').on('click', function(event) {
+                    event.preventDefault();
+                    var href = $(this).attr('href');
+
+                    $.get(href, function(costo) {
+                        $('.show-costo').html('El costo menos el aporte de los auspiciantes es: $' + costo);
+
+                    });
+                    
+                    $('#exampleModal-costo').modal();
                 });
 
             });
