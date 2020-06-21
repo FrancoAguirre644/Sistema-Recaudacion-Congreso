@@ -40,7 +40,7 @@
                     <th th:text="${e.idEntrada}" scope="row"></th>
                     <td th:text="${e.fechaCompra}"></td>
                     <td th:text="${e.precio}"></td>
-                    <td th:text="${e.Espectador.Nombre} +' '+ ${e.Espectador.apellido}"></td>
+                    <td th:text="${e.Espectador.nombre} +' '+ ${e.Espectador.apellido}"></td>
                     <td th:text="${e.Conferencia.titulo}"></td>
 
                     <td>
@@ -72,7 +72,7 @@
 
 
         <div class="form-update">
-            <form action="#" method="post" th:action="@{auspiciantes/save}">
+            <form action="#" method="post" th:action="@{entradas/save}">
                 <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -84,31 +84,32 @@
                 </button>
                             </div>
                             <div class="modal-body">
-                                <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
+                                <input class="form-control" id="id" name="idEntrada" type="hidden" value="" />
 
                                 <div class="form-row">
 
                                     <div class="col-7">
                                         <div class="form-group">
-                                            <label class="col-form-label" for="name">FechaCompra:</label> <input class="form-control" id="fechaCompra" name="fechaCompra" type="date" value="" />
+                                            <label class="col-form-label" for="name">Fecha Compra:</label> <input class="form-control" id="fechaCompra" name="fechaCompra" type="date" value="" />
                                         </div>
                                     </div>
 
                                     <div class="col">
 
                                         <div class="form-group">
-                                            <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="precio" name="precio" type="number" value="" />
+                                            <label class="col-form-label" for="name">Precio:</label> <input class="form-control" id="precio" name="precio" type="number" value="" />
                                         </div>
 
                                     </div>
 
                                 </div>
 
+
                                 <div class="form-group">
                                     <label class="col-form-label" for="name">Espectador:</label>
 
-                                    <select class="form-control " name="espectador" id="espectador">
-                                    <option th:each="es : ${espectadores}" th:value="${es.idPersona}" th:text="${es.nombre} + ' ' + ${es.apellido}"></option>
+                                    <select class="form-control " id="espectador" name="espectador.idPersona">
+                                    <option th:each="es : ${espectadores}" th:value="${es.idPersona}"  th:text="${es.nombre} + ' ' + ${es.apellido}" ></option>
                                 </select>
 
                                 </div>
@@ -117,12 +118,11 @@
 
                                     <label class="col-form-label" for="name">Conferencia:</label>
 
-                                    <select class="form-control " name="conferencia" id="conferencia">
+                                    <select class="form-control " id="conferencia" name="conferencia.idConferencia">
                                     <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
                                 </select>
 
                                 </div>
-
 
 
                             </div>
@@ -164,7 +164,7 @@
 
                     $.get(href, function(entrada, status) {
 
-                        $('.form-update #id').val(entrada.idConferencia);
+                        $('.form-update #id').val(entrada.idEntrada);
                         $('.form-update #fechaCompra').val(entrada.fechaCompra);
                         $('.form-update #precio').val(entrada.precio);
                         $('.form-update #espectador').val(entrada.espectador.idPersona);

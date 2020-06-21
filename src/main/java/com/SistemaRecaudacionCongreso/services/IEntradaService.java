@@ -13,4 +13,6 @@ public interface IEntradaService {
 
 	public EntradaModel findByIdEntrada(long idEntrada);
 
+	public EntradaModel insertOrUpdate(EntradaModel entradaModel);
+
 }

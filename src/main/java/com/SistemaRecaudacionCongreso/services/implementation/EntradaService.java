@@ -41,6 +41,14 @@ public class EntradaService implements IEntradaService{
 		return entradaConverter.entityToModel(entradaRepository.findByIdEntrada(idEntrada));
 	}
 
+	@Override
+	public EntradaModel insertOrUpdate(EntradaModel entradaModel) {
+		// TODO Auto-generated method stub
+		Entrada entrada = entradaRepository.save(entradaConverter.modelToEntity(entradaModel));
+
+		return entradaConverter.entityToModel(entrada);
+	}
+
 	
 	
 
