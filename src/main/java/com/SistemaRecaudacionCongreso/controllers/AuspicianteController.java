@@ -1,10 +1,5 @@
 package com.SistemaRecaudacionCongreso.controllers;
 
-import com.SistemaRecaudacionCongreso.entities.Auspiciante;
-import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
-import com.SistemaRecaudacionCongreso.models.AuspicianteModel;
-import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,6 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.SistemaRecaudacionCongreso.entities.Auspiciante;
+import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
+import com.SistemaRecaudacionCongreso.models.AuspicianteModel;
+import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
+import com.SistemaRecaudacionCongreso.services.IConferenciaService;
+
 /**
  * AuspicianteController
  */
@@ -27,12 +28,17 @@ public class AuspicianteController {
     @Autowired
     @Qualifier("auspicianteService")
     private IAuspicianteService auspicianteService;
+    
+    @Autowired
+    @Qualifier("conferenciaService")
+    private IConferenciaService conferenciaService;
 
     @GetMapping("")
     public ModelAndView index(){
         ModelAndView mAV = new ModelAndView(ViewRouteHelpers.AUSPICIANTE_INDEX);
         mAV.addObject("auspiciantes", auspicianteService.getAll());
         mAV.addObject("auspiciante", new AuspicianteModel());
+        mAV.addObject("conferencias", conferenciaService.getAll());
 
         return mAV;
     }

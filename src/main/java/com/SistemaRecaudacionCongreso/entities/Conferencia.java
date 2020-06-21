@@ -1,12 +1,14 @@
 package com.SistemaRecaudacionCongreso.entities;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Conferencia {
@@ -27,9 +29,16 @@ public class Conferencia {
 	@Column(name="costo")
 	private double costo;
 	
+	/*
+	
+	@OneToMany(mappedBy="conferencia")
+    private Set<Auspiciante> auspiciantes; */
+	
 	public Conferencia() {
 		// TODO Auto-generated constructor stub
 	}
+
+
 
 
 	public Conferencia(long idConferencia, String titulo, String descripcion, Date fecha, double costo) {
@@ -81,8 +90,18 @@ public class Conferencia {
 
 	public void setCosto(double costo) {
 		this.costo = costo;
+	}/*
+	
+
+	public Set<Auspiciante> getAuspiciantes() {
+		return auspiciantes;
 	}
 
+
+	public void setAuspiciantes(Set<Auspiciante> auspiciantes) {
+		this.auspiciantes = auspiciantes;
+	}
+*/
 	@Override
 	public String toString() {
 		return "Conferencia [idConferencia=" + idConferencia + ", titulo=" + titulo + ", fecha=" + fecha + ", costo="

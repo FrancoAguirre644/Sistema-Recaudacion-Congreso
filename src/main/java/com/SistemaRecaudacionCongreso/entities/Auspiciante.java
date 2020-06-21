@@ -2,6 +2,8 @@ package com.SistemaRecaudacionCongreso.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Auspiciante extends Persona{
@@ -15,16 +17,21 @@ public class Auspiciante extends Persona{
 	@Column(name="montoAportado")
 	private double montoAportado;
 	
+    @ManyToOne
+    @JoinColumn(name="id_conferencia", nullable=false)
+    private Conferencia conferencia;
+	
 	public Auspiciante() {
 		super();
 	}
 
 	public Auspiciante(long idPersona, String movil, String email, String razonSocial, String cuit,
-			double montoAportado) {
+			double montoAportado,Conferencia conferencia) {
 		super(idPersona, movil, email);
 		this.razonSocial = razonSocial;
 		this.cuit = cuit;
 		this.montoAportado = montoAportado;
+		this.conferencia = conferencia;
 	}
 
 	public String getRazonSocial() {
@@ -49,6 +56,15 @@ public class Auspiciante extends Persona{
 
 	public void setMontoAportado(double montoAportado) {
 		this.montoAportado = montoAportado;
+	}
+
+
+	public Conferencia getConferencia() {
+		return conferencia;
+	}
+
+	public void setConferencia(Conferencia conferencia) {
+		this.conferencia = conferencia;
 	}
 
 	@Override
