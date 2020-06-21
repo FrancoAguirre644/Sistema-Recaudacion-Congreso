@@ -10,4 +10,6 @@ import com.SistemaRecaudacionCongreso.entities.Entrada;
 @Repository("entradaRepository")
 public interface IEntradaRepository extends JpaRepository<Entrada,Serializable >{
 
+    public Entrada findByIdEntrada(long idEntrada);
+
 }
