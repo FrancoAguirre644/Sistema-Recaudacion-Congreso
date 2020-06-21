@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 public class AuspicianteConverter {
 
     public AuspicianteModel entityToModel(Auspiciante auspiciante){
-        return new AuspicianteModel(auspiciante.getIdPersona(),auspiciante.getMovil(),auspiciante.getEmail(),auspiciante.getRazonSocial(),auspiciante.getCuit(),auspiciante.getMontoAportado());
+        return new AuspicianteModel(auspiciante.getIdPersona(),auspiciante.getMovil(),auspiciante.getEmail(),auspiciante.getRazonSocial(),auspiciante.getCuit(),auspiciante.getMontoAportado(),auspiciante.getConferencia());
     }
 
     public Auspiciante modelToEntity(AuspicianteModel auspicianteModel){
-        return new Auspiciante(auspicianteModel.getIdPersona(),auspicianteModel.getMovil(),auspicianteModel.getEmail(),auspicianteModel.getRazonSocial(),auspicianteModel.getCuit(),auspicianteModel.getMontoAportado());
+        return new Auspiciante(auspicianteModel.getIdPersona(),auspicianteModel.getMovil(),auspicianteModel.getEmail(),auspicianteModel.getRazonSocial(),auspicianteModel.getCuit(),auspicianteModel.getMontoAportado(),auspicianteModel.getConferencia());
     }
     
 }

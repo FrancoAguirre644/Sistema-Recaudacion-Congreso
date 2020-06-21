@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
+import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
+import com.SistemaRecaudacionCongreso.services.implementation.AuspicianteService;
 
 @Controller
 @RequestMapping("/conferencias")
@@ -23,6 +26,10 @@ public class ConferenciaController {
 	@Autowired
 	@Qualifier("conferenciaService")
 	private IConferenciaService conferenciaService;
+	
+	@Autowired
+	@Qualifier("auspicianteService")
+	private IAuspicianteService auspicianteService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
@@ -48,5 +55,20 @@ public class ConferenciaController {
 		conferenciaService.insertOrUpdate(conferenciaModel);
 		return new RedirectView(ViewRouteHelpers.CONFERENCIA_ROOT);
 	}
+	
+	@GetMapping("/costoReal/{id}")
+	@ResponseBody
+	public double getCostoReal(@PathVariable("id") long idConferencia) {
+		double costoAportado = 0;
+		
+		for(Auspiciante a : auspicianteService.getAll()) {
+			if(a.getConferencia().getIdConferencia() == idConferencia) {
+				costoAportado += a.getMontoAportado();
+			}
+		}
+		
+		return conferenciaService.findByIdConferencia(idConferencia).getCosto() - costoAportado;
+	}
+	
 
 }
