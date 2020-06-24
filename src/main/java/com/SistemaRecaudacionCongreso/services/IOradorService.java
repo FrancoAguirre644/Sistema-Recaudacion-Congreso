@@ -12,5 +12,7 @@ public interface IOradorService {
 	public void remove(long idPersona);
 	
 	public OradorModel findByIdPersona(long idPersona);
+	
+	public OradorModel save(OradorModel oradorModel);
 
 }

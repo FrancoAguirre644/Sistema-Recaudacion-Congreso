@@ -250,8 +250,9 @@
 
 
                                 <td>
+                                
 
-                                    <a href="#" th:href="@{/oradores/delete/{id}(id=${o.idPersona})}" class="btn btn-danger btn-icon-split btn-sm">
+                                    <a href="#"  th:href="@{/oradores/delete/{id}(id=${o.idPersona})}" class="btn btn-danger btn-icon-split btn-sm delete">
                                         <span class="icon text-white-50">
                                                   <i class="fas fa-trash"></i>
                                                 </span>
@@ -265,23 +266,20 @@
                         </tbody>
                     </table>
                     
-                    <!-- 
 
                     <a href="#" class="btn btn-success btn-icon-split btn-add">
                         <span class=" icon text-white-50 ">
                           <i class="fas fa-plus "></i>
                         </span>
-                        <span class="text ">Agregar Entrada</span>
+                        <span class="text ">Agregar Oradores</span>
                     </a>
-                    
-                    -->
                     
                     
                     
                     
                     
                     <div class="form-update">
-                        <form action="#" method="post" th:action="@{entradas/save}">
+                        <form action="#" method="post" th:action="@{oradores/save}">
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -361,12 +359,10 @@
                     </div>
 
 
-
 					
-					<!-- 
 
                     <div class="form-add">
-                        <form action="#" method="post" th:action="@{entradas/save}">
+                        <form action="#" method="post" th:action="@{oradores/save}">
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -379,56 +375,57 @@
                                         </div>
                                         <div class="modal-body">
 
+                                           
                                             <div class="form-row">
+
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Nombre:</label> <input class="form-control" id="nombre" name="nombre" type="text" value="" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Apellido:</label> <input class="form-control" id="apellido" name="apellido" type="text" value="" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            
+                                            <div class="form-row">
+
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Movil:</label> <input class="form-control" id="movil" name="movil" type="text" value="" />
+                                                    </div>
+                                                </div>
 
                                                 <div class="col-7">
-                                                    <div class="form-group">
-                                                        <label class="col-form-label" for="name">Fecha Compra:</label> <input class="form-control" id="fechaCompra" name="fechaCompra" type="date" value="" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col">
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Precio:</label> <input class="form-control" id="precio" name="precio" type="number" value="" />
+                                                        <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
                                                     </div>
 
                                                 </div>
 
                                             </div>
+                                            
+                                            <div class="form-group">
 
-                                            <div class="form-row">
-
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label class="col-form-label" for="name">Espectador:</label>
-
-                                                        <select class="form-control " id="espectador" name="espectador.idPersona">
-                                                <option th:each="es : ${espectadores}" th:value="${es.idPersona}"  th:text="${es.nombre} + ' ' + ${es.apellido}" ></option>
-                                            </select>
+                                                        <label class="col-form-label" for="name">Area de Investigacion</label>
 
 
-                                                    </div>
+                                                        <select class="form-control " name="areaInvestigacion" id="areaInvestigacion">
+                                                            <option value="Informática">Informática</option>
+                                                            <option value="Ciencias Agrarias">Ciencias Agrarias</option>                                                          
+                                                            <option value="Ingeniería Civil">Ingeniería Civil</option>
+                                                            <option value="Ingeniería Mecánica">Ingeniería Mecánica</option>
+                                                        </select>
+
 
                                                 </div>
-
-                                                <div class="col">
-
-
-                                                    <div class="form-group">
-
-                                                        <label class="col-form-label" for="name">Conferencia:</label>
-
-                                                        <select class="form-control " id="conferencia" name="conferencia.idConferencia">
-                                                <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
-                                            </select>
-
-                                                    </div>
-
-                                                </div>
-
-
-                                            </div>
 
 
                                         </div>
@@ -444,9 +441,7 @@
 
                 </div>
 
-					
-					 -->
-					
+										
             </div>
             <!-- End of Main Content -->
 
@@ -526,12 +521,12 @@
                 $('.form-update #exampleModal').modal();
 
             });
-
-
+            
             $('.btn-add').on('click', function(event) {
                 event.preventDefault();
                 $('.form-add #exampleModal-add').modal();
             });
+            
 
         });
     
