@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Entradas</title>
+    <title>Oradores</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
@@ -236,11 +236,10 @@
                                 <td th:text="${o.email}"></td>
                                 <td th:text="${o.areaInvestigacion}"></td>
 								
-								<!-- 
 
                                 <td>
 
-                                    <a href="#" th:href="@{/entradas/{id}(id=${e.idEntrada})}" class="btn btn-info btn-icon-split btn-sm edit">
+                                    <a href="#" th:href="@{/oradores/{id}(id=${o.idPersona})}" class="btn btn-info btn-icon-split btn-sm edit">
                                         <span class="icon text-white-50">
                                       <i class="fas fa-edit"></i>
                                     </span>
@@ -252,7 +251,7 @@
 
                                 <td>
 
-                                    <a href="#" th:href="@{/entradas/delete/{id}(id=${e.idEntrada})}" class="btn btn-danger btn-icon-split btn-sm">
+                                    <a href="#" th:href="@{/oradores/delete/{id}(id=${o.idPersona})}" class="btn btn-danger btn-icon-split btn-sm">
                                         <span class="icon text-white-50">
                                                   <i class="fas fa-trash"></i>
                                                 </span>
@@ -260,7 +259,6 @@
                                     </a>
                                 </td>
                                 
-                                 -->
 
                             </tr>
 
@@ -275,73 +273,80 @@
                         </span>
                         <span class="text ">Agregar Entrada</span>
                     </a>
-
-
+                    
+                    -->
+                    
+                    
+                    
+                    
+                    
                     <div class="form-update">
                         <form action="#" method="post" th:action="@{entradas/save}">
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar Entrada
+                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar Orador
                                             </h5>
                                             <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <input class="form-control" id="id" name="idEntrada" type="hidden" value="" />
+
+                                           
+										<input class="form-control" id="id" name="idPersona" type="hidden" value="" />
 
                                             <div class="form-row">
+
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Nombre:</label> <input class="form-control" id="nombre" name="nombre" type="text" value="" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Apellido:</label> <input class="form-control" id="apellido" name="apellido" type="text" value="" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            
+                                            <div class="form-row">
+
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Movil:</label> <input class="form-control" id="movil" name="movil" type="text" value="" />
+                                                    </div>
+                                                </div>
 
                                                 <div class="col-7">
-                                                    <div class="form-group">
-                                                        <label class="col-form-label" for="name">Fecha Compra:</label> <input class="form-control" id="fechaCompra" name="fechaCompra" type="date" value="" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col">
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Precio:</label> <input class="form-control" id="precio" name="precio" type="number" value="" />
+                                                        <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
                                                     </div>
 
                                                 </div>
 
                                             </div>
+                                            
+                                            <div class="form-group">
 
-                                            <div class="form-row">
-
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label class="col-form-label" for="name">Espectador:</label>
-
-                                                        <select class="form-control " id="espectador" name="espectador.idPersona">
-                                                <option th:each="es : ${espectadores}" th:value="${es.idPersona}"  th:text="${es.nombre} + ' ' + ${es.apellido}" ></option>
-                                            </select>
+                                                        <label class="col-form-label" for="name">Area de Investigacion</label>
 
 
-                                                    </div>
+                                                        <select class="form-control " name="areaInvestigacion" id="areaInvestigacion">
+                                                            <option value="Informática">Informática</option>
+                                                            <option value="Ciencias Agrarias">Ciencias Agrarias</option>                                                          
+                                                            <option value="Ingeniería Civil">Ingeniería Civil</option>
+                                                            <option value="Ingeniería Mecánica">Ingeniería Mecánica</option>
+                                                        </select>
+
 
                                                 </div>
-
-                                                <div class="col">
-
-
-                                                    <div class="form-group">
-
-                                                        <label class="col-form-label" for="name">Conferencia:</label>
-
-                                                        <select class="form-control " id="conferencia" name="conferencia.idConferencia">
-                                                <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
-                                            </select>
-
-                                                    </div>
-
-                                                </div>
-
-
-                                            </div>
 
 
                                         </div>
@@ -355,6 +360,10 @@
                         </form>
                     </div>
 
+
+
+					
+					<!-- 
 
                     <div class="form-add">
                         <form action="#" method="post" th:action="@{entradas/save}">
@@ -498,20 +507,20 @@
 
     <script type="text/javascript">
     
-    /*
         $(document).ready(function() {
 
             $('.table .edit').on('click', function(event) {
                 event.preventDefault();
                 var href = $(this).attr('href');
 
-                $.get(href, function(entrada, status) {
+                $.get(href, function(orador, status) {
 
-                    $('.form-update #id').val(entrada.idEntrada);
-                    $('.form-update #fechaCompra').val(entrada.fechaCompra);
-                    $('.form-update #precio').val(entrada.precio);
-                    $('.form-update #espectador').val(entrada.espectador.idPersona);
-                    $('.form-update #conferencia').val(entrada.conferencia.idConferencia);
+                    $('.form-update #id').val(orador.idPersona);
+                    $('.form-update #nombre').val(orador.nombre);
+                    $('.form-update #apellido').val(orador.apellido);
+                    $('.form-update #movil').val(orador.movil);
+                    $('.form-update #email').val(orador.email); 
+                    $('.form-update #areaInvestigacion').val(orador.areaInvestigacion); 
 
                 });
                 $('.form-update #exampleModal').modal();
@@ -526,7 +535,6 @@
 
         });
     
-    */
     </script>
 
 

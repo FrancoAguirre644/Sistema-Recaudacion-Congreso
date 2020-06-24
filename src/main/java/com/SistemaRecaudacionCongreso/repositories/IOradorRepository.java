@@ -10,6 +10,6 @@ import com.SistemaRecaudacionCongreso.entities.Orador;
 @Repository("oradorRepository")
 public interface IOradorRepository extends JpaRepository<Orador, Serializable>{
 	
-	
+	public Orador findByIdPersona(long idPersona);
 
 }
