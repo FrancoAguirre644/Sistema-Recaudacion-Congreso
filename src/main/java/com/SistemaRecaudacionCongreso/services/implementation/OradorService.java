@@ -40,6 +40,13 @@ public class OradorService implements IOradorService{
 		// TODO Auto-generated method stub
 		return oradorConverter.entityToModel(oradorRepository.findByIdPersona(idPersona));
 	}
+
+	@Override
+	public OradorModel save(OradorModel oradorModel) {
+		// TODO Auto-generated method stub
+		Orador orador = oradorRepository.save(oradorConverter.modelToEntity(oradorModel));
+		return oradorConverter.entityToModel(orador);
+	}
 	
 	
 

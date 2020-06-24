@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.SistemaRecaudacionCongreso.converters.OradorConverter;
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
 import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
-import com.SistemaRecaudacionCongreso.services.implementation.AuspicianteService;
+import com.SistemaRecaudacionCongreso.services.IOradorService;
 
 @Controller
 @RequestMapping("/conferencias")
@@ -31,10 +32,20 @@ public class ConferenciaController {
 	@Qualifier("auspicianteService")
 	private IAuspicianteService auspicianteService;
 	
+	@Autowired
+	@Qualifier("oradorService")
+	private IOradorService oradorService;
+	
+	@Autowired
+	@Qualifier("oradorConverter")
+	private OradorConverter oradorConverter;
+	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.CONFERENCIA_INDEX);
 		mAV.addObject("conferencias", conferenciaService.getAll());
+		mAV.addObject("oradores", oradorService.getAll());
+		
 		return mAV;
 	}
 	
@@ -52,6 +63,7 @@ public class ConferenciaController {
 	
 	@PostMapping("/save")
 	public RedirectView save(@ModelAttribute("conferencia") ConferenciaModel conferenciaModel) {
+		conferenciaModel.setOrador(oradorConverter.modelToEntity(oradorService.findByIdPersona(conferenciaModel.getOrador().getIdPersona())));
 		conferenciaService.insertOrUpdate(conferenciaModel);
 		return new RedirectView(ViewRouteHelpers.CONFERENCIA_ROOT);
 	}

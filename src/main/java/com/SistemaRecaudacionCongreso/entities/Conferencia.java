@@ -1,14 +1,15 @@
 package com.SistemaRecaudacionCongreso.entities;
 
 import java.sql.Date;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Conferencia {
@@ -29,25 +30,23 @@ public class Conferencia {
 	@Column(name="costo")
 	private double costo;
 	
-	/*
-	
-	@OneToMany(mappedBy="conferencia")
-    private Set<Auspiciante> auspiciantes; */
+	@OneToOne(cascade = CascadeType.MERGE)
+	private Orador orador;
+
 	
 	public Conferencia() {
 		// TODO Auto-generated constructor stub
 	}
 
 
-
-
-	public Conferencia(long idConferencia, String titulo, String descripcion, Date fecha, double costo) {
+	public Conferencia(long idConferencia, String titulo, String descripcion, Date fecha, double costo,Orador orador) {
 		super();
 		this.idConferencia = idConferencia;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.fecha = fecha;
 		this.costo = costo;
+		this.orador = orador;
 	}
 
 	public long getIdConferencia() {
@@ -90,18 +89,19 @@ public class Conferencia {
 
 	public void setCosto(double costo) {
 		this.costo = costo;
-	}/*
+	}
 	
-
-	public Set<Auspiciante> getAuspiciantes() {
-		return auspiciantes;
+	
+	public Orador getOrador() {
+		return orador;
 	}
 
 
-	public void setAuspiciantes(Set<Auspiciante> auspiciantes) {
-		this.auspiciantes = auspiciantes;
+	public void setOrador(Orador orador) {
+		this.orador = orador;
 	}
-*/
+
+
 	@Override
 	public String toString() {
 		return "Conferencia [idConferencia=" + idConferencia + ", titulo=" + titulo + ", fecha=" + fecha + ", costo="
