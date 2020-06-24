@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -9,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Auspiciantes</title>
+    <title>Oradores</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" th:href="@{vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
@@ -17,10 +18,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" th:href="@{css/sb-admin-2.min.css}" rel="stylesheet">
-    
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
-    
-    
+
 </head>
 
 <body id="page-top">
@@ -215,51 +213,33 @@
                 </nav>
                 <!-- End of Topbar -->
 
+                <div class="container-fluid">
 
-                <div class="container-fluid">                
-                
-						
-
-                    <table class="table table-striped table-light" id="myTable">
-                    
-                    
-                    
-                    
+                    <table class="table table-striped table-light">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">razon Social</th>
-                                <th scope="col">Cuit</th>
-                                <th scope="col">Monto Aportado</th>
-                                <th scope="col">E-mail</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
                                 <th scope="col">Movil</th>
-                                <th scope="col">Conferencia</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Area Investigacion</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="a : ${auspiciantes}">
-                                <th th:text="${a.idPersona}" scope="row"></th>
-                                <td th:text="${a.razonSocial}"></td>
-                                <td th:text="${a.cuit}"></td>
-                                <td th:text="${a.montoAportado}"></td>
-                                <td th:text="${a.email}"></td>
-                                <td th:text="${a.movil}"></td>
-                                <td th:text="${a.Conferencia.idConferencia}"></td>
+                            <tr th:each="o : ${oradores}">
+                                <th th:text="${o.idPersona}" scope="row"></th>
+                                <td th:text="${o.nombre}"></td>
+                                <td th:text="${o.apellido}"></td>
+                                <td th:text="${o.movil}"></td>
+                                <td th:text="${o.email}"></td>
+                                <td th:text="${o.areaInvestigacion}"></td>
+								
 
                                 <td>
 
-                                    <a href="#" th:href="@{/auspiciantes/delete/{id}(id=${a.idPersona})}" class="btn btn-danger btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
-                                      <i class="fas fa-trash"></i>
-                                    </span>
-                                        <span class="text">Eliminar</span>
-                                    </a>
-                                </td>
-
-                                <td>
-
-                                    <a href="#" th:href="@{/auspiciantes/{id}(id=${a.idPersona})}" class="btn btn-info btn-icon-split btn-sm edit">
+                                    <a href="#" th:href="@{/oradores/{id}(id=${o.idPersona})}" class="btn btn-info btn-icon-split btn-sm edit">
                                         <span class="icon text-white-50">
                                       <i class="fas fa-edit"></i>
                                     </span>
@@ -267,92 +247,107 @@
                                     </a>
 
                                 </td>
+
+
+                                <td>
+
+                                    <a href="#" th:href="@{/oradores/delete/{id}(id=${o.idPersona})}" class="btn btn-danger btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                                  <i class="fas fa-trash"></i>
+                                                </span>
+                                        <span class="text">Eliminar</span>
+                                    </a>
+                                </td>
+                                
+
                             </tr>
 
                         </tbody>
-                        
-                        
-                        
                     </table>
                     
-                    
-
+                    <!-- 
 
                     <a href="#" class="btn btn-success btn-icon-split btn-add">
                         <span class=" icon text-white-50 ">
-                          <i class="fas fa-check "></i>
+                          <i class="fas fa-plus "></i>
                         </span>
-                        <span class="text ">Agregar Auspiciante</span>
+                        <span class="text ">Agregar Entrada</span>
                     </a>
-
-
-
+                    
+                    -->
+                    
+                    
+                    
+                    
+                    
                     <div class="form-update">
-                        <form action="#" method="post" th:action="@{auspiciantes/save}">
+                        <form action="#" method="post" th:action="@{entradas/save}">
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar Auspiciante
+                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar Orador
                                             </h5>
                                             <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-								<span aria-hidden="true">&times;</span>
-							</button>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                                         </div>
                                         <div class="modal-body">
-                                            <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
 
-                                            <div class="form-row">
-
-                                                <div class="col-7">
-                                                    <div class="form-group">
-                                                        <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col">
-
-                                                    <div class="form-group">
-                                                        <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" />
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
-                                            </div>
+                                           
+										<input class="form-control" id="id" name="idPersona" type="hidden" value="" />
 
                                             <div class="form-row">
 
                                                 <div class="col">
-
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Movil:</label>
-                                                        <input class="form-control" id="movil" name="movil" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Nombre:</label> <input class="form-control" id="nombre" name="nombre" type="text" value="" />
                                                     </div>
-
                                                 </div>
 
                                                 <div class="col">
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Monto Aportado:</label>
-                                                        <input class="form-control" id="montoAportado" name="montoAportado" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Apellido:</label> <input class="form-control" id="apellido" name="apellido" type="text" value="" />
                                                     </div>
 
                                                 </div>
-                                              
 
                                             </div>
                                             
-                                                   <div class="form-group">
-                                                        <label class="col-form-label" for="name">Conferencia Beneficiada:</label>
-                                                        <select class="form-control " id="conferencia" name="conferencia.idConferencia">
-                                                <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
-                                            </select>
+                                            <div class="form-row">
+
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">Movil:</label> <input class="form-control" id="movil" name="movil" type="text" value="" />
                                                     </div>
+                                                </div>
+
+                                                <div class="col-7">
+
+                                                    <div class="form-group">
+                                                        <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            
+                                            <div class="form-group">
+
+                                                        <label class="col-form-label" for="name">Area de Investigacion</label>
+
+
+                                                        <select class="form-control " name="areaInvestigacion" id="areaInvestigacion">
+                                                            <option value="Informática">Informática</option>
+                                                            <option value="Ciencias Agrarias">Ciencias Agrarias</option>                                                          
+                                                            <option value="Ingeniería Civil">Ingeniería Civil</option>
+                                                            <option value="Ingeniería Mecánica">Ingeniería Mecánica</option>
+                                                        </select>
+
+
+                                                </div>
+
 
                                         </div>
                                         <div class="modal-footer">
@@ -365,17 +360,22 @@
                         </form>
                     </div>
 
+
+
+					
+					<!-- 
+
                     <div class="form-add">
-                        <form action="#" method="post" th:action="@{auspiciantes/save}">
+                        <form action="#" method="post" th:action="@{entradas/save}">
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Agregar Auspiciante
+                                            <h5 class="modal-title" id="exampleModalLabel">Agregar Entrada
                                             </h5>
                                             <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-								<span aria-hidden="true">&times;</span>
-							</button>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                                         </div>
                                         <div class="modal-body">
 
@@ -383,162 +383,160 @@
 
                                                 <div class="col-7">
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Fecha Compra:</label> <input class="form-control" id="fechaCompra" name="fechaCompra" type="date" value="" />
                                                     </div>
                                                 </div>
 
                                                 <div class="col">
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Precio:</label> <input class="form-control" id="precio" name="precio" type="number" value="" />
                                                     </div>
 
                                                 </div>
 
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
                                             </div>
 
                                             <div class="form-row">
 
                                                 <div class="col">
-
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Movil:</label>
-                                                        <input class="form-control" id="movil" name="movil" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Espectador:</label>
+
+                                                        <select class="form-control " id="espectador" name="espectador.idPersona">
+                                                <option th:each="es : ${espectadores}" th:value="${es.idPersona}"  th:text="${es.nombre} + ' ' + ${es.apellido}" ></option>
+                                            </select>
+
+
                                                     </div>
 
                                                 </div>
 
                                                 <div class="col">
 
+
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Monto Aportado:</label>
-                                                        <input class="form-control" id="montoAportado" name="montoAportado" type="text" value="" />
+
+                                                        <label class="col-form-label" for="name">Conferencia:</label>
+
+                                                        <select class="form-control " id="conferencia" name="conferencia.idConferencia">
+                                                <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
+                                            </select>
+
                                                     </div>
 
                                                 </div>
 
+
                                             </div>
-                                            
-                                             <div class="form-group">
-                                                        <label class="col-form-label" for="name">Conferencia Beneficiada:</label>
-                                                        <select class="form-control " id="conferencia" name="conferencia.idConferencia">
-                                                <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
-                                            </select>
-                                                    </div>
-                                            
-                                            <div class="modal-footer">
-                                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                                                <input class="btn btn-success" type="submit" value="Save" />
-                                            </div>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                            <input class="btn btn-success" type="submit" value="Save" />
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </form>
-                        </div>
-
                     </div>
-
-
-
-
 
                 </div>
-                <!-- End of Main Content -->
 
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                    </div>
-                </footer>
-                <!-- End of Footer -->
-
+					
+					 -->
+					
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <!-- End of Page Wrapper -->
 
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="../../vendor/jquery/jquery.min.js"></script>
-        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="../../js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="../../js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="../../vendor/chart.js/Chart.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="../../vendor/chart.js/Chart.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="../../js/demo/chart-area-demo.js"></script>
-        <script src="../../js/demo/chart-pie-demo.js"></script>
-        
-            <!--   Datatables-->
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="../../js/demo/chart-area-demo.js"></script>
+    <script src="../../js/demo/chart-pie-demo.js"></script>
 
-    <!-- extension responsive -->
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function() {
+    <script type="text/javascript">
+    
+        $(document).ready(function() {
 
-                $('.table .edit').on('click', function(event) {
-                    event.preventDefault();
-                    var href = $(this).attr('href');
+            $('.table .edit').on('click', function(event) {
+                event.preventDefault();
+                var href = $(this).attr('href');
 
-                    $.get(href, function(auspiciante, status) {
-                        $('.form-update #id').val(auspiciante.idPersona);
-                        $('.form-update #movil').val(auspiciante.movil);
-                        $('.form-update #email').val(auspiciante.email);
-                        $('.form-update #razonSocial').val(auspiciante.razonSocial);
-                        $('.form-update #cuit').val(auspiciante.cuit);
-                        $('.form-update #montoAportado').val(auspiciante.montoAportado);
-                        $('.form-update #conferencia').val(auspiciante.conferencia.idConferencia);
+                $.get(href, function(orador, status) {
 
-                    });
-                    $('.form-update #exampleModal').modal();
+                    $('.form-update #id').val(orador.idPersona);
+                    $('.form-update #nombre').val(orador.nombre);
+                    $('.form-update #apellido').val(orador.apellido);
+                    $('.form-update #movil').val(orador.movil);
+                    $('.form-update #email').val(orador.email); 
+                    $('.form-update #areaInvestigacion').val(orador.areaInvestigacion); 
 
                 });
-
-
-                $('.btn-add').on('click', function(event) {
-                    event.preventDefault();
-                    $('.form-add #exampleModal-add').modal();
-                });
-             
+                $('.form-update #exampleModal').modal();
 
             });
-        </script>
+
+
+            $('.btn-add').on('click', function(event) {
+                event.preventDefault();
+                $('.form-add #exampleModal-add').modal();
+            });
+
+        });
+    
+    </script>
+
 
 </body>
 

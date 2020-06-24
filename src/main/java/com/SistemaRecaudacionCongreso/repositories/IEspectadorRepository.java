@@ -2,7 +2,6 @@ package com.SistemaRecaudacionCongreso.repositories;
 
 import java.io.Serializable;
 
-import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Espectador;
 
 import org.springframework.data.jpa.repository.JpaRepository;
