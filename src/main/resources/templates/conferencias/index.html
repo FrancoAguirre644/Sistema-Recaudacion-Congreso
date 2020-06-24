@@ -229,7 +229,10 @@
                             <div class="card-body text-primary">
                                 <p class="card-text" th:text="${c.descripcion}"></p>
                                 <p class="card-text" th:text="${c.fecha}"></p>
+                                <p class="card-text" th:text="${c.Orador.nombre} + ' ' + ${c.Orador.apellido} "></p>
+                                
                                 <p class="card-text" th:text="'$'+ ${c.costo}"></p>
+                                
 
                                 <a href="#" th:href="@{/conferencias/{id}(id=${c.idConferencia})}" class="btn btn-info btn-icon-split btn-sm edit">
                                     <span class="icon text-white-50">
@@ -310,6 +313,16 @@
                                             </div>
 
                                         </div>
+                                        
+                                        <div class="form-group">
+
+                                                        <label class="col-form-label" for="name">Orador:</label>
+
+                                                        <select class="form-control " id="orador" name="orador.idPersona">
+                                                <option th:each="o : ${oradores}" th:value="${o.idPersona}" th:text="${o.nombre} + ' ' + ${o.apellido}"></option>
+                                            </select>
+
+                                                    </div>
 
 
                                     </div>
@@ -370,6 +383,16 @@
                                             </div>
 
                                         </div>
+                                        
+                                        <div class="form-group">
+
+                                                        <label class="col-form-label" for="name">Orador:</label>
+
+                                                        <select class="form-control " id="orador" name="orador.idPersona">
+                                                <option th:each="o : ${oradores}" th:value="${o.idPersona}" th:text="${o.nombre} + ' ' + ${o.apellido}"></option>
+                                            </select>
+
+                                                    </div>
 
                                     </div>
                                     <div class="modal-footer">
@@ -476,6 +499,7 @@
                         $('.form-update #descripcion').val(conferencia.descripcion);
                         $('.form-update #fecha').val(conferencia.fecha);
                         $('.form-update #costo').val(conferencia.costo);
+                        $('.form-update #orador').val(conferencia.orador.idPersona);
                     });
                     $('.form-update #exampleModal').modal();
 
