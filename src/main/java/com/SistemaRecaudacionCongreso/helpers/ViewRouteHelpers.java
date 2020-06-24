@@ -10,6 +10,10 @@ public class ViewRouteHelpers {
     public static final String AUSPICIANTE_INDEX = "/auspiciantes/index";
     public static final String AUSPICIANTE_ROOT = "/auspiciantes";
     
+  //Auspiciantes
+    public static final String ORADOR_INDEX = "/oradores/index";
+    public static final String ORADOR_ROOT = "/oradores";
+    
     //Conferencias
     public static final String CONFERENCIA_INDEX = "/conferencias/index";
     public static final String CONFERENCIA_ROOT = "/conferencias";

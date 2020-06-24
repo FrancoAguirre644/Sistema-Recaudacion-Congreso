@@ -219,21 +219,24 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Fecha Compra</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Espectador</th>
-                                <th scope="col">Conferencia</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Movil</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Area Investigacion</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="e : ${entradas}">
-                                <th th:text="${e.idEntrada}" scope="row"></th>
-                                <td th:text="${e.fechaCompra}"></td>
-                                <td th:text="'$' + ${e.precio}"></td>
-                                <td th:text="${e.Espectador.nombre} +' '+ ${e.Espectador.apellido}"></td>
-                                <td th:text="${e.Conferencia.titulo}"></td>
-
+                            <tr th:each="o : ${oradores}">
+                                <th th:text="${o.idPersona}" scope="row"></th>
+                                <td th:text="${o.nombre}"></td>
+                                <td th:text="${o.apellido}"></td>
+                                <td th:text="${o.movil}"></td>
+                                <td th:text="${o.email}"></td>
+                                <td th:text="${o.areaInvestigacion}"></td>
+								
+								<!-- 
 
                                 <td>
 
@@ -256,11 +259,15 @@
                                         <span class="text">Eliminar</span>
                                     </a>
                                 </td>
+                                
+                                 -->
 
                             </tr>
 
                         </tbody>
                     </table>
+                    
+                    <!-- 
 
                     <a href="#" class="btn btn-success btn-icon-split btn-add">
                         <span class=" icon text-white-50 ">
@@ -428,7 +435,9 @@
 
                 </div>
 
-
+					
+					 -->
+					
             </div>
             <!-- End of Main Content -->
 
@@ -488,6 +497,8 @@
 
 
     <script type="text/javascript">
+    
+    /*
         $(document).ready(function() {
 
             $('.table .edit').on('click', function(event) {
@@ -514,10 +525,11 @@
             });
 
         });
+    
+    */
     </script>
 
 
 </body>
 
 </html>
-
