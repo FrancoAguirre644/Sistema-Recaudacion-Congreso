@@ -1,5 +1,9 @@
 package com.SistemaRecaudacionCongreso.controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -70,17 +74,27 @@ public class ConferenciaController {
 	
 	@GetMapping("/costoReal/{id}")
 	@ResponseBody
-	public double getCostoReal(@PathVariable("id") long idConferencia) {
+	public ArrayList<Auspiciante> getCostoReal(@PathVariable("id") long idConferencia) {
 		double costoAportado = 0;
+		ArrayList<Auspiciante> auspiciantes = new ArrayList<Auspiciante>();
 		
 		for(Auspiciante a : auspicianteService.getAll()) {
 			if(a.getConferencia().getIdConferencia() == idConferencia) {
 				costoAportado += a.getMontoAportado();
+				auspiciantes.add(a);
 			}
 		}
 		
-		return conferenciaService.findByIdConferencia(idConferencia).getCosto() - costoAportado;
+		for(Auspiciante auspiciante : auspiciantes ) {
+			System.out.println(auspiciante);
+		}
+		
+		//conferenciaService.findByIdConferencia(idConferencia).getCosto() - costoAportado
+		
+		return auspiciantes;
 	}
+	
+	
 	
 
 }
