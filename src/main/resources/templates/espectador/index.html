@@ -226,6 +226,7 @@
                                 <th scope="col">Apellido</th>
                                 <th scope="col">Tipo Documento</th>
                                 <th scope="col">Nro. Documento</th>
+                                <th scope="col">Nivel Estudio</th>
                                 <th scope="col">E-mail</th>
                                 <th scope="col">Telefono</th>
                                 <th scope="col">Acciones</th>
@@ -238,12 +239,21 @@
                                 <td th:text="${e.apellido}"></td>
                                 <td th:text="${e.tipoDocumento}"></td>
                                 <td th:text="${e.nroDocumento}"></td>
+                                <td th:text="${e.nivelEstudio}"></td>
                                 <td th:text="${e.email}"></td>
                                 <td th:text="${e.movil}"></td>
-                                <!--
-                                <td><a href="" th:href="@{/espectadores/delete/{id}(id=${e.idPersona})}">Eliminar</a></td>
+                                
+								<td>
 
-                                -->
+                                    <a href="#" th:href="@{/espectadores/{id}(id=${e.idPersona})}" class="btn btn-info btn-icon-split btn-sm eBtn">
+                                        <span class="icon text-white-50">
+                                      <i class="fas fa-edit"></i>
+                                    </span>
+                                        <span class="text">Editar</span>
+                                    </a>
+
+                                </td>
+                                
 
                                 <td>
 
@@ -254,21 +264,6 @@
                                         <span class="text">Eliminar</span>
                                     </a>
                                 </td>
-
-                                <td>
-
-                                    <a href="#" th:href="@{/espectadores/{id}(id=${e.idPersona})}" class="btn btn-info btn-icon-split btn-sm eBtn">
-                                        <span class="icon text-white-50">
-                                      <i class="fas fa-edit"></i>
-                                    </span>
-                                        <span class="text">Editar</span>
-                                    </a>
-
-                                </td>
-
-
-
-
 
                             </tr>
 
@@ -365,6 +360,12 @@
                                                 </div>
 
                                             </div>
+                                            
+                                            <select class="form-control " name="nivelEstudio" id="nivelEstudio">
+                                                            <option value="Secundario">Secundario</option>
+                                                            <option value="Terceario">Terceario</option>
+                                                            <option value="Universitario">Universitario</option>
+                                                        </select>
 
                                         </div>
                                         <div class="modal-footer">
@@ -464,6 +465,12 @@
                                                 </div>
 
                                             </div>
+                                            
+                                            <select class="form-control " name="nivelEstudio" id="nivelEstudio">
+                                                            <option value="Secundario">Secundario</option>
+                                                            <option value="Terceario">Terceario</option>
+                                                            <option value="Universitario">Universitario</option>
+                                                        </select>
 
                                         </div>
 
@@ -565,6 +572,7 @@
                     $('.form-update #email').val(espectador.email);
                     $('.form-update #tipoDocumento').val(espectador.tipoDocumento);
                     $('.form-update #nroDocumento').val(espectador.nroDocumento);
+					$('.form-update #nivelEstudio').val(espectador.nivelEstudio);
                 });
                 $('.form-update #exampleModal').modal();
 

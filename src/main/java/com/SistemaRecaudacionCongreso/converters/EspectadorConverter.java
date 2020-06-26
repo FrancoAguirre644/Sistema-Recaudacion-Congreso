@@ -10,11 +10,11 @@ import com.SistemaRecaudacionCongreso.models.EspectadorModel;
 public class EspectadorConverter {
 
 	public EspectadorModel entityToModel(Espectador espectador) {
-		return new EspectadorModel(espectador.getIdPersona(),espectador.getMovil(), espectador.getEmail(), espectador.getNombre(),espectador.getApellido(),espectador.getTipoDocumento(),espectador.getNroDocumento());
+		return new EspectadorModel(espectador.getIdPersona(),espectador.getMovil(), espectador.getEmail(), espectador.getNombre(),espectador.getApellido(),espectador.getTipoDocumento(),espectador.getNroDocumento(),espectador.getNivelEstudio());
 	}
 	
 	public Espectador modelToEntity(EspectadorModel espectadorModel) {
-		return new Espectador(espectadorModel.getIdPersona(),espectadorModel.getMovil(), espectadorModel.getEmail(), espectadorModel.getNombre(),espectadorModel.getApellido(),espectadorModel.getTipoDocumento(),espectadorModel.getNroDocumento());
+		return new Espectador(espectadorModel.getIdPersona(),espectadorModel.getMovil(), espectadorModel.getEmail(), espectadorModel.getNombre(),espectadorModel.getApellido(),espectadorModel.getTipoDocumento(),espectadorModel.getNroDocumento(),espectadorModel.getNivelEstudio());
 	}
 
 }

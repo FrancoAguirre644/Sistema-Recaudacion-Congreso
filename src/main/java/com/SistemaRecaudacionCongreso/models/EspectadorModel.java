@@ -1,33 +1,31 @@
 package com.SistemaRecaudacionCongreso.models;
 
-import javax.persistence.Column;
 
 
 public class EspectadorModel extends PersonaModel {
 
-	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "apellido")
 	private String apellido;
 
-	@Column(name = "tipoDocumento")
 	private String tipoDocumento;
 
-	@Column(name = "nroDocumento")
 	private long nroDocumento;
+	
+	private String nivelEstudio;
 
 	public EspectadorModel() {
 
 	}
 
 	public EspectadorModel(long idPersona, String movil, String email, String nombre, String apellido, String tipoDocumento,
-			long nroDocumento) {
+			long nroDocumento, String nivelEstudio) {
 		super(idPersona, movil, email);
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.tipoDocumento = tipoDocumento;
 		this.nroDocumento = nroDocumento;
+		this.nivelEstudio = nivelEstudio;
 	}
 
 	public String getNombre() {
@@ -61,5 +59,21 @@ public class EspectadorModel extends PersonaModel {
 	public void setNroDocumento(long nroDocumento) {
 		this.nroDocumento = nroDocumento;
 	}
+	
+	public String getNivelEstudio() {
+		return nivelEstudio;
+	}
+
+	public void setNivelEstudio(String nivelEstudio) {
+		this.nivelEstudio = nivelEstudio;
+	}
+
+	@Override
+	public String toString() {
+		return "EspectadorModel [nombre=" + nombre + ", apellido=" + apellido + ", tipoDocumento=" + tipoDocumento
+				+ ", nroDocumento=" + nroDocumento + ", nivelEstudio=" + nivelEstudio + ", idPersona=" + idPersona
+				+ ", movil=" + movil + ", email=" + email + "]";
+	}
+	
 
 }

@@ -514,18 +514,13 @@
                 $('.btn-costo').on('click', function(event) {
                     event.preventDefault();
                     var href = $(this).attr('href');
-					/*
-                    $.get(href, function(costo) {
-                        $('.show-costo').html('El costo menos el aporte de los auspiciantes es: $' + costo);
 
-                    }); */
-                    
                     $.ajax({
                     	   type : 'GET',
                     	   url : href,
                     	   dataType : 'json',
                     	   success : function(costo) {
-                    		   $('.show-costo').html('El costo menos el aporte de los auspiciantes es: $' + '</br>');
+                    		   $('.show-costo').html('El costo menos el aporte de los auspiciantes es: $' + costoReal(costo) + '</br></br>');
                     		   
                     		   $.each(costo, function(i, item) {
                     			    $('.show-costo').append(costo[i].razonSocial);
@@ -538,6 +533,18 @@
                     	}) ;
                     
                     $('#exampleModal-costo').modal();
+                    
+                    function costoReal(costo){
+                    	var costoReal = 0;
+                    	
+                    	$.each(costo, function(i, item) {
+                    		costoReal += costo[i].montoAportado;
+            			    
+            			});
+                    	
+                    	return costoReal;
+                    }
+                    
                 });
 
             });
