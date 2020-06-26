@@ -1,8 +1,6 @@
 package com.SistemaRecaudacionCongreso.controllers;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,10 +16,14 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.SistemaRecaudacionCongreso.converters.OradorConverter;
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
+import com.SistemaRecaudacionCongreso.entities.Conferencia;
+import com.SistemaRecaudacionCongreso.entities.Entrada;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
+import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
 import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
+import com.SistemaRecaudacionCongreso.services.IEntradaService;
 import com.SistemaRecaudacionCongreso.services.IOradorService;
 
 @Controller
@@ -35,6 +37,10 @@ public class ConferenciaController {
 	@Autowired
 	@Qualifier("auspicianteService")
 	private IAuspicianteService auspicianteService;
+	
+	@Autowired
+	@Qualifier("entradaService")
+	private IEntradaService entradaService;
 	
 	@Autowired
 	@Qualifier("oradorService")
@@ -75,12 +81,10 @@ public class ConferenciaController {
 	@GetMapping("/costoReal/{id}")
 	@ResponseBody
 	public ArrayList<Auspiciante> getCostoReal(@PathVariable("id") long idConferencia) {
-		double costoAportado = 0;
 		ArrayList<Auspiciante> auspiciantes = new ArrayList<Auspiciante>();
 		
 		for(Auspiciante a : auspicianteService.getAll()) {
 			if(a.getConferencia().getIdConferencia() == idConferencia) {
-				costoAportado += a.getMontoAportado();
 				auspiciantes.add(a);
 			}
 		}
@@ -89,12 +93,10 @@ public class ConferenciaController {
 			System.out.println(auspiciante);
 		}
 		
-		//conferenciaService.findByIdConferencia(idConferencia).getCosto() - costoAportado
 		
 		return auspiciantes;
 	}
 	
-	
-	
+
 
 }

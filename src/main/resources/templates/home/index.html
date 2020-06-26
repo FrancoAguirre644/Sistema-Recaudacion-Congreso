@@ -190,6 +190,19 @@
 
                 </nav>
                 <!-- End of Topbar -->
+                
+                
+                
+                <div class="container-fluid">
+                
+	                <div class="alert alert-info" th:each="r : ${ranking}" role="alert">
+	  					<p th:text="${r.nombreConferencia} + ' ' + ${r.cantidadVendida}"></p>
+					</div>
+				
+				</div>
+                
+                
+                
             </div>
             <!-- End of Main Content -->
 
