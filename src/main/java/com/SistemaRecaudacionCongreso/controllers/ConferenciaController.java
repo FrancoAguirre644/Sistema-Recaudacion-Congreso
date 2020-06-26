@@ -97,6 +97,12 @@ public class ConferenciaController {
 		return auspiciantes;
 	}
 	
+	@GetMapping("/rankingConferencia")
+	@ResponseBody
+	public ArrayList<RankingConferenciaModel> rankingConferencia(){
+		return conferenciaService.getRanking();
+	}
+	
 
 
 }

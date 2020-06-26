@@ -195,11 +195,46 @@
                 
                 <div class="container-fluid">
                 
-	                <div class="alert alert-info" th:each="r : ${ranking}" role="alert">
+	                <div class="alert alert-info" th:each="r : ${ranking1}" role="alert">
 	  					<p th:text="${r.nombreConferencia} + ' ' + ${r.cantidadVendida}"></p>
 					</div>
 				
-				</div>
+				
+				
+				
+				
+              <div class="card shadow mb-4" style="width: 500px">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <canvas id="myPieChart-ranking"></canvas>
+                  
+                  <!-- 
+                  <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-primary"></i> Direct
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-success"></i> Social
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-info"></i> Referral
+                    </span>
+                  </div>
+                  
+                   -->
+                  
+                </div>
+              </div>
+				
+				
+				
+				
+			</div>
+					
                 
                 
                 
@@ -259,6 +294,88 @@
     <!-- Page level custom scripts -->
     <script src="../../js/demo/chart-area-demo.js"></script>
     <script src="../../js/demo/chart-pie-demo.js"></script>
+    
+    
+    
+    
+        <script type="text/javascript ">
+	
+		
+		
+		$(document).ready(function() {
+					
+
+                    $.ajax({
+                    	   type : 'GET',
+                    	   url : "conferencias/rankingConferencia",
+                    	   dataType : 'json',
+                    	   success : function(data) {
+									var cantidades = [];
+									var nombres = [];
+
+                    			    $.each(data, function(i, item) {
+										
+                    			    	cantidades.push(data[i].cantidadVendida);
+										nombres.push(data[i].nombreConferencia);
+                    			});
+
+
+
+
+
+							var ctx = document.getElementById('myPieChart-ranking').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: nombres,
+        datasets: [{
+            label: '# of Votes',
+            data: cantidades,
+            backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255,1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 3
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                   scaleShowLabels:false
+                }
+            }]
+        }
+    }
+});
+
+
+
+							
+	   
+                    	   },
+                    	}) ;
+
+					
+                });
+
+
+		
+
+        
+    </script>
 
 </body>
 
