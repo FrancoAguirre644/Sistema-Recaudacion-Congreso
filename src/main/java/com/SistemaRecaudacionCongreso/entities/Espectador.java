@@ -18,17 +18,21 @@ public class Espectador extends Persona {
 	@Column(name = "nroDocumento")
 	private long nroDocumento;
 
+	@Column(name = "nivelEstudio")
+	private String nivelEstudio;
+
 	public Espectador() {
 
 	}
 
 	public Espectador(long idPersona, String movil, String email, String nombre, String apellido, String tipoDocumento,
-			long nroDocumento) {
+			long nroDocumento, String nivelEstudio) {
 		super(idPersona, movil, email);
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.tipoDocumento = tipoDocumento;
 		this.nroDocumento = nroDocumento;
+		this.nivelEstudio = nivelEstudio;
 	}
 
 	public String getNombre() {
@@ -62,5 +66,21 @@ public class Espectador extends Persona {
 	public void setNroDocumento(long nroDocumento) {
 		this.nroDocumento = nroDocumento;
 	}
+
+	public String getNivelEstudio() {
+		return nivelEstudio;
+	}
+
+	public void setNivelEstudio(String nivelEstudio) {
+		this.nivelEstudio = nivelEstudio;
+	}
+
+	@Override
+	public String toString() {
+		return "Espectador [nombre=" + nombre + ", apellido=" + apellido + ", tipoDocumento=" + tipoDocumento
+				+ ", nroDocumento=" + nroDocumento + ", nivelEstudio=" + nivelEstudio + ", idPersona=" + idPersona
+				+ ", movil=" + movil + ", email=" + email + "]";
+	}
+	
 
 }
