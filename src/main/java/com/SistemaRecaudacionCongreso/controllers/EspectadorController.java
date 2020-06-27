@@ -35,6 +35,9 @@ public class EspectadorController {
         ModelAndView mAV = new ModelAndView(ViewRouteHelpers.ESPECTADOR_INDEX);
         mAV.addObject("espectadores", espectadorService.getAll());
         mAV.addObject("espectador", new EspectadorModel());
+        
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println(espectadorRepository.getNivelEstudio());
 
         return mAV;
     }

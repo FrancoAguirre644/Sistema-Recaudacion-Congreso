@@ -1,10 +1,11 @@
 package com.SistemaRecaudacionCongreso.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.SistemaRecaudacionCongreso.converters.ConferenciaConverter;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.EntradaModel;
+import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
+import com.SistemaRecaudacionCongreso.repositories.IEntradaRepository;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
 import com.SistemaRecaudacionCongreso.services.IEntradaService;
 import com.SistemaRecaudacionCongreso.services.IEspectadorService;
@@ -38,7 +41,10 @@ public class EntradaController {
 	@Autowired
 	@Qualifier("conferenciaConverter")
 	private ConferenciaConverter conferenciaConverter;
-
+	
+	@Autowired
+	@Qualifier("entradaRepository")
+	private IEntradaRepository entradaRepository;
 	
 	@GetMapping("")
 	public ModelAndView index() {
@@ -47,6 +53,11 @@ public class EntradaController {
 		mAV.addObject("espectadores", espectadorService.getAll());
 		mAV.addObject("conferencias", conferenciaService.getAll());
 		mAV.addObject("entrada", new EntradaModel());
+		
+		
+		System.out.println(entradaRepository.countByNivelEstudio("Secundario"));
+		System.out.println(entradaService.getCantidadEspectadoresNivelEstudio());;
+
 
 		return mAV;
 	}
@@ -65,11 +76,6 @@ public class EntradaController {
 
 	@PostMapping("/save")
 	public RedirectView save(EntradaModel entradaModel){
-		System.out.println("-------------------------------------------------------------------------");
-		System.out.println(entradaModel.getConferencia().getIdConferencia());
-		System.out.println(entradaModel.getConferencia());
-		System.out.println("-------------------------------------------------------------------------");
-
 		entradaModel.setEspectador(espectadorService.findByIdPersona(entradaModel.getEspectador().getIdPersona()));
 		entradaModel.setConferencia(conferenciaConverter.modelToEntity(conferenciaService.findByIdConferencia(entradaModel.getConferencia().getIdConferencia())));
 
@@ -77,7 +83,11 @@ public class EntradaController {
 		return new RedirectView(ViewRouteHelpers.ENTRADA_ROOT);
 	}
 
-
+	@GetMapping("/rankingNivelEstudio")
+	@ResponseBody
+	public ArrayList<RankingConferenciaModel> rankingNivelEstudio(){
+		return entradaService.getCantidadEspectadoresNivelEstudio();
+	}
 
 
 }

@@ -1,5 +1,6 @@
 package com.SistemaRecaudacionCongreso.services.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.SistemaRecaudacionCongreso.converters.EntradaConverter;
 import com.SistemaRecaudacionCongreso.entities.Entrada;
 import com.SistemaRecaudacionCongreso.models.EntradaModel;
+import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
 import com.SistemaRecaudacionCongreso.repositories.IEntradaRepository;
 import com.SistemaRecaudacionCongreso.services.IEntradaService;
 
@@ -22,7 +24,11 @@ public class EntradaService implements IEntradaService{
 	@Autowired
 	@Qualifier("entradaConverter")
 	private EntradaConverter entradaConverter;
-
+	
+	@Autowired
+	@Qualifier("espectadorService")
+	private EspectadorService espectadorService;
+	
 	@Override
 	public List<Entrada> getAll() {
 		// TODO Auto-generated method stub
@@ -47,6 +53,19 @@ public class EntradaService implements IEntradaService{
 		Entrada entrada = entradaRepository.save(entradaConverter.modelToEntity(entradaModel));
 
 		return entradaConverter.entityToModel(entrada);
+	}
+
+	@Override
+	public ArrayList<RankingConferenciaModel> getCantidadEspectadoresNivelEstudio() {
+		// TODO Auto-generated method stub´
+		ArrayList<RankingConferenciaModel> ranking = new ArrayList<RankingConferenciaModel>();
+		
+		for(String n : espectadorService.getNivelEstudio()) {
+			ranking.add(new RankingConferenciaModel(n, entradaRepository.countByNivelEstudio(n)));
+		}
+		
+		
+		return ranking;
 	}
 
 	

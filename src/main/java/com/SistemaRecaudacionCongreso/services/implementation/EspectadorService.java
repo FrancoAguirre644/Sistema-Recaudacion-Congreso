@@ -1,6 +1,7 @@
 package com.SistemaRecaudacionCongreso.services.implementation;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,6 +43,10 @@ public class EspectadorService implements IEspectadorService{
 		return espectadorConverter.entityToModel(espectador);
 		
 	}
+    
+    public Set<String> getNivelEstudio(){
+    	return espectadorRepository.getNivelEstudio();
+    }
 
 
 }

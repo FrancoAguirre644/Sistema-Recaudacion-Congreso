@@ -2,6 +2,9 @@ package com.SistemaRecaudacionCongreso.helpers;
 
 public class ViewRouteHelpers {
 	
+	//Home
+	public static final String HOME_INDEX = "/home/index";
+	
 	//Espectadores
     public static final String ESPECTADOR_INDEX = "/espectador/index";
     public static final String ESPECTADOR_ROOT = "/espectadores";
@@ -10,7 +13,7 @@ public class ViewRouteHelpers {
     public static final String AUSPICIANTE_INDEX = "/auspiciantes/index";
     public static final String AUSPICIANTE_ROOT = "/auspiciantes";
     
-  //Auspiciantes
+   //Auspiciantes
     public static final String ORADOR_INDEX = "/oradores/index";
     public static final String ORADOR_ROOT = "/oradores";
     
