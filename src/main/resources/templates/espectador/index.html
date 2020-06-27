@@ -19,6 +19,10 @@
 
     <link href="css/sb-admin-2.min.css" th:href="@{css/sb-admin-2.min.css}" rel="stylesheet">
 
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" th:href="@{vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+
+
 
 </head>
 
@@ -218,57 +222,71 @@
 
                 <div class="container-fluid">
 
-                    <table class="table table-striped table-light">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Tipo Documento</th>
-                                <th scope="col">Nro. Documento</th>
-                                <th scope="col">Nivel Estudio</th>
-                                <th scope="col">E-mail</th>
-                                <th scope="col">Telefono</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="e : ${espectadores}">
-                                <th th:text="${e.idPersona}" scope="row"></th>
-                                <td th:text="${e.nombre}"></td>
-                                <td th:text="${e.apellido}"></td>
-                                <td th:text="${e.tipoDocumento}"></td>
-                                <td th:text="${e.nroDocumento}"></td>
-                                <td th:text="${e.nivelEstudio}"></td>
-                                <td th:text="${e.email}"></td>
-                                <td th:text="${e.movil}"></td>
-                                
-								<td>
 
-                                    <a href="#" th:href="@{/espectadores/{id}(id=${e.idPersona})}" class="btn btn-info btn-icon-split btn-sm eBtn">
-                                        <span class="icon text-white-50">
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Apellido</th>
+                                            <th scope="col">Tipo Documento</th>
+                                            <th scope="col">Nro. Documento</th>
+                                            <th scope="col">Nivel Estudio</th>
+                                            <th scope="col">E-mail</th>
+                                            <th scope="col">Telefono</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="e : ${espectadores}">
+                                            <th th:text="${e.idPersona}" scope="row"></th>
+                                            <td th:text="${e.nombre}"></td>
+                                            <td th:text="${e.apellido}"></td>
+                                            <td th:text="${e.tipoDocumento}"></td>
+                                            <td th:text="${e.nroDocumento}"></td>
+                                            <td th:text="${e.nivelEstudio}"></td>
+                                            <td th:text="${e.email}"></td>
+                                            <td th:text="${e.movil}"></td>
+
+                                            <td>
+
+                                                <a href="#" th:href="@{/espectadores/{id}(id=${e.idPersona})}" class="btn btn-info btn-icon-split btn-sm eBtn">
+                                                    <span class="icon text-white-50">
                                       <i class="fas fa-edit"></i>
                                     </span>
-                                        <span class="text">Editar</span>
-                                    </a>
+                                                    <span class="text">Editar</span>
+                                                </a>
 
-                                </td>
-                                
-
-                                <td>
-
-                                    <a href="#" th:href="@{/espectadores/delete/{id}(id=${e.idPersona})}" class="btn btn-danger btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
+                                                <a href="#" th:href="@{/espectadores/delete/{id}(id=${e.idPersona})}" class="btn btn-danger btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
                                       <i class="fas fa-trash"></i>
                                     </span>
-                                        <span class="text">Eliminar</span>
-                                    </a>
-                                </td>
+                                                    <span class="text">Eliminar</span>
+                                                </a>
 
-                            </tr>
+                                            </td>
 
-                        </tbody>
-                    </table>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
 
                     <div class="form-update">
                         <form action="#" method="post" th:action="@{espectadores/save}">
@@ -360,7 +378,7 @@
                                                 </div>
 
                                             </div>
-                                            
+
                                             <select class="form-control " name="nivelEstudio" id="nivelEstudio">
                                                             <option value="Secundario">Secundario</option>
                                                             <option value="Terceario">Terceario</option>
@@ -465,7 +483,7 @@
                                                 </div>
 
                                             </div>
-                                            
+
                                             <select class="form-control " name="nivelEstudio" id="nivelEstudio">
                                                             <option value="Secundario">Secundario</option>
                                                             <option value="Terceario">Terceario</option>
@@ -540,21 +558,21 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../../vendor/jquery/jquery.min.js "></script>
-    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <script src="../../vendor/jquery/jquery.min.js"></script>
+    <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../../vendor/jquery-easing/jquery.easing.min.js "></script>
+    <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../../js/sb-admin-2.min.js "></script>
+    <script src="../../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../../vendor/chart.js/Chart.min.js "></script>
+    <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../../js/demo/chart-area-demo.js "></script>
-    <script src="../../js/demo/chart-pie-demo.js "></script>
+    <script src="../../js/demo/datatables-demo.js"></script>
 
 
     <script type="text/javascript ">
@@ -572,7 +590,7 @@
                     $('.form-update #email').val(espectador.email);
                     $('.form-update #tipoDocumento').val(espectador.tipoDocumento);
                     $('.form-update #nroDocumento').val(espectador.nroDocumento);
-					$('.form-update #nivelEstudio').val(espectador.nivelEstudio);
+                    $('.form-update #nivelEstudio').val(espectador.nivelEstudio);
                 });
                 $('.form-update #exampleModal').modal();
 

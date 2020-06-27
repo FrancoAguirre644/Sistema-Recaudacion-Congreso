@@ -19,6 +19,10 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" th:href="@{css/sb-admin-2.min.css}" rel="stylesheet">
 
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" th:href="@{vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+
+
 </head>
 
 <body id="page-top">
@@ -215,57 +219,68 @@
 
                 <div class="container-fluid">
 
-                    <table class="table table-striped table-light">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Movil</th>
-                                <th scope="col">E-mail</th>
-                                <th scope="col">Area Investigacion</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="o : ${oradores}">
-                                <th th:text="${o.idPersona}" scope="row"></th>
-                                <td th:text="${o.nombre}"></td>
-                                <td th:text="${o.apellido}"></td>
-                                <td th:text="${o.movil}"></td>
-                                <td th:text="${o.email}"></td>
-                                <td th:text="${o.areaInvestigacion}"></td>
-								
 
-                                <td>
 
-                                    <a href="#" th:href="@{/oradores/{id}(id=${o.idPersona})}" class="btn btn-info btn-icon-split btn-sm edit">
-                                        <span class="icon text-white-50">
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Apellido</th>
+                                            <th scope="col">Movil</th>
+                                            <th scope="col">E-mail</th>
+                                            <th scope="col">Area Investigacion</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="o : ${oradores}">
+                                            <th th:text="${o.idPersona}" scope="row"></th>
+                                            <td th:text="${o.nombre}"></td>
+                                            <td th:text="${o.apellido}"></td>
+                                            <td th:text="${o.movil}"></td>
+                                            <td th:text="${o.email}"></td>
+                                            <td th:text="${o.areaInvestigacion}"></td>
+
+
+                                            <td>
+
+                                                <a href="#" th:href="@{/oradores/{id}(id=${o.idPersona})}" class="btn btn-info btn-icon-split btn-sm edit">
+                                                    <span class="icon text-white-50">
                                       <i class="fas fa-edit"></i>
                                     </span>
-                                        <span class="text">Editar</span>
-                                    </a>
+                                                    <span class="text">Editar</span>
+                                                </a>
 
-                                </td>
-
-
-                                <td>
-                                
-
-                                    <a href="#"  th:href="@{/oradores/delete/{id}(id=${o.idPersona})}" class="btn btn-danger btn-icon-split btn-sm delete">
-                                        <span class="icon text-white-50">
+                                                <a href="#" th:href="@{/oradores/delete/{id}(id=${o.idPersona})}" class="btn btn-danger btn-icon-split btn-sm delete">
+                                                    <span class="icon text-white-50">
                                                   <i class="fas fa-trash"></i>
                                                 </span>
-                                        <span class="text">Eliminar</span>
-                                    </a>
-                                </td>
-                                
+                                                    <span class="text">Eliminar</span>
+                                                </a>
 
-                            </tr>
+                                            </td>
 
-                        </tbody>
-                    </table>
-                    
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
 
                     <a href="#" class="btn btn-success btn-icon-split btn-add">
                         <span class=" icon text-white-50 ">
@@ -273,11 +288,11 @@
                         </span>
                         <span class="text ">Agregar Oradores</span>
                     </a>
-                    
-                    
-                    
-                    
-                    
+
+
+
+
+
                     <div class="form-update">
                         <form action="#" method="post" th:action="@{oradores/save}">
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
@@ -292,8 +307,8 @@
                                         </div>
                                         <div class="modal-body">
 
-                                           
-										<input class="form-control" id="id" name="idPersona" type="hidden" value="" />
+
+                                            <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
 
                                             <div class="form-row">
 
@@ -312,7 +327,7 @@
                                                 </div>
 
                                             </div>
-                                            
+
                                             <div class="form-row">
 
                                                 <div class="col">
@@ -330,13 +345,13 @@
                                                 </div>
 
                                             </div>
-                                            
+
                                             <div class="form-group">
 
-                                                        <label class="col-form-label" for="name">Area de Investigacion</label>
+                                                <label class="col-form-label" for="name">Area de Investigacion</label>
 
 
-                                                        <select class="form-control " name="areaInvestigacion" id="areaInvestigacion">
+                                                <select class="form-control " name="areaInvestigacion" id="areaInvestigacion">
                                                             <option value="Informática">Informática</option>
                                                             <option value="Ciencias Agrarias">Ciencias Agrarias</option>                                                          
                                                             <option value="Ingeniería Civil">Ingeniería Civil</option>
@@ -344,7 +359,7 @@
                                                         </select>
 
 
-                                                </div>
+                                            </div>
 
 
                                         </div>
@@ -359,7 +374,7 @@
                     </div>
 
 
-					
+
 
                     <div class="form-add">
                         <form action="#" method="post" th:action="@{oradores/save}">
@@ -375,7 +390,7 @@
                                         </div>
                                         <div class="modal-body">
 
-                                           
+
                                             <div class="form-row">
 
                                                 <div class="col">
@@ -393,7 +408,7 @@
                                                 </div>
 
                                             </div>
-                                            
+
                                             <div class="form-row">
 
                                                 <div class="col">
@@ -411,13 +426,13 @@
                                                 </div>
 
                                             </div>
-                                            
+
                                             <div class="form-group">
 
-                                                        <label class="col-form-label" for="name">Area de Investigacion</label>
+                                                <label class="col-form-label" for="name">Area de Investigacion</label>
 
 
-                                                        <select class="form-control " name="areaInvestigacion" id="areaInvestigacion">
+                                                <select class="form-control " name="areaInvestigacion" id="areaInvestigacion">
                                                             <option value="Informática">Informática</option>
                                                             <option value="Ciencias Agrarias">Ciencias Agrarias</option>                                                          
                                                             <option value="Ingeniería Civil">Ingeniería Civil</option>
@@ -425,7 +440,7 @@
                                                         </select>
 
 
-                                                </div>
+                                            </div>
 
 
                                         </div>
@@ -441,7 +456,7 @@
 
                 </div>
 
-										
+
             </div>
             <!-- End of Main Content -->
 
@@ -482,6 +497,7 @@
         </div>
     </div>
 
+
     <!-- Bootstrap core JavaScript-->
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -493,15 +509,14 @@
     <script src="../../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../../vendor/chart.js/Chart.min.js"></script>
+    <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../../js/demo/chart-area-demo.js"></script>
-    <script src="../../js/demo/chart-pie-demo.js"></script>
+    <script src="../../js/demo/datatables-demo.js"></script>
 
 
     <script type="text/javascript">
-    
         $(document).ready(function() {
 
             $('.table .edit').on('click', function(event) {
@@ -514,22 +529,21 @@
                     $('.form-update #nombre').val(orador.nombre);
                     $('.form-update #apellido').val(orador.apellido);
                     $('.form-update #movil').val(orador.movil);
-                    $('.form-update #email').val(orador.email); 
-                    $('.form-update #areaInvestigacion').val(orador.areaInvestigacion); 
+                    $('.form-update #email').val(orador.email);
+                    $('.form-update #areaInvestigacion').val(orador.areaInvestigacion);
 
                 });
                 $('.form-update #exampleModal').modal();
 
             });
-            
+
             $('.btn-add').on('click', function(event) {
                 event.preventDefault();
                 $('.form-add #exampleModal-add').modal();
             });
-            
+
 
         });
-    
     </script>
 
 

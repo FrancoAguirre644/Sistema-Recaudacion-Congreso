@@ -78,9 +78,9 @@ public class ConferenciaController {
 		return new RedirectView(ViewRouteHelpers.CONFERENCIA_ROOT);
 	}
 	
-	@GetMapping("/costoReal/{id}")
+	@GetMapping("/listaAuspiciantes/{id}")
 	@ResponseBody
-	public ArrayList<Auspiciante> getCostoReal(@PathVariable("id") long idConferencia) {
+	public ArrayList<Auspiciante> getAuspiciantes(@PathVariable("id") long idConferencia) {
 		ArrayList<Auspiciante> auspiciantes = new ArrayList<Auspiciante>();
 		
 		for(Auspiciante a : auspicianteService.getAll()) {
@@ -89,12 +89,20 @@ public class ConferenciaController {
 			}
 		}
 		
-		for(Auspiciante auspiciante : auspiciantes ) {
-			System.out.println(auspiciante);
-		}
-		
-		
 		return auspiciantes;
+	}
+
+	@GetMapping("/costoReal/{id}")
+	public Double getCostoReal(@PathVariable("id") long idConferencia){
+		double sumaAportes = 0;
+
+		for(Auspiciante a : auspicianteService.getAll()) {
+			if(a.getConferencia().getIdConferencia() == idConferencia) {
+				sumaAportes +=a.getMontoAportado();
+			}
+		}
+
+		return conferenciaService.findByIdConferencia(idConferencia).getCosto() - sumaAportes; 
 	}
 	
 	@GetMapping("/rankingConferencia")

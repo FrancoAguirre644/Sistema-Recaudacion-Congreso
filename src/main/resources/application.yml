@@ -3,7 +3,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost/sistemaRecaudacionCongreso?serverTimezone=UTC
     username: root
-    password:  
+    password: 42385689a
   jpa:
     show-sql: true
     hibernate:
