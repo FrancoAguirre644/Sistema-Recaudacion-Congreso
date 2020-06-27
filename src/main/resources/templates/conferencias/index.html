@@ -230,9 +230,9 @@
                                 <p class="card-text" th:text="${c.descripcion}"></p>
                                 <p class="card-text" th:text="${c.fecha}"></p>
                                 <p class="card-text" th:text="${c.Orador.nombre} + ' ' + ${c.Orador.apellido} "></p>
-                                
+
                                 <p class="card-text" th:text="'$'+ ${c.costo}"></p>
-                                
+
 
                                 <a href="#" th:href="@{/conferencias/{id}(id=${c.idConferencia})}" class="btn btn-info btn-icon-split btn-sm edit">
                                     <span class="icon text-white-50">
@@ -247,19 +247,19 @@
 								</span>
                                     <span class="text">Eliminar</span>
                                 </a>
-                                
-                                
-                              <div class="text-center" style="margin-top: 10px">
-                                
-                                <a href="#" th:href="@{/conferencias/costoReal/{id}(id=${c.idConferencia})}" class="btn btn-dark btn-icon-split btn-sm btn-costo">
-                                    <span class="icon text-white-50">
+
+
+                                <div class="text-center" style="margin-top: 10px">
+
+                                    <a href="#" th:href="@{/conferencias/listaAuspiciantes/{id}(id=${c.idConferencia})}" class="btn btn-dark btn-icon-split btn-sm btn-costo">
+                                        <span class="icon text-white-50">
 								  <i class="fas fa-dollar-sign"></i>
 								</span>
-                                    <span class="text">Costo Real</span>
-                                </a>
-                                
-                               </div>
-                               
+                                        <span class="text">Costo Real</span>
+                                    </a>
+
+                                </div>
+
 
 
                             </div>
@@ -313,16 +313,16 @@
                                             </div>
 
                                         </div>
-                                        
+
                                         <div class="form-group">
 
-                                                        <label class="col-form-label" for="name">Orador:</label>
+                                            <label class="col-form-label" for="name">Orador:</label>
 
-                                                        <select class="form-control " id="orador" name="orador.idPersona">
+                                            <select class="form-control " id="orador" name="orador.idPersona">
                                                 <option th:each="o : ${oradores}" th:value="${o.idPersona}" th:text="${o.nombre} + ' ' + ${o.apellido}"></option>
                                             </select>
 
-                                                    </div>
+                                        </div>
 
 
                                     </div>
@@ -383,16 +383,16 @@
                                             </div>
 
                                         </div>
-                                        
+
                                         <div class="form-group">
 
-                                                        <label class="col-form-label" for="name">Orador:</label>
+                                            <label class="col-form-label" for="name">Orador:</label>
 
-                                                        <select class="form-control " id="orador" name="orador.idPersona">
+                                            <select class="form-control " id="orador" name="orador.idPersona">
                                                 <option th:each="o : ${oradores}" th:value="${o.idPersona}" th:text="${o.nombre} + ' ' + ${o.apellido}"></option>
                                             </select>
 
-                                                    </div>
+                                        </div>
 
                                     </div>
                                     <div class="modal-footer">
@@ -403,28 +403,28 @@
                             </div>
                         </div>
                     </form>
-                    
-                    
-                    
+
+
+
                     <!-- Modal -->
-<div class="modal fade" id="exampleModal-costo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Costo Real</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <div class="modal fade" id="exampleModal-costo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Costo Real</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body show-costo">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+                                </div>
+                                <div class="modal-body show-costo">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -510,41 +510,54 @@
                     event.preventDefault();
                     $('.form-add #exampleModal-add').modal();
                 });
-                
+
                 $('.btn-costo').on('click', function(event) {
                     event.preventDefault();
                     var href = $(this).attr('href');
+                    var id = href.substring(href.lastIndexOf('/') + 1);
 
                     $.ajax({
-                    	   type : 'GET',
-                    	   url : href,
-                    	   dataType : 'json',
-                    	   success : function(costo) {
-                    		   $('.show-costo').html('El costo menos el aporte de los auspiciantes es: $' + costoReal(costo) + '</br></br>');
-                    		   
-                    		   $.each(costo, function(i, item) {
-                    			    $('.show-costo').append(costo[i].razonSocial);
-                    			    $('.show-costo').append(costo[i].cuit);
-                    			    $('.show-costo').append(costo[i].montoAportado);
-                    			    $('.show-costo').append('</br>');
-                    			});
-                    		   
-                    	   },
-                    	}) ;
-                    
+                        type: 'GET',
+                        url: "conferencias/costoReal" + id,
+                        dataType: 'json',
+                        success: function(costoReal) {
+
+                            $('.show-costo').html('El costo menos el aporte de los auspiciantes es: $' + costoReal + '</br></br>');
+
+                        },
+                    });
+
+
+                    $.ajax({
+                        type: 'GET',
+                        url: href,
+                        dataType: 'json',
+                        success: function(lstAuspiciantes) {
+
+                            $.each(lstAuspiciantes, function(i, item) {
+                                $('.show-costo').html(lstAuspiciantes[i].razonSocial);
+                                $('.show-costo').append(lstAuspiciantes[i].cuit);
+                                $('.show-costo').append(lstAuspiciantes[i].montoAportado);
+                                $('.show-costo').append('</br>');
+                            });
+
+                        },
+                    });
+
                     $('#exampleModal-costo').modal();
-                    
-                    function costoReal(costo){
-                    	var costoReal = 0;
-                    	
-                    	$.each(costo, function(i, item) {
-                    		costoReal += costo[i].montoAportado;
-            			    
-            			});
-                    	
-                    	return costoReal;
-                    }
-                    
+                    /*
+
+                                        function SumaAuspiciantes(costo) {
+                                            var costoReal = 0;
+
+                                            $.each(costo, function(i, item) {
+                                                costoReal += costo[i].montoAportado;
+
+                                            });
+
+                                            return costoReal;
+                                        } */
+
                 });
 
             });
@@ -554,7 +567,3 @@
 </body>
 
 </html>
-
-
-
-

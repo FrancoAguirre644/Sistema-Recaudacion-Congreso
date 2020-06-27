@@ -18,9 +18,9 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" th:href="@{css/sb-admin-2.min.css}" rel="stylesheet">
-    
-      <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" th:href="@{vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" th:href="@{vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
 
 </head>
 
@@ -217,75 +217,75 @@
                 <!-- End of Topbar -->
 
                 <div class="container-fluid">
-                
-               <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
 
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Fecha Compra</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Espectador</th>
-                                <th scope="col">Conferencia</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="e : ${entradas}">
-                                <th th:text="${e.idEntrada}" scope="row"></th>
-                                <td th:text="${e.fechaCompra}"></td>
-                                <td th:text="'$' + ${e.precio}"></td>
-                                <td th:text="${e.Espectador.nombre} +' '+ ${e.Espectador.apellido}"></td>
-                                <td th:text="${e.Conferencia.titulo}"></td>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Fecha Compra</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Espectador</th>
+                                            <th scope="col">Conferencia</th>
+                                            <th scope="col">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="e : ${entradas}">
+                                            <th th:text="${e.idEntrada}" scope="row"></th>
+                                            <td th:text="${e.fechaCompra}"></td>
+                                            <td th:text="'$' + ${e.precio}"></td>
+                                            <td th:text="${e.Espectador.nombre} +' '+ ${e.Espectador.apellido}"></td>
+                                            <td th:text="${e.Conferencia.titulo}"></td>
 
 
-                                <td>
+                                            <td>
 
-                                    <a href="#" th:href="@{/entradas/{id}(id=${e.idEntrada})}" class="btn btn-info btn-icon-split btn-sm edit">
-                                        <span class="icon text-white-50">
+                                                <a href="#" th:href="@{/entradas/{id}(id=${e.idEntrada})}" class="btn btn-info btn-icon-split btn-sm edit">
+                                                    <span class="icon text-white-50">
                                       <i class="fas fa-edit"></i>
                                     </span>
-                                        <span class="text">Editar</span>
-                                    </a>
-                                    
-                                    <a href="#" th:href="@{/entradas/delete/{id}(id=${e.idEntrada})}" class="btn btn-danger btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
+                                                    <span class="text">Editar</span>
+                                                </a>
+
+                                                <a href="#" th:href="@{/entradas/delete/{id}(id=${e.idEntrada})}" class="btn btn-danger btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
                                                   <i class="fas fa-trash"></i>
                                                 </span>
-                                        <span class="text">Eliminar</span>
-                                    </a>
+                                                    <span class="text">Eliminar</span>
+                                                </a>
 
-                                </td>
-
-
+                                            </td>
 
 
-                            </tr>
 
-                        </tbody>
-                    </table>
-					
-					</div>
-					
-					</div>
-					
-					</div>
-                    
-                    
-                    
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                     <a href="#" class="btn btn-success btn-icon-split btn-add">
                         <span class=" icon text-white-50 ">
-                          <i class="fas fa-plus "></i>
-                        </span>
+              <i class="fas fa-plus "></i>
+            </span>
                         <span class="text ">Agregar Entrada</span>
                     </a>
+
+
 
 
                     <div class="form-update">
@@ -497,12 +497,12 @@
     <!-- Custom scripts for all pages-->
     <script src="../../js/sb-admin-2.min.js"></script>
 
-	      <!-- Page level plugins -->
-	  <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
-	  <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-	
-	  <!-- Page level custom scripts -->
-	  <script src="../../js/demo/datatables-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../../js/demo/datatables-demo.js"></script>
 
 
     <script type="text/javascript">
@@ -538,4 +538,3 @@
 </body>
 
 </html>
-
