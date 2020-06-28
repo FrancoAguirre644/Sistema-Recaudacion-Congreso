@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.SistemaRecaudacionCongreso.converters.OradorConverter;
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Conferencia;
-import com.SistemaRecaudacionCongreso.entities.Entrada;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
 import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
@@ -60,8 +60,12 @@ public class ConferenciaController {
 	}
 	
 	@GetMapping("/delete/{id}")
-	public RedirectView delete(@PathVariable("id") long idConferencia) {
+	public RedirectView delete(@PathVariable("id") long idConferencia, RedirectAttributes redirectAttrs) {
 		conferenciaService.remove(idConferencia);
+		
+		redirectAttrs.addFlashAttribute("mensaje","Eliminado Correctamente");
+		redirectAttrs.addFlashAttribute("clase", "success");
+		
 		return new RedirectView(ViewRouteHelpers.CONFERENCIA_ROOT);
 	}
 	
@@ -72,9 +76,34 @@ public class ConferenciaController {
 	}
 	
 	@PostMapping("/save")
-	public RedirectView save(@ModelAttribute("conferencia") ConferenciaModel conferenciaModel) {
-		conferenciaModel.setOrador(oradorConverter.modelToEntity(oradorService.findByIdPersona(conferenciaModel.getOrador().getIdPersona())));
-		conferenciaService.insertOrUpdate(conferenciaModel);
+	public RedirectView save(@ModelAttribute("conferencia") ConferenciaModel conferenciaModel, RedirectAttributes redirectAttrs) {	
+        boolean band = false;
+        int i=0;
+                
+        while(i<conferenciaService.getAll().size() && !band) {
+        	Conferencia c =  conferenciaService.getAll().get(i);
+        	        	
+        	if(c.getTitulo().equalsIgnoreCase(conferenciaModel.getTitulo())) {
+        		band = true;
+        	}
+        	
+        	i++;
+        }
+        
+        if(band) {
+        	redirectAttrs.addFlashAttribute("mensaje","No se ha podido agregar debido a que ya existe esa conferencia");
+			redirectAttrs.addFlashAttribute("clase", "danger");
+        }else {
+        	
+    		conferenciaModel.setOrador(oradorConverter.modelToEntity(oradorService.findByIdPersona(conferenciaModel.getOrador().getIdPersona())));
+    		conferenciaService.insertOrUpdate(conferenciaModel);
+    		
+        	redirectAttrs.addFlashAttribute("mensaje","Agregado Correctamente");
+    		redirectAttrs.addFlashAttribute("clase", "success");
+    		
+        }
+		
+
 		return new RedirectView(ViewRouteHelpers.CONFERENCIA_ROOT);
 	}
 	

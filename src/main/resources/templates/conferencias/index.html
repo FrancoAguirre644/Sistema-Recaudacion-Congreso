@@ -214,6 +214,9 @@
 
 
                 <div class="container-fluid">
+                
+                <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
+        </div>
 
                     <a href="#" class="btn btn-success btn-icon-split btn-add" style="margin-bottom: 20px;">
                         <span class=" icon text-white-50 ">

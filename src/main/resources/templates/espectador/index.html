@@ -222,7 +222,8 @@
 
                 <div class="container-fluid">
 
-
+				<div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
+				        </div>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">

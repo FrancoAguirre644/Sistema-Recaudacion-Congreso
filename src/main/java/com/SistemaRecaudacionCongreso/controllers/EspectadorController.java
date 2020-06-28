@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.SistemaRecaudacionCongreso.entities.Espectador;
@@ -36,15 +37,15 @@ public class EspectadorController {
         mAV.addObject("espectadores", espectadorService.getAll());
         mAV.addObject("espectador", new EspectadorModel());
         
-        System.out.println("-----------------------------------------------------------------------");
-        System.out.println(espectadorRepository.getNivelEstudio());
-
         return mAV;
     }
 
     @GetMapping("/delete/{id}")
-    public RedirectView delete(@PathVariable ("id") long idPersona){
+    public RedirectView delete(@PathVariable ("id") long idPersona, RedirectAttributes redirectAttrs){
         espectadorService.remove(idPersona);
+        
+    	redirectAttrs.addFlashAttribute("mensaje","Eliminado Correctamente");
+		redirectAttrs.addFlashAttribute("clase", "success");
 
         return new RedirectView(ViewRouteHelpers.ESPECTADOR_ROOT);
     }
@@ -52,13 +53,35 @@ public class EspectadorController {
     @GetMapping("/{id}")
     @ResponseBody
     public Espectador get(@PathVariable ("id") long idPersona){
-        //return espectadorService.findByIdPersona(idPersona);
         return espectadorRepository.findById(idPersona).get();
     }
     
     @PostMapping("/save")
-	public RedirectView save(@ModelAttribute("espectador") EspectadorModel espectadorModel ) {
-    	espectadorService.insertOrUpdate(espectadorModel);
+	public RedirectView save(@ModelAttribute("espectador") EspectadorModel espectadorModel, RedirectAttributes redirectAttrs ) {
+        boolean band = false;
+        int i=0;
+                
+        while(i<espectadorService.getAll().size() && !band) {
+        	Espectador e =  espectadorService.getAll().get(i);
+        	        	
+        	if(e.getNroDocumento() == espectadorModel.getNroDocumento()) {
+        		band = true;
+        	}
+        	
+        	i++;
+        }
+        
+        if(band) {
+        	redirectAttrs.addFlashAttribute("mensaje","No se ha podido agregar debido a que ya existe ese espectador");
+			redirectAttrs.addFlashAttribute("clase", "danger");
+        }else {
+        	espectadorService.insertOrUpdate(espectadorModel);
+        	redirectAttrs.addFlashAttribute("mensaje","Agregado Correctamente");
+    		redirectAttrs.addFlashAttribute("clase", "success");
+    		
+        }
+    	
+    	
     	return new RedirectView(ViewRouteHelpers.ESPECTADOR_ROOT);
     }
 

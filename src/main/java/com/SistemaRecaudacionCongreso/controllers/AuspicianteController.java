@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
@@ -44,8 +45,11 @@ public class AuspicianteController {
     }
 
     @GetMapping("/delete/{id}")
-    public RedirectView delete(@PathVariable ("id") long idPersona){
+    public RedirectView delete(@PathVariable ("id") long idPersona, RedirectAttributes redirectAttrs){
         auspicianteService.remove(idPersona);
+        
+    	redirectAttrs.addFlashAttribute("mensaje","Eliminado Correctamente");
+		redirectAttrs.addFlashAttribute("clase", "success");
         
         return new RedirectView(ViewRouteHelpers.AUSPICIANTE_ROOT);
     }
@@ -58,8 +62,29 @@ public class AuspicianteController {
 
 
     @PostMapping("/save")
-    public RedirectView save(@ModelAttribute("auspiciante") AuspicianteModel auspicianteModel){
-        auspicianteService.insertOrUpdate(auspicianteModel);
+    public RedirectView save(@ModelAttribute("auspiciante") AuspicianteModel auspicianteModel, RedirectAttributes redirectAttrs){
+        boolean band = false;
+        int i=0;
+                
+        while(i<auspicianteService.getAll().size() && !band) {
+        	Auspiciante a =  auspicianteService.getAll().get(i);
+        	        	
+        	if(a.getCuit().equalsIgnoreCase(auspicianteModel.getCuit())) {
+        		band = true;
+        	}
+        	
+        	i++;
+        }
+        
+        if(band) {
+        	redirectAttrs.addFlashAttribute("mensaje","No se ha podido agregar debido a que ya existe ese auspiciante");
+			redirectAttrs.addFlashAttribute("clase", "danger");
+        }else {
+            auspicianteService.insertOrUpdate(auspicianteModel);
+        	redirectAttrs.addFlashAttribute("mensaje","Agregado Correctamente");
+    		redirectAttrs.addFlashAttribute("clase", "success");
+    		
+        }
 
         return new RedirectView(ViewRouteHelpers.AUSPICIANTE_ROOT);
     }
