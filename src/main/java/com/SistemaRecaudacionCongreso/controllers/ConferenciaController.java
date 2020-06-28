@@ -93,6 +93,7 @@ public class ConferenciaController {
 	}
 
 	@GetMapping("/costoReal/{id}")
+	@ResponseBody
 	public Double getCostoReal(@PathVariable("id") long idConferencia){
 		double sumaAportes = 0;
 
