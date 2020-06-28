@@ -5,9 +5,9 @@ INSERT INTO persona (email,movil) VALUES("Email2@gmail.com",15222222);
 INSERT INTO persona (email,movil) VALUES("Email3@gmail.com",15333333);
 INSERT INTO persona (email,movil) VALUES("Email4@gmail.com",15444444);
 
-INSERT INTO persona (email,movil) VALUES("Email5@edu.com.ar",15999911);
-INSERT INTO persona (email,movil) VALUES("Email6@edu.com.ar",15999922);
-INSERT INTO persona (email,movil) VALUES("Email7@edu.com.ar",15999933);
+INSERT INTO persona (email,movil) VALUES("Email5@gmail.com.ar",15999911);
+INSERT INTO persona (email,movil) VALUES("Email6@gmail.com.ar",15999922);
+INSERT INTO persona (email,movil) VALUES("Email7@gmail.com.ar",15999933);
 
 INSERT INTO persona (email,movil) VALUES("UNla@edu.com.ar",15555555);
 INSERT INTO persona (email,movil) VALUES("UBA@edu.com.ar",15666666);
@@ -24,9 +24,9 @@ INSERT INTO espectador (nombre,apellido,nivel_estudio,tipo_documento,nro_documen
 
 
 
-INSERT INTO orador(nombre,apellido,area_investigacion,id_persona) VALUES("Tomas","Perez",'Ciencias Agrarias',5);
-INSERT INTO orador(nombre,apellido,area_investigacion,id_persona) VALUES("Tomas","Perez",'Ciencias Agrarias',6);
-INSERT INTO orador(nombre,apellido,area_investigacion,id_persona) VALUES("Tomas","Perez",'Informatica',7);
+INSERT INTO orador(nombre,apellido,area_investigacion,id_persona) VALUES("Philip ","Bailey",'Ciencias Agrarias',5);
+INSERT INTO orador(nombre,apellido,area_investigacion,id_persona) VALUES("Susan Ann","Sulley",'Ciencias Agrarias',6);
+INSERT INTO orador(nombre,apellido,area_investigacion,id_persona) VALUES("Philip","Oakley",'Informatica',7);
 
 
 INSERT INTO conferencia(id_conferencia,costo,descripcion,titulo,fecha,orador_id_persona) VALUES(1,20000,"Esta es la Conferencia1","Conferencia1",'2020-09-21',5);
