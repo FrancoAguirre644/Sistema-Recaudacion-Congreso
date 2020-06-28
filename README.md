@@ -2,7 +2,6 @@
 
 # [ Tareas a realizar ]
 
-Añadir data.sql para cargar los registros de las tablas al iniciar. </br>
 Hacer que solo se pueda añadir una entrada mediante la validacion de un codigo. </br>
 Corregir los links de la barra de tareas del template. </br>
 Realizar login </br>
