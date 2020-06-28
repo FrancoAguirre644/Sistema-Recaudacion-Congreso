@@ -518,11 +518,10 @@
 
                     $.ajax({
                         type: 'GET',
-                        url: "conferencias/costoReal" + id,
+                        url: "conferencias/costoReal/" + id,
                         dataType: 'json',
                         success: function(costoReal) {
-
-                            $('.show-costo').html('El costo menos el aporte de los auspiciantes es: $' + costoReal + '</br></br>');
+                            $('.show-costo').html('El costo menos el aporte de los auspiciantes es: $' + costoReal + '<hr>');
 
                         },
                     });
@@ -533,30 +532,18 @@
                         url: href,
                         dataType: 'json',
                         success: function(lstAuspiciantes) {
+                            var text;
 
                             $.each(lstAuspiciantes, function(i, item) {
-                                $('.show-costo').html(lstAuspiciantes[i].razonSocial);
-                                $('.show-costo').append(lstAuspiciantes[i].cuit);
-                                $('.show-costo').append(lstAuspiciantes[i].montoAportado);
-                                $('.show-costo').append('</br>');
+
+                                text = lstAuspiciantes[i].razonSocial + "&emsp;&emsp;" + lstAuspiciantes[i].cuit + "&emsp;&emsp;$" + lstAuspiciantes[i].montoAportado + "</br>";
+                                $('.show-costo').append(text);
                             });
 
                         },
                     });
 
                     $('#exampleModal-costo').modal();
-                    /*
-
-                                        function SumaAuspiciantes(costo) {
-                                            var costoReal = 0;
-
-                                            $.each(costo, function(i, item) {
-                                                costoReal += costo[i].montoAportado;
-
-                                            });
-
-                                            return costoReal;
-                                        } */
 
                 });
 
