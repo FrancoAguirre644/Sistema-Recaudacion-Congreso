@@ -4,7 +4,7 @@ spring:
     url: jdbc:mysql://localhost/sistemaRecaudacionCongreso?serverTimezone=UTC
     username: root
     password:
-    initialization-mode: always
+    initialization-mode: never
 
   jpa:
     show-sql: true
