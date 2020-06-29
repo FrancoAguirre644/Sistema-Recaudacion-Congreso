@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.SistemaRecaudacionCongreso.converters.ConferenciaConverter;
+import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Conferencia;
 import com.SistemaRecaudacionCongreso.entities.Entrada;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
@@ -88,5 +89,32 @@ public class ConferenciaService implements IConferenciaService {
 
 		return cantidad;
 	}
+	
+	public Double getAporteAuspiciantes(long idConferencia) {
+		double sumaAportes = 0;
+
+		for(Auspiciante a : auspicianteService.getAll()) {
+			if(a.getConferencia().getIdConferencia() == idConferencia) {
+				sumaAportes +=a.getMontoAportado();
+			}
+		}
+		
+		return sumaAportes;
+	}
+
+	@Override
+	public ArrayList<Auspiciante> getAuspiciantesConferencia(long idConferencia) {
+		// TODO Auto-generated method stub
+		ArrayList<Auspiciante> auspiciantes = new ArrayList<Auspiciante>();
+		
+		for(Auspiciante a : auspicianteService.getAll()) {
+			if(a.getConferencia().getIdConferencia() == idConferencia) {
+				auspiciantes.add(a);
+			}
+		}
+		
+		return auspiciantes;
+	}
+	
 
 }

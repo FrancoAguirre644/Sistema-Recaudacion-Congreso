@@ -3,6 +3,7 @@ package com.SistemaRecaudacionCongreso.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Conferencia;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
 import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
@@ -21,5 +22,11 @@ public interface IConferenciaService {
 	public ArrayList<RankingConferenciaModel> getRanking();
 	
 	public int cantidadVendida(long idConferencia);
+	
+	public Double getAporteAuspiciantes(long idConferencia);
+	
+	public ArrayList<Auspiciante> getAuspiciantesConferencia(long idConferencia);
+
+	
 
 }
