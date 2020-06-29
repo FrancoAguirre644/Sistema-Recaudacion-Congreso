@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.SistemaRecaudacionCongreso.converters.OradorConverter;
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Conferencia;
+import com.SistemaRecaudacionCongreso.entities.Entrada;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
 import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
@@ -56,6 +57,14 @@ public class ConferenciaController {
 		mAV.addObject("conferencias", conferenciaService.getAll());
 		mAV.addObject("oradores", oradorService.getAll());
 		
+		for(Conferencia c : conferenciaService.getAll()) {
+			System.out.println(getGananciaEntrada(c.getIdConferencia()));
+		}
+		
+		System.out.println(getGananciaTotalEntradas());
+		
+		
+
 		return mAV;
 	}
 	
@@ -110,29 +119,13 @@ public class ConferenciaController {
 	@GetMapping("/listaAuspiciantes/{id}")
 	@ResponseBody
 	public ArrayList<Auspiciante> getAuspiciantes(@PathVariable("id") long idConferencia) {
-		ArrayList<Auspiciante> auspiciantes = new ArrayList<Auspiciante>();
-		
-		for(Auspiciante a : auspicianteService.getAll()) {
-			if(a.getConferencia().getIdConferencia() == idConferencia) {
-				auspiciantes.add(a);
-			}
-		}
-		
-		return auspiciantes;
+		return conferenciaService.getAuspiciantesConferencia(idConferencia);
 	}
 
 	@GetMapping("/costoReal/{id}")
 	@ResponseBody
-	public Double getCostoReal(@PathVariable("id") long idConferencia){
-		double sumaAportes = 0;
-
-		for(Auspiciante a : auspicianteService.getAll()) {
-			if(a.getConferencia().getIdConferencia() == idConferencia) {
-				sumaAportes +=a.getMontoAportado();
-			}
-		}
-
-		return conferenciaService.findByIdConferencia(idConferencia).getCosto() - sumaAportes; 
+	public Double getCostoReal(@PathVariable("id") long idConferencia){		
+		return conferenciaService.findByIdConferencia(idConferencia).getCosto() - conferenciaService.getAporteAuspiciantes(idConferencia); 
 	}
 	
 	@GetMapping("/rankingConferencia")
@@ -141,6 +134,68 @@ public class ConferenciaController {
 		return conferenciaService.getRanking();
 	}
 	
+	@GetMapping("/reporte")
+	public ModelAndView reporte() {
+		ModelAndView mAV = new ModelAndView();
+		
+
+		
+		return mAV;
+	}
+	
+	public double balance() {
+		double balance = getCostoConferencias();
+		
+		for(Conferencia c : conferenciaService.getAll()) {
+			balance -= conferenciaService.getAporteAuspiciantes(c.getIdConferencia()) - getGananciaTotalEntradas();
+		}
+		
+		return balance;
+	}
+	
+	public double getCostoConferencias() {
+		double CostoConferencias = 0;
+		
+		for(Conferencia c : conferenciaService.getAll()) {
+			CostoConferencias += c.getCosto();
+		}
+		
+		return CostoConferencias;
+	}
+	
+	public double getGananciaEntrada(long idConferencia) {
+		double gananciaEntradas = 0;
+		
+		for(Entrada e : entradaService.getAll()) {
+			
+			if(e.getConferencia().getIdConferencia() == idConferencia) {
+				gananciaEntradas += e.getPrecio();
+			}
+			
+		}
+		
+		return gananciaEntradas;
+	}
+	
+	public double getGananciaTotalEntradas() {
+		double gananciaEntradas = 0;
+		
+		for(Conferencia c : conferenciaService.getAll()) {
+			gananciaEntradas += getGananciaEntrada(c.getIdConferencia());
+		}
+		
+		return gananciaEntradas;
+	}
+	
+	public double getAportesTotales() {
+		double aportesTotal = 0;
+		
+		for(Conferencia c : conferenciaService.getAll()) {
+			aportesTotal += conferenciaService.getAporteAuspiciantes(c.getIdConferencia());
+		}
+		
+		return aportesTotal;
+	}
 
 
 }
