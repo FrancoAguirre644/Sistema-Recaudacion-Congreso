@@ -115,6 +115,31 @@ public class ConferenciaService implements IConferenciaService {
 		
 		return auspiciantes;
 	}
+
+	public double getCostoConferencias() {
+		double CostoConferencias = 0;
+		
+		for(Conferencia c : conferenciaService.getAll()) {
+			CostoConferencias += c.getCosto();
+		}
+		
+		return CostoConferencias;
+	}
+
+
+	public double getAportesTotales() {
+		double aportesTotal = 0;
+		
+		for(Conferencia c : conferenciaService.getAll()) {
+			aportesTotal += conferenciaService.getAporteAuspiciantes(c.getIdConferencia());
+		}
+		
+		return aportesTotal;
+	}
+
+	public double getCostoSolventado(long idConferencia){
+		return conferenciaService.findByIdConferencia(idConferencia).getCosto() - getAporteAuspiciantes(idConferencia) - entradaService.getGananciaEntrada(idConferencia);
+	}
 	
 
 }
