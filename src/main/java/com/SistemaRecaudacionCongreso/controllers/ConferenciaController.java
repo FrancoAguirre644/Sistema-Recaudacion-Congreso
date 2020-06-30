@@ -1,5 +1,6 @@
 package com.SistemaRecaudacionCongreso.controllers;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.SistemaRecaudacionCongreso.converters.OradorConverter;
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Conferencia;
-import com.SistemaRecaudacionCongreso.entities.Entrada;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
+import com.SistemaRecaudacionCongreso.models.PorcentajeSolventado;
 import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
 import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
@@ -56,13 +57,15 @@ public class ConferenciaController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.CONFERENCIA_INDEX);
 		mAV.addObject("conferencias", conferenciaService.getAll());
 		mAV.addObject("oradores", oradorService.getAll());
-		
+
+		costoSolventado();
+		/*
 		for(Conferencia c : conferenciaService.getAll()) {
 			System.out.println(getGananciaEntrada(c.getIdConferencia()));
 		}
 		
 		System.out.println(getGananciaTotalEntradas());
-		
+		*/
 		
 
 		return mAV;
@@ -136,12 +139,51 @@ public class ConferenciaController {
 	
 	@GetMapping("/reporte")
 	public ModelAndView reporte() {
-		ModelAndView mAV = new ModelAndView();
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.REPORTE_INDEX);
 		
 
 		
 		return mAV;
 	}
+
+	@GetMapping("/costoSolventado") // Funcion que resuelve cuanto es el porcentaje que falta para solventar el gasto de las conferencias
+	public ArrayList<PorcentajeSolventado> costoSolventado(){
+		ArrayList<PorcentajeSolventado> lista = new ArrayList<PorcentajeSolventado>();
+		DecimalFormat decimalFormat = new DecimalFormat(".#");
+
+
+		for(Conferencia c : conferenciaService.getAll()){
+			lista.add(new PorcentajeSolventado(c.getTitulo(), Math.round(porcentajeSolventado(c.getCosto(), (c.getIdConferencia()))* 10.0 ) /10.0 ) );
+
+			System.out.println("Porcentaje Solventado: " + porcentajeSolventado(c.getCosto(), c.getIdConferencia()) + "%");
+
+			/*PORCENTAJE
+			
+			costo = 100%
+			valor = x
+
+			valor * 100 / costo
+
+			*/
+			
+		}
+
+		System.out.println("----------------------------------------------------------------------------------------------");
+
+		for(PorcentajeSolventado l : lista){
+			System.out.println(l.getNombre() + "    " + l.getPorcentaje());
+		}
+
+		return lista;
+	}
+
+	private double porcentajeSolventado(double costo,long idConferencia){
+
+		return  (conferenciaService.findByIdConferencia(idConferencia).getCosto() <= entradaService.getGananciaEntrada(idConferencia) + conferenciaService.getAporteAuspiciantes(idConferencia))?  100 :  ((entradaService.getGananciaEntrada(idConferencia) + conferenciaService.getAporteAuspiciantes(idConferencia)) * 100 ) / costo;
+	}
+
+	/*
+
 	
 	public double balance() {
 		double balance = getCostoConferencias();
@@ -152,6 +194,7 @@ public class ConferenciaController {
 		
 		return balance;
 	}
+
 	
 	public double getCostoConferencias() {
 		double CostoConferencias = 0;
@@ -197,5 +240,6 @@ public class ConferenciaController {
 		return aportesTotal;
 	}
 
+	*/
 
 }

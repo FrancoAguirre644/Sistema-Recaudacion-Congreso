@@ -27,6 +27,10 @@ public interface IConferenciaService {
 	
 	public ArrayList<Auspiciante> getAuspiciantesConferencia(long idConferencia);
 
+	public double getCostoConferencias();
+
+	public double getAportesTotales();
+
 	
 
 }
