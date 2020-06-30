@@ -2,8 +2,6 @@
 
 # [ Tareas a realizar ]
 
-Mostrar los auspiantes y el monto aportado a la hora de mostrar el costo real. </br>
-Comenzar con los casos de uso correspondientes. </br>
 Hacer que solo se pueda añadir una entrada mediante la validacion de un codigo. </br>
 Corregir los links de la barra de tareas del template. </br>
 Realizar login </br>

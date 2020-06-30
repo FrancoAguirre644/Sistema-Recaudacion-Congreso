@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.SistemaRecaudacionCongreso.converters.EntradaConverter;
+import com.SistemaRecaudacionCongreso.entities.Conferencia;
 import com.SistemaRecaudacionCongreso.entities.Entrada;
 import com.SistemaRecaudacionCongreso.models.EntradaModel;
 import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
@@ -28,6 +29,10 @@ public class EntradaService implements IEntradaService{
 	@Autowired
 	@Qualifier("espectadorService")
 	private EspectadorService espectadorService;
+
+	@Autowired
+	@Qualifier("conferenciaService")
+	private ConferenciaService conferenciaService;
 	
 	@Override
 	public List<Entrada> getAll() {
@@ -66,6 +71,30 @@ public class EntradaService implements IEntradaService{
 		
 		
 		return ranking;
+	}
+
+	public double getGananciaEntrada(long idConferencia) {
+		double gananciaEntradas = 0;
+		
+		for(Entrada e : this.getAll()) {
+			
+			if(e.getConferencia().getIdConferencia() == idConferencia) {
+				gananciaEntradas += e.getPrecio();
+			}
+			
+		}
+		
+		return gananciaEntradas;
+	}
+	
+	public double getGananciaTotalEntradas() {
+		double gananciaTotalEntradas = 0;
+		
+		for(Conferencia c : conferenciaService.getAll()) {
+			gananciaTotalEntradas += getGananciaEntrada(c.getIdConferencia());
+		}
+		
+		return gananciaTotalEntradas;
 	}
 
 	

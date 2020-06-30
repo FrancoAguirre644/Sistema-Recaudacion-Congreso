@@ -19,4 +19,8 @@ public interface IEntradaService {
 	
 	public ArrayList<RankingConferenciaModel> getCantidadEspectadoresNivelEstudio();  
 
+	public double getGananciaEntrada(long idConferencia);
+
+	public double getGananciaTotalEntradas();
+
 }
