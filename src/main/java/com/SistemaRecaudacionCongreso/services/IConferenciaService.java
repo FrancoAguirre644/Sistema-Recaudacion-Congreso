@@ -6,6 +6,7 @@ import java.util.List;
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Conferencia;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
+import com.SistemaRecaudacionCongreso.models.PorcentajeSolventado;
 import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
 
 
@@ -31,6 +32,8 @@ public interface IConferenciaService {
 
 	public double getAportesTotales();
 
+	public double porcentajeSolventado(double costo,long idConferencia);
 	
+	public ArrayList<PorcentajeSolventado> costoSolventado();
 
 }

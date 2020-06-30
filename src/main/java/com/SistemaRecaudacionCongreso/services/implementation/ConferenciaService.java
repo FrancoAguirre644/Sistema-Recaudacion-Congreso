@@ -12,6 +12,7 @@ import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Conferencia;
 import com.SistemaRecaudacionCongreso.entities.Entrada;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
+import com.SistemaRecaudacionCongreso.models.PorcentajeSolventado;
 import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
 import com.SistemaRecaudacionCongreso.repositories.IConferenciaRepository;
 import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
@@ -139,6 +140,40 @@ public class ConferenciaService implements IConferenciaService {
 
 	public double getCostoSolventado(long idConferencia){
 		return conferenciaService.findByIdConferencia(idConferencia).getCosto() - getAporteAuspiciantes(idConferencia) - entradaService.getGananciaEntrada(idConferencia);
+	}
+	
+	public double porcentajeSolventado(double costo,long idConferencia){
+
+		return  (conferenciaService.findByIdConferencia(idConferencia).getCosto() <= entradaService.getGananciaEntrada(idConferencia) + conferenciaService.getAporteAuspiciantes(idConferencia))?  100 :  ((entradaService.getGananciaEntrada(idConferencia) + conferenciaService.getAporteAuspiciantes(idConferencia)) * 100 ) / costo;
+	}
+	
+	public ArrayList<PorcentajeSolventado> costoSolventado(){
+		ArrayList<PorcentajeSolventado> lista = new ArrayList<PorcentajeSolventado>();
+
+
+		for(Conferencia c : conferenciaService.getAll()){
+			lista.add(new PorcentajeSolventado(c.getTitulo(), Math.round(porcentajeSolventado(c.getCosto(), (c.getIdConferencia()))* 10.0 ) /10.0 ) );
+
+			System.out.println("Porcentaje Solventado: " + porcentajeSolventado(c.getCosto(), c.getIdConferencia()) + "%");
+
+			/*PORCENTAJE
+			
+			costo = 100%
+			valor = x
+
+			valor * 100 / costo
+
+			*/
+			
+		}
+
+		System.out.println("----------------------------------------------------------------------------------------------");
+
+		for(PorcentajeSolventado l : lista){
+			System.out.println(l.getNombre() + "    " + l.getPorcentaje());
+		}
+
+		return lista;
 	}
 	
 

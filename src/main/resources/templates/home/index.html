@@ -237,37 +237,30 @@
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Costos solventados</h6>
                         </div>
-                        <div class="card-body">
-                            <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
-                            <div class="progress mb-4">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                    
+                        <div class="card-body show-percentage" >
+                        	<div th:each="c : ${costoSolventado}" >
+                        	
+                                      
+		                            <h4 class="small font-weight-bold" th:text="${c.nombre}" >	                            
+		                            </h4>
+		                            
+		                            <span  th:text="${c.porcentaje} + '%' " style="float:right; padding-left: 5px"></span>	
+		                            
+		                            
+	                            
+	                            <div class="progress mb-4" >
+	                                <div class="progress-bar bg-info" role="progressbar"  th:style="'width:' + ${c.porcentaje} + '%' + ';'" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+	                            </div>
+                            
                             </div>
-                            <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-                            <div class="progress mb-4">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-                            <div class="progress mb-4">
-                                <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-                            <div class="progress mb-4">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-                            <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            
                         </div>
+                        
+                        
                     </div>
-
-
-
-
-
-
 
 
 
@@ -443,7 +436,7 @@
                                 borderColor: [
                                     '#127681',
                                     '#c70039',
-                                    '#9440ed',
+                                    '#f37121',
                                     'rgba(75, 192, 192, 1)',
                                     'rgba(153, 102, 255, 1)',
                                     'rgba(255, 159, 64, 1)'
@@ -466,11 +459,53 @@
                     });
 
 
+					
+
 
 
 
                 },
+
+
+
+
+
             });
+
+
+				$.ajax({
+                    type: 'GET',
+                    url: "conferencias/costoSolventado",
+                    dataType: 'json',
+                    success: function(data) {
+                        var porcentajes = [];
+                        var nombresConferencias = [];
+
+
+                        $.each(data, function(i, item) {
+
+                            porcentajes.push(data[i].porcentaje);
+                            nombresConferencias.push(data[i].nombre);
+
+							//$('.show-percentage').addClass('alert alert-warning');
+
+    						//$('<h4>').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
+							//$('<div>').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
+
+    						//$('<h1>').addClass('alert alert-success').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
+
+
+
+							//<h4 class='small font-weight-bold'>Server Migration <span class="float-right">20%</span></h4>
+
+                        });
+
+						//alert(porcentajes + "  " +nombresConferencias);
+
+
+
+                    },
+                });
         </script>
 
 </body>
