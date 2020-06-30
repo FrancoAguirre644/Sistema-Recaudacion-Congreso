@@ -25,8 +25,12 @@ public class HomeController {
 	private IEntradaService entradaService;
 	
 	@GetMapping("")
-	public String home() {				
-		return ViewRouteHelpers.HOME_INDEX;
+	public ModelAndView home() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.HOME_INDEX);
+		
+		mAV.addObject("costoSolventado", conferenciaService.costoSolventado());
+		
+		return mAV;
 	}
 
 	@GetMapping("reporte")
@@ -37,8 +41,6 @@ public class HomeController {
 		mAV.addObject("gananciaAportes", conferenciaService.getAportesTotales());
 		mAV.addObject("costoConferencias", conferenciaService.getCostoConferencias());
 
-		
-		
 		return mAV;
 	}
 	

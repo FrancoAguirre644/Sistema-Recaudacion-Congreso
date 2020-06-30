@@ -140,7 +140,6 @@ public class ConferenciaController {
 	@GetMapping("/reporte")
 	public ModelAndView reporte() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.REPORTE_INDEX);
-
 		
 
 		
@@ -148,9 +147,9 @@ public class ConferenciaController {
 	}
 
 	@GetMapping("/costoSolventado") // Funcion que resuelve cuanto es el porcentaje que falta para solventar el gasto de las conferencias
+	@ResponseBody
 	public ArrayList<PorcentajeSolventado> costoSolventado(){
 		ArrayList<PorcentajeSolventado> lista = new ArrayList<PorcentajeSolventado>();
-		DecimalFormat decimalFormat = new DecimalFormat(".#");
 
 
 		for(Conferencia c : conferenciaService.getAll()){
