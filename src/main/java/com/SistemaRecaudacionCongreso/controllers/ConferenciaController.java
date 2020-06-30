@@ -136,7 +136,7 @@ public class ConferenciaController {
 	
 	@GetMapping("/reporte")
 	public ModelAndView reporte() {
-		ModelAndView mAV = new ModelAndView();
+		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.REPORTE);
 		
 
 		
@@ -149,6 +149,12 @@ public class ConferenciaController {
 		for(Conferencia c : conferenciaService.getAll()) {
 			balance -= conferenciaService.getAporteAuspiciantes(c.getIdConferencia()) - getGananciaTotalEntradas();
 		}
+		
+		//SUMA DEL COSTO DE TODAS LAS CONFERENCIAS 
+		//SUMA DE TODOS LOS APORTES DE TODAS LAS CONFERENCIAS
+		//SUMA DE TODAS LAS ENTRADAS DE TODAS LAS CONFERENCIAS
+		
+		
 		
 		return balance;
 	}
