@@ -1,7 +1,7 @@
 package com.SistemaRecaudacionCongreso.controllers;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -121,8 +121,14 @@ public class ConferenciaController {
 	
 	@GetMapping("/listaAuspiciantes/{id}")
 	@ResponseBody
-	public ArrayList<Auspiciante> getAuspiciantes(@PathVariable("id") long idConferencia) {
+	public ArrayList<Auspiciante> getAuspiciantesConferencia(@PathVariable("id") long idConferencia) {
 		return conferenciaService.getAuspiciantesConferencia(idConferencia);
+	}
+	
+	@GetMapping("/listaConferencias")
+	@ResponseBody
+	public List<Conferencia> getAuspiciantesConferencia(){
+		return conferenciaService.getAll();
 	}
 
 	@GetMapping("/costoReal/{id}")
@@ -181,6 +187,9 @@ public class ConferenciaController {
 
 		return  (conferenciaService.findByIdConferencia(idConferencia).getCosto() <= entradaService.getGananciaEntrada(idConferencia) + conferenciaService.getAporteAuspiciantes(idConferencia))?  100 :  ((entradaService.getGananciaEntrada(idConferencia) + conferenciaService.getAporteAuspiciantes(idConferencia)) * 100 ) / costo;
 	}
+	
+	
+    
 
 	/*
 

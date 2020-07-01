@@ -1,5 +1,6 @@
 package com.SistemaRecaudacionCongreso.services.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.SistemaRecaudacionCongreso.converters.EspectadorConverter;
+import com.SistemaRecaudacionCongreso.entities.Conferencia;
 import com.SistemaRecaudacionCongreso.entities.Espectador;
 import com.SistemaRecaudacionCongreso.models.EspectadorModel;
+import com.SistemaRecaudacionCongreso.models.PorcentajeSolventado;
 import com.SistemaRecaudacionCongreso.repositories.IEspectadorRepository;
 import com.SistemaRecaudacionCongreso.services.IEspectadorService;
 
@@ -47,6 +50,8 @@ public class EspectadorService implements IEspectadorService{
     public Set<String> getNivelEstudio(){
     	return espectadorRepository.getNivelEstudio();
     }
+    
+
 
 
 }

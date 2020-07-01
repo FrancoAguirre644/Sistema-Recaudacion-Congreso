@@ -214,6 +214,71 @@
 
 
                 <div class="container-fluid">
+                
+                
+                
+                
+                <div class="card shadow mb-4 border-bottom-primary" style="width: 1000px">
+                                <!-- Card Header - Dropdown -->
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary" th:text="'Balance General ' + ${#dates.format(#dates.createNow(),'dd/MM/YYYY')}"></h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                	<div >
+                                	                      	
+                                    	<span>Costo de conferencias:</span>
+                                    	<span style="float: right; padding-left: 5px "> <a class="btn-conferencias"><i class="fas fa-angle-down"  ></i></a></span>
+                                    	
+                                    	<span style="float: right;" class="text font-weight-bold text-danger text-uppercase mb-1" th:text=" '$'+ ${costoConferencias}"></span>
+                             			
+                                    	
+                                    	<div  class="text-xs show-conferencias" style="padding: 5px" >
+                                    			<!-- 
+                                    	
+                                    			<span th:text="${c.titulo}"></span>
+                                    	 		<span th:text=" '$'+ ${c.costo}" style="float: right"></span>
+                                    	 		
+                                    	 		 -->
+
+                                    	
+                                    	</div>
+                                    	
+                                    	<div  class="text-xs show-costo" >
+                                    	 		 
+                                    	 </div>
+                                    	
+                                    	
+                                    	
+                                    </div>
+                                    
+                                   	<br>
+                                    
+                                    <div>
+                                	                                    	
+                                    	<span>Aporte Auspiciantes:</span>
+                                    	<span style="float: right; padding-left: 5px "> <a href="" ><i class="fas fa-angle-down"  ></i></a></span>
+                                    	<span style="float: right;" class="text font-weight-bold text-success text-uppercase mb-1" th:text=" '$'+ ${gananciaAportes}"></span>
+                                    	
+                                    </div>
+                                    	
+                                    <br>
+                                    
+                                    <div >
+                                	                      	
+                                    	<span>Ganancia entradas:</span>
+                                    	<span style="float: right; padding-left: 5px "> <a href=""><i class="fas fa-angle-down"  ></i></a></span>
+                                    	<span style="float: right;" class="text font-weight-bold text-success text-uppercase mb-1" th:text=" '$'+ ${gananciaEntradas}"></span>
+                                    	
+                                    </div>
+                                    	
+                                    </div>
+                                    
+
+                                </div>
+
+                                </div>
+                            </div>
 
 
 
@@ -309,7 +374,39 @@
         <script type="text/javascript">
         $(document).ready(function() {
 
-            
+        	$(".show-conferencias").hide();
+        	
+        	$(".btn-conferencias").click(function() {
+        		
+        		if ($(".show-conferencias").is(':not(:visible)')) {
+        			   // do something
+        			   
+        			   $.ajax({ //https://api.jquery.com/jquery.ajax/ => Examples:
+						method: "GET",
+					 	url: "/conferencias/listaConferencias",
+						})
+						.done(function(data) {
+
+							$(".show-conferencias").html("Detalles </br>");
+							
+							$.each(data, function(i, item) {
+								var text = data[i].titulo + "<span style='float:right;' class='text-xs font-weight-bold text-danger'>  " + " $" + data[i].costo + '</span>' + '</br>';
+								$(".show-conferencias").append(text);
+								//$(".show-conferencias").append(data[i].costo);
+
+	                        });
+							
+							
+						})
+						.fail(function() {
+							alert("error");
+						});
+        			   
+        			}
+        	
+        		
+        		$(".show-conferencias").toggle();
+        	});
 
 
         });
