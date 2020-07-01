@@ -1,5 +1,7 @@
 package com.SistemaRecaudacionCongreso.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,8 +16,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
+import com.SistemaRecaudacionCongreso.entities.Conferencia;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.AuspicianteModel;
+import com.SistemaRecaudacionCongreso.models.PorcentajeSolventado;
 import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
 
@@ -88,5 +92,7 @@ public class AuspicianteController {
 
         return new RedirectView(ViewRouteHelpers.AUSPICIANTE_ROOT);
     }
+    
+
     
 }

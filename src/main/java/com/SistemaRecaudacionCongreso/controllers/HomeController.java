@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
+import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
 import com.SistemaRecaudacionCongreso.services.IEntradaService;
 
@@ -24,6 +25,10 @@ public class HomeController {
 	@Qualifier("entradaService")
 	private IEntradaService entradaService;
 	
+	@Autowired
+	@Qualifier("auspicianteService")
+	private IAuspicianteService auspicianteService;
+	
 	@GetMapping("")
 	public ModelAndView home() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.HOME_INDEX);
@@ -38,7 +43,11 @@ public class HomeController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.REPORTE_INDEX);
 
 		mAV.addObject("gananciaEntradas", entradaService.getGananciaTotalEntradas());
+		
 		mAV.addObject("gananciaAportes", conferenciaService.getAportesTotales());
+		mAV.addObject("auspiciantes", auspicianteService.getAll());
+		
+		mAV.addObject("conferencias", conferenciaService.getAll());
 		mAV.addObject("costoConferencias", conferenciaService.getCostoConferencias());
 
 		return mAV;
