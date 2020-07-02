@@ -20,6 +20,7 @@ import com.SistemaRecaudacionCongreso.converters.OradorConverter;
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Conferencia;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
+import com.SistemaRecaudacionCongreso.models.AportesModel;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
 import com.SistemaRecaudacionCongreso.models.PorcentajeSolventado;
 import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
@@ -59,14 +60,6 @@ public class ConferenciaController {
 		mAV.addObject("oradores", oradorService.getAll());
 
 		costoSolventado();
-		/*
-		for(Conferencia c : conferenciaService.getAll()) {
-			System.out.println(getGananciaEntrada(c.getIdConferencia()));
-		}
-		
-		System.out.println(getGananciaTotalEntradas());
-		*/
-		
 
 		return mAV;
 	}
@@ -142,119 +135,25 @@ public class ConferenciaController {
 	public ArrayList<RankingConferenciaModel> rankingConferencia(){
 		return conferenciaService.getRanking();
 	}
-	
-	@GetMapping("/reporte")
-	public ModelAndView reporte() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.REPORTE_INDEX);
-		
 
-		
-		return mAV;
+	@GetMapping("/gananciaEntradas")
+	@ResponseBody
+	public ArrayList<AportesModel> gananciaEntradas(){
+		return conferenciaService.gananciaEntradas();
+	}
+
+	@GetMapping("/gananciaAportes")
+	@ResponseBody
+	public ArrayList<AportesModel> gananciaAportes(){
+		return conferenciaService.gananciaAportes();
 	}
 
 	@GetMapping("/costoSolventado") // Funcion que resuelve cuanto es el porcentaje que falta para solventar el gasto de las conferencias
 	@ResponseBody
 	public ArrayList<PorcentajeSolventado> costoSolventado(){
-		ArrayList<PorcentajeSolventado> lista = new ArrayList<PorcentajeSolventado>();
-
-
-		for(Conferencia c : conferenciaService.getAll()){
-			lista.add(new PorcentajeSolventado(c.getTitulo(), Math.round(porcentajeSolventado(c.getCosto(), (c.getIdConferencia()))* 10.0 ) /10.0 ) );
-
-			System.out.println("Porcentaje Solventado: " + porcentajeSolventado(c.getCosto(), c.getIdConferencia()) + "%");
-
-			/*PORCENTAJE
-			
-			costo = 100%
-			valor = x
-
-			valor * 100 / costo
-
-			*/
-			
-		}
-
-		System.out.println("----------------------------------------------------------------------------------------------");
-
-		for(PorcentajeSolventado l : lista){
-			System.out.println(l.getNombre() + "    " + l.getPorcentaje());
-		}
-
-		return lista;
+		return conferenciaService.costoSolventado();
 	}
 
-	private double porcentajeSolventado(double costo,long idConferencia){
 
-		return  (conferenciaService.findByIdConferencia(idConferencia).getCosto() <= entradaService.getGananciaEntrada(idConferencia) + conferenciaService.getAporteAuspiciantes(idConferencia))?  100 :  ((entradaService.getGananciaEntrada(idConferencia) + conferenciaService.getAporteAuspiciantes(idConferencia)) * 100 ) / costo;
-	}
-	
-	
-    
-
-	/*
-
-	
-	public double balance() {
-		double balance = getCostoConferencias();
-		
-		for(Conferencia c : conferenciaService.getAll()) {
-			balance -= conferenciaService.getAporteAuspiciantes(c.getIdConferencia()) - getGananciaTotalEntradas();
-		}
-		
-		//SUMA DEL COSTO DE TODAS LAS CONFERENCIAS 
-		//SUMA DE TODOS LOS APORTES DE TODAS LAS CONFERENCIAS
-		//SUMA DE TODAS LAS ENTRADAS DE TODAS LAS CONFERENCIAS
-		
-		
-		
-		return balance;
-	}
-
-	
-	public double getCostoConferencias() {
-		double CostoConferencias = 0;
-		
-		for(Conferencia c : conferenciaService.getAll()) {
-			CostoConferencias += c.getCosto();
-		}
-		
-		return CostoConferencias;
-	}
-	
-	public double getGananciaEntrada(long idConferencia) {
-		double gananciaEntradas = 0;
-		
-		for(Entrada e : entradaService.getAll()) {
-			
-			if(e.getConferencia().getIdConferencia() == idConferencia) {
-				gananciaEntradas += e.getPrecio();
-			}
-			
-		}
-		
-		return gananciaEntradas;
-	}
-	
-	public double getGananciaTotalEntradas() {
-		double gananciaEntradas = 0;
-		
-		for(Conferencia c : conferenciaService.getAll()) {
-			gananciaEntradas += getGananciaEntrada(c.getIdConferencia());
-		}
-		
-		return gananciaEntradas;
-	}
-	
-	public double getAportesTotales() {
-		double aportesTotal = 0;
-		
-		for(Conferencia c : conferenciaService.getAll()) {
-			aportesTotal += conferenciaService.getAporteAuspiciantes(c.getIdConferencia());
-		}
-		
-		return aportesTotal;
-	}
-
-	*/
 
 }

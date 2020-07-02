@@ -196,70 +196,66 @@
 
                 <div class="container-fluid">
 
-                    <div class="row">
+                    <div class="d-flex justify-content-between">
 
-                        <div class="col">
 
-                            <div class="card shadow mb-4 border-bottom-info" style="width: 500px;">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Entradas Vendidas por Conferencia</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <canvas id="myPieChart-ranking"></canvas>
-
-                                </div>
+                        <div class="card shadow mb-4 border-bottom-info" style="width: 510px;">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Entradas Vendidas por Conferencia</h6>
                             </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <canvas id="myPieChart-ranking"></canvas>
 
+                            </div>
                         </div>
 
-                        <div class="col">
 
-                            <div class="card shadow mb-4 border-bottom-primary" style="width: 500px">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Entradas Vendidas Por Nivel Estudio</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <canvas id="myPieChart-rankingNivelEstudio"></canvas>
 
-                                </div>
+                        <div class="card shadow mb-4 border-bottom-primary" style="width: 510px">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Entradas Vendidas Por Nivel Estudio</h6>
                             </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <canvas id="myPieChart-rankingNivelEstudio"></canvas>
 
+                            </div>
                         </div>
+
 
                     </div>
 
 
 
 
-                    <div class="card shadow mb-4 border-bottom-success">
+                    <div class="card shadow mb-4 border-left-success">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Costos solventados</h6>
                         </div>
-                    
-                        <div class="card-body show-percentage" >
-                        	<div th:each="c : ${costoSolventado}" >
-                        	
-                                      
-		                            <h4 class="small font-weight-bold" th:text="${c.nombre}" >	                            
-		                            </h4>
-		                            
-		                            <span  th:text="${c.porcentaje} + '%' " style="float:right; padding-left: 5px"></span>	
-		                            
-		                            
-	                            
-	                            <div class="progress mb-4" >
-	                                <div class="progress-bar bg-gradient-success" role="progressbar"  th:style="'width:' + ${c.porcentaje} + '%' + ';'" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-	                            </div>
-                            
+
+                        <div class="card-body show-percentage">
+                            <div th:each="c : ${costoSolventado}">
+
+
+                                <h4 class="small font-weight-bold" th:text="${c.nombre}">
+                                </h4>
+
+                                <span th:text="${c.porcentaje} + '%' " style="float:right; padding-left: 5px"></span>
+
+
+
+                                <div class="progress mb-4">
+                                    <div class="progress-bar bg-gradient-success" role="progressbar" th:style="'width:' + ${c.porcentaje} + '%' + ';'" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+
                             </div>
-                            
+
                         </div>
-                        
-                        
+
+
                     </div>
 
 
@@ -459,7 +455,7 @@
                     });
 
 
-					
+
 
 
 
@@ -473,39 +469,39 @@
             });
 
 
-				$.ajax({
-                    type: 'GET',
-                    url: "conferencias/costoSolventado",
-                    dataType: 'json',
-                    success: function(data) {
-                        var porcentajes = [];
-                        var nombresConferencias = [];
+            $.ajax({
+                type: 'GET',
+                url: "conferencias/costoSolventado",
+                dataType: 'json',
+                success: function(data) {
+                    var porcentajes = [];
+                    var nombresConferencias = [];
 
 
-                        $.each(data, function(i, item) {
+                    $.each(data, function(i, item) {
 
-                            porcentajes.push(data[i].porcentaje);
-                            nombresConferencias.push(data[i].nombre);
+                        porcentajes.push(data[i].porcentaje);
+                        nombresConferencias.push(data[i].nombre);
 
-							//$('.show-percentage').addClass('alert alert-warning');
+                        //$('.show-percentage').addClass('alert alert-warning');
 
-    						//$('<h4>').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
-							//$('<div>').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
+                        //$('<h4>').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
+                        //$('<div>').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
 
-    						//$('<h1>').addClass('alert alert-success').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
-
-
-
-							//<h4 class='small font-weight-bold'>Server Migration <span class="float-right">20%</span></h4>
-
-                        });
-
-						//alert(porcentajes + "  " +nombresConferencias);
+                        //$('<h1>').addClass('alert alert-success').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
 
 
 
-                    },
-                });
+                        //<h4 class='small font-weight-bold'>Server Migration <span class="float-right">20%</span></h4>
+
+                    });
+
+                    //alert(porcentajes + "  " +nombresConferencias);
+
+
+
+                },
+            });
         </script>
 
 </body>
