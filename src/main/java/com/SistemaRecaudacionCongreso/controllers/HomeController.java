@@ -45,10 +45,10 @@ public class HomeController {
 		mAV.addObject("gananciaEntradas", entradaService.getGananciaTotalEntradas());
 		
 		mAV.addObject("gananciaAportes", conferenciaService.getAportesTotales());
-		mAV.addObject("auspiciantes", auspicianteService.getAll());
 		
-		mAV.addObject("conferencias", conferenciaService.getAll());
 		mAV.addObject("costoConferencias", conferenciaService.getCostoConferencias());
+
+		mAV.addObject("total", conferenciaService.getBalanceTotal());
 
 		return mAV;
 	}

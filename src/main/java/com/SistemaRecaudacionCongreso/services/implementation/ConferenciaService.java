@@ -11,6 +11,7 @@ import com.SistemaRecaudacionCongreso.converters.ConferenciaConverter;
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Conferencia;
 import com.SistemaRecaudacionCongreso.entities.Entrada;
+import com.SistemaRecaudacionCongreso.models.AportesModel;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
 import com.SistemaRecaudacionCongreso.models.PorcentajeSolventado;
 import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
@@ -174,6 +175,34 @@ public class ConferenciaService implements IConferenciaService {
 		}
 
 		return lista;
+	}
+
+
+	public ArrayList<AportesModel> gananciaEntradas(){
+		ArrayList<AportesModel> lstGananciaEntradas = new ArrayList<AportesModel>();
+
+		for(Conferencia c : conferenciaService.getAll()){
+			lstGananciaEntradas.add(new AportesModel(c.getTitulo(),entradaService.getGananciaEntrada(c.getIdConferencia())));
+		}
+
+		return lstGananciaEntradas;
+
+	}
+
+	public ArrayList<AportesModel> gananciaAportes(){
+		ArrayList<AportesModel> lstGananciaAportes = new ArrayList<AportesModel>();
+
+		for(Conferencia c : conferenciaService.getAll()){
+			lstGananciaAportes.add(new AportesModel(c.getTitulo(),conferenciaService.getAporteAuspiciantes(c.getIdConferencia())));
+		}
+
+		return lstGananciaAportes;
+	}
+
+	@Override
+	public double getBalanceTotal() {
+		// TODO Auto-generated method stub
+		return -(getCostoConferencias()) + getAportesTotales() + entradaService.getGananciaTotalEntradas();
 	}
 	
 

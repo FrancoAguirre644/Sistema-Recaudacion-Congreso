@@ -20,6 +20,7 @@ import com.SistemaRecaudacionCongreso.converters.OradorConverter;
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Conferencia;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
+import com.SistemaRecaudacionCongreso.models.AportesModel;
 import com.SistemaRecaudacionCongreso.models.ConferenciaModel;
 import com.SistemaRecaudacionCongreso.models.PorcentajeSolventado;
 import com.SistemaRecaudacionCongreso.models.RankingConferenciaModel;
@@ -152,6 +153,18 @@ public class ConferenciaController {
 		return mAV;
 	}
 
+	@GetMapping("/gananciaEntradas")
+	@ResponseBody
+	public ArrayList<AportesModel> gananciaEntradas(){
+		return conferenciaService.gananciaEntradas();
+	}
+
+	@GetMapping("/gananciaAportes")
+	@ResponseBody
+	public ArrayList<AportesModel> gananciaAportes(){
+		return conferenciaService.gananciaAportes();
+	}
+
 	@GetMapping("/costoSolventado") // Funcion que resuelve cuanto es el porcentaje que falta para solventar el gasto de las conferencias
 	@ResponseBody
 	public ArrayList<PorcentajeSolventado> costoSolventado(){
@@ -188,6 +201,7 @@ public class ConferenciaController {
 		return  (conferenciaService.findByIdConferencia(idConferencia).getCosto() <= entradaService.getGananciaEntrada(idConferencia) + conferenciaService.getAporteAuspiciantes(idConferencia))?  100 :  ((entradaService.getGananciaEntrada(idConferencia) + conferenciaService.getAporteAuspiciantes(idConferencia)) * 100 ) / costo;
 	}
 	
+
 	
     
 
