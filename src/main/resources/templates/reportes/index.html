@@ -186,7 +186,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-       -                         <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
                                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -218,7 +218,7 @@
 
 
 
-                    <div class="card shadow mb-4 border-bottom-primary" style="width: 1000px">
+                    <div class="card shadow mb-4 border-bottom-primary">
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary" th:text="'Balance General ' + ${#dates.format(#dates.createNow(),'dd/MM/YYYY')}"></h6>
@@ -258,6 +258,7 @@
                                 <span style="float: right; padding-left: 5px "> <a class="btn-entradas" ><i class="fas fa-angle-down"  ></i></a></span>
                                 <span style="float: right;" class="text font-weight-bold text-success text-uppercase mb-1" th:text=" '$'+ ${gananciaEntradas}"></span>
 
+
                                 <div class="text-xs show-gananciaEntradas" style="padding: 5px"></div>
 
 
@@ -267,8 +268,11 @@
 
                             <div>
                                 <span>Ganancia Total:</span>
-                                <span style="float: right;" class="text font-weight-bold text-success text-uppercase mb-1" th:text=" '$'+ ${total}"></span>
+                                <!--<span style="float: right;" class="text font-weight-bold text-success text-uppercase mb-1" th:text=" '$'+ ${total}"></span>
+                                -->
 
+                                <span style="float: right;" th:class="'text font-weight-bold text-' + (${total>=0} ? success : danger)" th:text="'$'+${total}">
+                                </span>
                             </div>
 
                         </div>
@@ -277,30 +281,21 @@
                     </div>
 
                 </div>
+
+
+
             </div>
+            <!-- End of Main Content -->
 
-
-
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
         </div>
-
-
-
-
-
-
-    </div>
-    <!-- End of Main Content -->
-
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-        </div>
-    </footer>
-    <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
+        <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
