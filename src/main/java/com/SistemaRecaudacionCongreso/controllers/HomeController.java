@@ -38,7 +38,7 @@ public class HomeController {
 		return mAV;
 	}
 
-	@GetMapping("reporte")
+	@GetMapping("balance")
 	public ModelAndView reporte() {	
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.REPORTE_INDEX);
 

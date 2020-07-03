@@ -1,5 +1,11 @@
 USE sistemaRecaudacionCongreso;
 
+INSERT INTO user (id,createdat,enabled,password,updatedat,username) VALUES(1, "2020-03-22 00:00:01", 1, "$2a$10$zUXqm9ehdGj7I6f1M8HNRugErdA5SJ06sJUo7dTLty8q7tbKBklPi", "2020-03-22 00:00:01", "empleado");
+INSERT INTO user (id,createdat,enabled,password,updatedat,username) VALUES(2, "2020-03-22 00:00:01", 1, "$2a$10$wUbGKY0nzIA9aH9gPZuqOuBNhwTmOmzRBZeMk8L8YHCz.AczonfLG", "2020-03-22 00:00:01", "admin");
+
+INSERT INTO user_role (id,createdat,role,updatedat,user_id) VALUES(1, "2020-03-22 00:00:01", "ROLE_USER", "2020-03-22 00:00:01", 1);
+INSERT INTO user_role (id,createdat,role,updatedat,user_id) VALUES(2, "2020-03-22 00:00:01", "ROLE_ADMIN", "2020-03-22 00:00:01", 2);
+
 INSERT INTO persona (id_persona,email,movil) VALUES(1,"Email1@gmail.com",15111111);
 INSERT INTO persona (email,movil) VALUES("Email2@gmail.com",15222222);
 INSERT INTO persona (email,movil) VALUES("Email3@gmail.com",15333333);

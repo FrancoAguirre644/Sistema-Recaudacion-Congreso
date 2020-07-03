@@ -45,7 +45,6 @@ public class UserController {
 		}
 		System.out.println(username);
 		if(!username.isEmpty()) {
-			System.out.println("Ya esta logueado. Primero deberia desloguearse");
 			return "redirect:/";
 		}
 		else {
