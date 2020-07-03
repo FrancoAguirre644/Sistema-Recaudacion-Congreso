@@ -162,13 +162,15 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                  <span class="mr-2 d-none d-lg-inline text-gray-600 small" sec:authentication="name"></span>
-                                <img class="img-profile rounded-circle"
-                                    src="https://www.mwcbarcelona.com/wp-content/uploads/2019/09/conference-programmes-featured-wide-2x.jpg">
+                                 <img class="img-profile rounded-circle" th:src="@{'/img/'+ ${imgUser}}" >  
+                                
+                                
                             </a>
-                            <!-- Dropdown - User Information -->
+                            
+                            
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
+                                <a class="dropdown-item" id="btn-profile" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400" ></i> Profile
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#logoutModal">
@@ -189,7 +191,6 @@
                 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
                 
                 		<span class="h3 mb-0 text-gray-900" style="font-size: 30px; font-weight: bolder;" >Bienvenido <span sec:authentication="name"></span>!</span>
-                	
                 	</div>
 
                     <div class="d-flex justify-content-between">
@@ -294,6 +295,41 @@
 								<input class="btn btn-primary" style="cursor: pointer"
 									type="submit" value="Logout" />
 							</form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="detailsUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detalles del Usuario</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    	<div class="d-flex justify-content-center">
+                    				<img class="img-profile rounded-circle" th:src="@{'/img/'+ ${imgUser}}" > 
+                    			
+                    		
+                    		
+                    			<div class="container-fluid" >
+                    				<div class="text-center" style="margin-top: 50px">
+		                    			<span  style="text-transform: capitalize; padding-top: 36px" sec:authentication="name" ></span>
+		                				<span  sec:authentication="principal.authorities"></span>
+	                				</div>
+	                			</div>
+                			
+                    	</div>
+                    	
+                    	
+                    
+                    	
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" type="button" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -500,6 +536,12 @@
 
 
                 },
+            });
+
+
+			$('#btn-profile').on('click', function(event) {
+                event.preventDefault();
+                $('#detailsUserModal').modal();
             });
         </script>
 
