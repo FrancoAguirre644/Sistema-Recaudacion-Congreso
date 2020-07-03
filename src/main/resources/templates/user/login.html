@@ -41,20 +41,20 @@
                   <div class="text-center">
                     <h1 class="h3 text-gray-900 mb-4">Login</h1>
                   </div>
-                  <form class="user">
+                  <form class="user" th:action="@{/loginprocess}" method="post" >
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" id="exampleInputEmail"
-                        aria-describedby="emailHelp" placeholder="Enter Username...">
+                        aria-describedby="emailHelp" name="username" placeholder="Enter Username...">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword"
+                      <input type="password" class="form-control form-control-user" name="password" id="exampleInputPassword"
                         placeholder="Password">
                     </div>
                     <div class="form-group">
                     </div>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                      Login
-                    </a>
+
+                    
+                    <input type="submit" class="btn btn-primary btn-user btn-block" value="Login">
 
                   </form>
 
