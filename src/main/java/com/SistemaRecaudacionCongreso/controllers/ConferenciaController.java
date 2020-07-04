@@ -28,6 +28,8 @@ import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
 import com.SistemaRecaudacionCongreso.services.IEntradaService;
 import com.SistemaRecaudacionCongreso.services.IOradorService;
+import com.SistemaRecaudacionCongreso.services.implementation.UserService;
+
 
 @Controller
 @RequestMapping("/conferencias")
@@ -52,12 +54,18 @@ public class ConferenciaController {
 	@Autowired
 	@Qualifier("oradorConverter")
 	private OradorConverter oradorConverter;
+
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.CONFERENCIA_INDEX);
 		mAV.addObject("conferencias", conferenciaService.getAll());
 		mAV.addObject("oradores", oradorService.getAll());
+		mAV.addObject("imgUser",userService.getPhotoUser());
+
 
 		costoSolventado();
 

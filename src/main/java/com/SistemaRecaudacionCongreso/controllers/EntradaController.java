@@ -21,6 +21,8 @@ import com.SistemaRecaudacionCongreso.repositories.IEntradaRepository;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
 import com.SistemaRecaudacionCongreso.services.IEntradaService;
 import com.SistemaRecaudacionCongreso.services.IEspectadorService;
+import com.SistemaRecaudacionCongreso.services.implementation.UserService;
+
 
 @Controller
 @RequestMapping("/entradas")
@@ -46,6 +48,10 @@ public class EntradaController {
 	@Qualifier("entradaRepository")
 	private IEntradaRepository entradaRepository;
 	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
+	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.ENTRADA_INDEX);
@@ -53,10 +59,8 @@ public class EntradaController {
 		mAV.addObject("espectadores", espectadorService.getAll());
 		mAV.addObject("conferencias", conferenciaService.getAll());
 		mAV.addObject("entrada", new EntradaModel());
-		
-		
-		System.out.println(entradaRepository.countByNivelEstudio("Secundario"));
-		System.out.println(entradaService.getCantidadEspectadoresNivelEstudio());;
+		mAV.addObject("imgUser",userService.getPhotoUser());
+
 
 
 		return mAV;

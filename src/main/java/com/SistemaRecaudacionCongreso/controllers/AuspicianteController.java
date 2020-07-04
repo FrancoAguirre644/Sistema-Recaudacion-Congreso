@@ -22,6 +22,8 @@ import com.SistemaRecaudacionCongreso.models.AuspicianteModel;
 import com.SistemaRecaudacionCongreso.models.PorcentajeSolventado;
 import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
+import com.SistemaRecaudacionCongreso.services.implementation.UserService;
+
 
 /**
  * AuspicianteController
@@ -37,6 +39,10 @@ public class AuspicianteController {
     @Autowired
     @Qualifier("conferenciaService")
     private IConferenciaService conferenciaService;
+    
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 
     @GetMapping("")
     public ModelAndView index(){
@@ -44,6 +50,7 @@ public class AuspicianteController {
         mAV.addObject("auspiciantes", auspicianteService.getAll());
         mAV.addObject("auspiciante", new AuspicianteModel());
         mAV.addObject("conferencias", conferenciaService.getAll());
+        mAV.addObject("imgUser",userService.getPhotoUser());
 
         return mAV;
     }

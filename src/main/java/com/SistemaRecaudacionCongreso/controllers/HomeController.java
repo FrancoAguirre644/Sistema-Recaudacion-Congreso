@@ -3,15 +3,12 @@ package com.SistemaRecaudacionCongreso.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
-import com.SistemaRecaudacionCongreso.repositories.IUserRepository;
 import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
 import com.SistemaRecaudacionCongreso.services.IEntradaService;
@@ -51,6 +48,8 @@ public class HomeController {
 	@GetMapping("balance")
 	public ModelAndView reporte() {	
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.REPORTE_INDEX);
+
+		mAV.addObject("imgUser",userService.getPhotoUser());
 
 		mAV.addObject("gananciaEntradas", entradaService.getGananciaTotalEntradas());
 		

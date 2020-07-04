@@ -21,6 +21,8 @@ import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.EspectadorModel;
 import com.SistemaRecaudacionCongreso.repositories.IEspectadorRepository;
 import com.SistemaRecaudacionCongreso.services.IEspectadorService;
+import com.SistemaRecaudacionCongreso.services.implementation.UserService;
+
 
 @Controller
 @RequestMapping("/espectadores")
@@ -34,11 +36,17 @@ public class EspectadorController {
     @Qualifier("espectadorRepository")
     private IEspectadorRepository espectadorRepository;
 
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
+
     @GetMapping("")
     public ModelAndView index(){
         ModelAndView mAV = new ModelAndView(ViewRouteHelpers.ESPECTADOR_INDEX);
         mAV.addObject("espectadores", espectadorService.getAll());
         mAV.addObject("espectador", new EspectadorModel());
+        mAV.addObject("imgUser",userService.getPhotoUser());
+
         
         return mAV;
     }

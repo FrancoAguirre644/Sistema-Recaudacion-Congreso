@@ -130,7 +130,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="height: 52px;">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Main Content -->
                     <!-- Topbar Navbar -->
@@ -500,41 +500,6 @@
 
 
 
-            });
-
-
-            $.ajax({
-                type: 'GET',
-                url: "conferencias/costoSolventado",
-                dataType: 'json',
-                success: function(data) {
-                    var porcentajes = [];
-                    var nombresConferencias = [];
-
-
-                    $.each(data, function(i, item) {
-
-                        porcentajes.push(data[i].porcentaje);
-                        nombresConferencias.push(data[i].nombre);
-
-                        //$('.show-percentage').addClass('alert alert-warning');
-
-                        //$('<h4>').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
-                        //$('<div>').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
-
-                        //$('<h1>').addClass('alert alert-success').html("<h4>" + data[i].nombre + "</h4>").appendTo('.show-percentage');
-
-
-
-                        //<h4 class='small font-weight-bold'>Server Migration <span class="float-right">20%</span></h4>
-
-                    });
-
-                    //alert(porcentajes + "  " +nombresConferencias);
-
-
-
-                },
             });
 
 
