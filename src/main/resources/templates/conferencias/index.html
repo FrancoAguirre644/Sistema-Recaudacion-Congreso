@@ -214,9 +214,9 @@
 
 
                 <div class="container-fluid">
-                
-                <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
-        </div>
+
+                    <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
+                    </div>
 
                     <a href="#" class="btn btn-success btn-icon-split btn-add" style="margin-bottom: 20px;">
                         <span class=" icon text-white-50 ">
@@ -272,7 +272,7 @@
                 </div>
 
                 <div class="form-add">
-                    <form action="#" method="post" th:action="@{conferencias/save}">
+                    <form action="#" method="post" th:action="@{conferencias/save}" novalidate class="formulario-add">
                         <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -285,14 +285,22 @@
                                     </div>
                                     <div class="modal-body">
 
+
+
                                         <div class="form-group">
-                                            <label class="col-form-label" for="name">Titulo:</label> <input class="form-control" id="titulo" name="titulo" type="text" value="" />
+                                            <label class="col-form-label" for="name">Titulo:</label> <input class="form-control" id="titulo" name="titulo" type="text" value="" required />
+                                            <div class="invalid-feedback">
+                                                Debe ingresar el titulo
+                                            </div>
                                         </div>
 
 
 
                                         <div class="form-group">
-                                            <label class="col-form-label" for="name">Descripcion:</label> <input class="form-control" id="descripcion" name="descripcion" type="text" value="" />
+                                            <label class="col-form-label" for="name">Descripcion:</label> <input class="form-control" id="descripcion" name="descripcion" type="text" value="" required />
+                                            <div class="invalid-feedback">
+                                                Debe ingresar la descripcion
+                                            </div>
                                         </div>
 
 
@@ -302,7 +310,10 @@
                                             <div class="col">
 
                                                 <div class="form-group">
-                                                    <label class="col-form-label" for="name">Fecha:</label> <input class="form-control" id="fecha" name="fecha" type="date" value="" />
+                                                    <label class="col-form-label" for="name">Fecha:</label> <input class="form-control" id="fecha" name="fecha" type="date" value="" required />
+                                                    <div class="invalid-feedback">
+                                                        Debe ingresar la fecha de realizacion
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -310,7 +321,10 @@
                                             <div class="col">
 
                                                 <div class="form-group">
-                                                    <label class="col-form-label" for="name">Costo:</label> <input class="form-control" id="costo" name="costo" type="number" value="" />
+                                                    <label class="col-form-label" for="name">Costo:</label> <input class="form-control" id="costo" name="costo" type="number" value="" min="1" required/>
+                                                    <div class="invalid-feedback">
+                                                        Debe ingresar el costo
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -340,7 +354,7 @@
                 </div>
 
                 <div class="form-update">
-                    <form action="#" method="post" th:action="@{conferencias/save}">
+                    <form action="#" method="post" th:action="@{conferencias/save}" novalidate class="formulario-update">
                         <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -356,13 +370,19 @@
 
 
                                         <div class="form-group">
-                                            <label class="col-form-label" for="name">Titulo:</label> <input class="form-control" id="titulo" name="titulo" type="text" value="" />
+                                            <label class="col-form-label" for="name">Titulo:</label> <input class="form-control" id="titulo" name="titulo" type="text" value="" required />
+                                            <div class="invalid-feedback">
+                                                Debe ingresar el titulo
+                                            </div>
                                         </div>
 
 
 
                                         <div class="form-group">
-                                            <label class="col-form-label" for="name">Descripcion:</label> <input class="form-control" id="descripcion" name="descripcion" type="text" value="" />
+                                            <label class="col-form-label" for="name">Descripcion:</label> <input class="form-control" id="descripcion" name="descripcion" type="text" value="" required />
+                                            <div class="invalid-feedback">
+                                                Debe ingresar la descripcion
+                                            </div>
                                         </div>
 
 
@@ -372,7 +392,10 @@
                                             <div class="col">
 
                                                 <div class="form-group">
-                                                    <label class="col-form-label" for="name">Fecha:</label> <input class="form-control" id="fecha" name="fecha" type="date" value="" />
+                                                    <label class="col-form-label" for="name">Fecha:</label> <input class="form-control" id="fecha" name="fecha" type="date" value="" required />
+                                                    <div class="invalid-feedback">
+                                                        Debe ingresar la fecha de realizacion
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -380,7 +403,10 @@
                                             <div class="col">
 
                                                 <div class="form-group">
-                                                    <label class="col-form-label" for="name">Costo:</label> <input class="form-control" id="costo" name="costo" type="number" value="" />
+                                                    <label class="col-form-label" for="name">Costo:</label> <input class="form-control" id="costo" name="costo" type="number" value="" min="1" required/>
+                                                    <div class="invalid-feedback">
+                                                        Debe ingresar el costo
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -549,6 +575,43 @@
                     $('#exampleModal-costo').modal();
 
                 });
+
+                (function() {
+                    'use strict';
+                    window.addEventListener('load', function() {
+                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                        var forms = document.getElementsByClassName('formulario-add');
+                        // Loop over them and prevent submission
+                        var validation = Array.prototype.filter.call(forms, function(form) {
+                            form.addEventListener('submit', function(event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            }, false);
+                        });
+                    }, false);
+                })();
+
+
+                (function() {
+                    'use strict';
+                    window.addEventListener('load', function() {
+                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                        var forms = document.getElementsByClassName('formulario-update');
+                        // Loop over them and prevent submission
+                        var validation = Array.prototype.filter.call(forms, function(form) {
+                            form.addEventListener('submit', function(event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            }, false);
+                        });
+                    }, false);
+                })();
 
             });
         </script>

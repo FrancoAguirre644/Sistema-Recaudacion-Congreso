@@ -218,9 +218,9 @@
 
 
                 <div class="container-fluid">
-                
-                        <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
-        </div>
+
+                    <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
+                    </div>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -237,7 +237,6 @@
 
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
                                             <th scope="col">razon Social</th>
                                             <th scope="col">Cuit</th>
                                             <th scope="col">Monto Aportado</th>
@@ -249,13 +248,12 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="a : ${auspiciantes}">
-                                            <th th:text="${a.idPersona}" scope="row"></th>
-                                            <td th:text="${a.razonSocial}"></td>
+                                            <td th:text="${a.razonSocial}" scope="row"></td>
                                             <td th:text="${a.cuit}"></td>
                                             <td th:text="${a.montoAportado}"></td>
                                             <td th:text="${a.email}"></td>
                                             <td th:text="${a.movil}"></td>
-                                            <td th:text="${a.Conferencia.idConferencia}"></td>
+                                            <td th:text="${a.Conferencia.titulo}"></td>
 
                                             <td>
 
@@ -303,7 +301,7 @@
 
 
                     <div class="form-update">
-                        <form action="#" method="post" th:action="@{auspiciantes/save}">
+                        <form action="#" method="post" th:action="@{auspiciantes/save}" class="formulario-update" novalidate>
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -317,18 +315,26 @@
                                         <div class="modal-body">
                                             <input class="form-control" id="id" name="idPersona" type="hidden" value="" />
 
+
                                             <div class="form-row">
 
                                                 <div class="col-7">
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" required/>
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar razon social
+                                                        </div>
                                                     </div>
+
                                                 </div>
 
                                                 <div class="col">
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar cuit
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -336,7 +342,10 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
+                                                <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" required />
+                                                <div class="invalid-feedback">
+                                                    Debe ingresar e-mail
+                                                </div>
                                             </div>
 
                                             <div class="form-row">
@@ -345,7 +354,10 @@
 
                                                     <div class="form-group">
                                                         <label class="col-form-label" for="name">Movil:</label>
-                                                        <input class="form-control" id="movil" name="movil" type="text" value="" />
+                                                        <input class="form-control" id="movil" name="movil" type="text" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar movil
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -354,84 +366,10 @@
 
                                                     <div class="form-group">
                                                         <label class="col-form-label" for="name">Monto Aportado:</label>
-                                                        <input class="form-control" id="montoAportado" name="montoAportado" type="text" value="" />
-                                                    </div>
-
-                                                </div>
-
-
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-form-label" for="name">Conferencia Beneficiada:</label>
-                                                <select class="form-control " id="conferencia" name="conferencia.idConferencia">
-                                                <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
-                                            </select>
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                                            <input class="btn btn-success" type="submit" value="Save" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="form-add">
-                        <form action="#" method="post" th:action="@{auspiciantes/save}">
-                            <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Agregar Auspiciante
-                                            </h5>
-                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-								<span aria-hidden="true">&times;</span>
-							</button>
-                                        </div>
-                                        <div class="modal-body">
-
-                                            <div class="form-row">
-
-                                                <div class="col-7">
-                                                    <div class="form-group">
-                                                        <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col">
-
-                                                    <div class="form-group">
-                                                        <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" />
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
-                                            </div>
-
-                                            <div class="form-row">
-
-                                                <div class="col">
-
-                                                    <div class="form-group">
-                                                        <label class="col-form-label" for="name">Movil:</label>
-                                                        <input class="form-control" id="movil" name="movil" type="text" value="" />
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="col">
-
-                                                    <div class="form-group">
-                                                        <label class="col-form-label" for="name">Monto Aportado:</label>
-                                                        <input class="form-control" id="montoAportado" name="montoAportado" type="text" value="" />
+                                                        <input class="form-control" id="montoAportado" min="1" name="montoAportado" type="number" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar monto a aportar
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -444,6 +382,7 @@
                                                 <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
                                             </select>
                                             </div>
+
 
                                             <div class="modal-footer">
                                                 <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
@@ -455,99 +394,228 @@
                         </form>
                         </div>
 
+                        <div class="form-add">
+                            <form action="#" method="post" novalidate th:action="@{auspiciantes/save}" class="formulario-add">
+                                <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Agregar Auspiciante
+                                                </h5>
+                                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="form-row">
+
+                                                    <div class="col-7">
+                                                        <div class="form-group">
+                                                            <label class="col-form-label" for="name">Razon Social:</label> <input class="form-control" id="razonSocial" name="razonSocial" type="text" value="" required/>
+                                                            <div class="invalid-feedback">
+                                                                Debe ingresar razon social
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col">
+
+                                                        <div class="form-group">
+                                                            <label class="col-form-label" for="name">Cuit:</label> <input class="form-control" id="cuit" name="cuit" type="text" value="" required />
+                                                            <div class="invalid-feedback">
+                                                                Debe ingresar cuit
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" required />
+                                                    <div class="invalid-feedback">
+                                                        Debe ingresar e-mail
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row">
+
+                                                    <div class="col">
+
+                                                        <div class="form-group">
+                                                            <label class="col-form-label" for="name">Movil:</label>
+                                                            <input class="form-control" id="movil" name="movil" type="text" value="" required />
+                                                            <div class="invalid-feedback">
+                                                                Debe ingresar movil
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col">
+
+                                                        <div class="form-group">
+                                                            <label class="col-form-label" for="name">Monto Aportado:</label>
+                                                            <input class="form-control" id="montoAportado" name="montoAportado" type="number" value="" min="1" required />
+                                                            <div class="invalid-feedback">
+                                                                Debe ingresar monto a aportar
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-form-label" for="name">Conferencia Beneficiada:</label>
+                                                    <select class="form-control " id="conferencia" name="conferencia.idConferencia">
+                                                <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
+                                            </select>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                                    <input class="btn btn-success" type="submit" value="Save" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </form>
+                            </div>
+
+                        </div>
+
+
+
+
+
                     </div>
+                    <!-- End of Main Content -->
 
-
-
-
+                    <!-- Footer -->
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                        </div>
+                    </footer>
+                    <!-- End of Footer -->
 
                 </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                    </div>
-                </footer>
-                <!-- End of Footer -->
+                <!-- End of Content Wrapper -->
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Page Wrapper -->
 
-        </div>
-        <!-- End of Page Wrapper -->
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        </div>
+                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="login.html">Logout</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="../../vendor/jquery/jquery.min.js"></script>
-        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="../../vendor/jquery/jquery.min.js"></script>
+            <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="../../js/sb-admin-2.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="../../js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+            <!-- Page level plugins -->
+            <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
+            <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="../../js/demo/datatables-demo.js"></script>
+            <!-- Page level custom scripts -->
+            <script src="../../js/demo/datatables-demo.js"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function() {
+            <script type="text/javascript">
+                $(document).ready(function() {
 
-                $('.table .edit').on('click', function(event) {
-                    event.preventDefault();
-                    var href = $(this).attr('href');
+                    $('.table .edit').on('click', function(event) {
+                        event.preventDefault();
+                        var href = $(this).attr('href');
 
-                    $.get(href, function(auspiciante, status) {
-                        $('.form-update #id').val(auspiciante.idPersona);
-                        $('.form-update #movil').val(auspiciante.movil);
-                        $('.form-update #email').val(auspiciante.email);
-                        $('.form-update #razonSocial').val(auspiciante.razonSocial);
-                        $('.form-update #cuit').val(auspiciante.cuit);
-                        $('.form-update #montoAportado').val(auspiciante.montoAportado);
-                        $('.form-update #conferencia').val(auspiciante.conferencia.idConferencia);
+                        $.get(href, function(auspiciante, status) {
+                            $('.form-update #id').val(auspiciante.idPersona);
+                            $('.form-update #movil').val(auspiciante.movil);
+                            $('.form-update #email').val(auspiciante.email);
+                            $('.form-update #razonSocial').val(auspiciante.razonSocial);
+                            $('.form-update #cuit').val(auspiciante.cuit);
+                            $('.form-update #montoAportado').val(auspiciante.montoAportado);
+                            $('.form-update #conferencia').val(auspiciante.conferencia.idConferencia);
+
+                        });
+                        $('.form-update #exampleModal').modal();
 
                     });
-                    $('.form-update #exampleModal').modal();
+
+
+                    $('.btn-add').on('click', function(event) {
+                        event.preventDefault();
+                        $('.form-add #exampleModal-add').modal();
+                    });
+
+                    (function() {
+                        'use strict';
+                        window.addEventListener('load', function() {
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.getElementsByClassName('formulario-add');
+                            // Loop over them and prevent submission
+                            var validation = Array.prototype.filter.call(forms, function(form) {
+                                form.addEventListener('submit', function(event) {
+                                    if (form.checkValidity() === false) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                    }
+                                    form.classList.add('was-validated');
+                                }, false);
+                            });
+                        }, false);
+                    })();
+
+
+                    (function() {
+                        'use strict';
+                        window.addEventListener('load', function() {
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.getElementsByClassName('formulario-update');
+                            // Loop over them and prevent submission
+                            var validation = Array.prototype.filter.call(forms, function(form) {
+                                form.addEventListener('submit', function(event) {
+                                    if (form.checkValidity() === false) {
+                                        event.preventDefault();
+                                        event.stopPropagation();
+                                    }
+                                    form.classList.add('was-validated');
+                                }, false);
+                            });
+                        }, false);
+                    })();
+
+
 
                 });
-
-
-                $('.btn-add').on('click', function(event) {
-                    event.preventDefault();
-                    $('.form-add #exampleModal-add').modal();
-                });
-
-
-            });
-        </script>
+            </script>
 
 </body>
 

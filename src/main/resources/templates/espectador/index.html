@@ -222,8 +222,8 @@
 
                 <div class="container-fluid">
 
-				<div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
-				        </div>
+                    <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
+                    </div>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -236,7 +236,6 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Apellido</th>
                                             <th scope="col">Tipo Documento</th>
@@ -249,8 +248,7 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="e : ${espectadores}">
-                                            <th th:text="${e.idPersona}" scope="row"></th>
-                                            <td th:text="${e.nombre}"></td>
+                                            <td th:text="${e.nombre}" scope="row"></td>
                                             <td th:text="${e.apellido}"></td>
                                             <td th:text="${e.tipoDocumento}"></td>
                                             <td th:text="${e.nroDocumento}"></td>
@@ -290,7 +288,7 @@
 
 
                     <div class="form-update">
-                        <form action="#" method="post" th:action="@{espectadores/save}">
+                        <form action="#" method="post" novalidate class="formulario" th:action="@{espectadores/save}">
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -303,14 +301,17 @@
                                         </div>
                                         <div class="modal-body">
 
-                                            <div class="form-row">
+                                            <input type="hidden" name="idPersona" id="id">
 
-                                                <input type="hidden" name="idPersona" id="id">
+                                            <div class="form-row">
 
                                                 <div class="col">
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Nombre:</label> <input class="form-control" id="nombre" name="nombre" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Nombre:</label> <input class="form-control" id="nombre" name="nombre" type="text" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el nombre
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -319,7 +320,10 @@
 
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Apellido:</label> <input class="form-control" id="apellido" name="apellido" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Apellido:</label> <input class="form-control" id="apellido" name="apellido" type="text" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el apellido
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -331,7 +335,10 @@
                                                 <div class="col">
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Movil:</label> <input class="form-control" id="movil" name="movil" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Movil:</label> <input class="form-control" id="movil" name="movil" type="text" value="" required/>
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el movil
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -340,7 +347,10 @@
 
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
+                                                        <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el e-mail
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -357,12 +367,12 @@
                                                         <label class="col-form-label" for="name">Tipo Documento</label>
 
 
-                                                        <select class="form-control " name="tipoDocumento" id="tipoDocumento">
-                                                            <option value="DNI">DNI</option>
-                                                            <option value="CI">CI</option>
-                                                            <option value="LE">LE</option>
-                                                            <option value="LC">LC</option>
-                                                        </select>
+                                                        <select class="form-control " name="tipoDocumento" id="tipoDocumento" required>
+                                                                <option value="DNI">DNI</option>
+                                                                <option value="CI">CI</option>
+                                                                <option value="LE">LE</option>
+                                                                <option value="LC">LC</option>
+                                                            </select>
 
                                                     </div>
 
@@ -373,18 +383,21 @@
 
                                                     <div class="form-group">
                                                         <label class="col-form-label" for="name">Nro Documento:</label>
-                                                        <input class="form-control" id="nroDocumento" name="nroDocumento" type="text" value="" />
+                                                        <input class="form-control" id="nroDocumento" name="nroDocumento" type="number" min="10000000" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el documento
+                                                        </div>
                                                     </div>
 
                                                 </div>
 
                                             </div>
 
-                                            <select class="form-control " name="nivelEstudio" id="nivelEstudio">
-                                                            <option value="Secundario">Secundario</option>
-                                                            <option value="Terceario">Terceario</option>
-                                                            <option value="Universitario">Universitario</option>
-                                                        </select>
+                                            <select class="form-control " name="nivelEstudio" id="nivelEstudio" required>
+                                                                <option value="Secundario">Secundario</option>
+                                                                <option value="Terceario">Terceario</option>
+                                                                <option value="Universitario">Universitario</option>
+                                                            </select>
 
                                         </div>
                                         <div class="modal-footer">
@@ -398,7 +411,7 @@
                     </div>
 
                     <div class="form-add">
-                        <form action="#" class="form-agregar" method="post" th:action="@{espectadores/save}">
+                        <form action="#" class="form-agregar formulario" method="post" th:action="@{espectadores/save}" novalidate>
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content ">
@@ -415,7 +428,10 @@
                                                 <div class="col">
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Nombre:</label> <input class="form-control" id="nombre" name="nombre" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Nombre:</label> <input class="form-control" id="nombre" name="nombre" type="text" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el nombre
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -424,7 +440,10 @@
 
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Apellido:</label> <input class="form-control" id="apellido" name="apellido" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Apellido:</label> <input class="form-control" id="apellido" name="apellido" type="text" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el apellido
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -436,7 +455,10 @@
                                                 <div class="col">
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Movil:</label> <input class="form-control" id="movil" name="movil" type="text" value="" />
+                                                        <label class="col-form-label" for="name">Movil:</label> <input class="form-control" id="movil" name="movil" type="text" value="" required/>
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el movil
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -445,7 +467,10 @@
 
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" />
+                                                        <label class="col-form-label" for="name">E-mail:</label> <input class="form-control" id="email" name="email" type="email" value="" required/>
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el e-mail
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -462,7 +487,7 @@
                                                         <label class="col-form-label" for="name">Tipo Documento</label>
 
 
-                                                        <select class="form-control " name="tipoDocumento" id="tipoDocumento">
+                                                        <select class="form-control " name="tipoDocumento" id="tipoDocumento" required>
                                                             <option value="DNI">DNI</option>
                                                             <option value="CI">CI</option>
                                                             <option value="LE">LE</option>
@@ -478,14 +503,17 @@
 
                                                     <div class="form-group">
                                                         <label class="col-form-label" for="name">Nro Documento:</label>
-                                                        <input class="form-control" id="nroDocumento" name="nroDocumento" type="text" value="" />
+                                                        <input class="form-control" id="nroDocumento" name="nroDocumento" type="number" min="10000000" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el documento
+                                                        </div>
                                                     </div>
 
                                                 </div>
 
                                             </div>
 
-                                            <select class="form-control " name="nivelEstudio" id="nivelEstudio">
+                                            <select class="form-control " name="nivelEstudio" id="nivelEstudio" required>
                                                             <option value="Secundario">Secundario</option>
                                                             <option value="Terceario">Terceario</option>
                                                             <option value="Universitario">Universitario</option>
@@ -601,6 +629,25 @@
                 event.preventDefault();
                 $('.form-add #exampleModal-add').modal();
             });
+
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('formulario');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+
 
         });
     </script>

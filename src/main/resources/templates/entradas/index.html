@@ -229,7 +229,6 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
                                             <th scope="col">Fecha Compra</th>
                                             <th scope="col">Precio</th>
                                             <th scope="col">Espectador</th>
@@ -239,8 +238,7 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="e : ${entradas}">
-                                            <th th:text="${e.idEntrada}" scope="row"></th>
-                                            <td th:text="${e.fechaCompra}"></td>
+                                            <td th:text="${e.fechaCompra}" scope="row"></td>
                                             <td th:text="'$' + ${e.precio}"></td>
                                             <td th:text="${e.Espectador.nombre} +' '+ ${e.Espectador.apellido}"></td>
                                             <td th:text="${e.Conferencia.titulo}"></td>
@@ -289,7 +287,7 @@
 
 
                     <div class="form-update">
-                        <form action="#" method="post" th:action="@{entradas/save}">
+                        <form action="#" method="post" th:action="@{entradas/save}" novalidate class="formulario">
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -303,18 +301,25 @@
                                         <div class="modal-body">
                                             <input class="form-control" id="id" name="idEntrada" type="hidden" value="" />
 
+
                                             <div class="form-row">
 
                                                 <div class="col-7">
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Fecha Compra:</label> <input class="form-control" id="fechaCompra" name="fechaCompra" type="date" value="" />
+                                                        <label class="col-form-label" for="name">Fecha Compra:</label> <input class="form-control" id="fechaCompra" name="fechaCompra" type="date" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar fecha de compra
+                                                        </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col">
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Precio:</label> <input class="form-control" id="precio" name="precio" type="number" value="" />
+                                                        <label class="col-form-label" for="name">Precio:</label> <input class="form-control" id="precio" name="precio" type="number" value="" required min="200" />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el precio
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -327,7 +332,7 @@
                                                     <div class="form-group">
                                                         <label class="col-form-label" for="name">Espectador:</label>
 
-                                                        <select class="form-control " id="espectador" name="espectador.idPersona">
+                                                        <select class="form-control " id="espectador" name="espectador.idPersona" required>
                                                 <option th:each="es : ${espectadores}" th:value="${es.idPersona}"  th:text="${es.nombre} + ' ' + ${es.apellido}" ></option>
                                             </select>
 
@@ -343,7 +348,7 @@
 
                                                         <label class="col-form-label" for="name">Conferencia:</label>
 
-                                                        <select class="form-control " id="conferencia" name="conferencia.idConferencia">
+                                                        <select class="form-control " id="conferencia" name="conferencia.idConferencia" required>
                                                 <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
                                             </select>
 
@@ -368,7 +373,7 @@
 
 
                     <div class="form-add">
-                        <form action="#" method="post" th:action="@{entradas/save}">
+                        <form action="#" method="post" th:action="@{entradas/save}" novalidate class="formulario">
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -385,14 +390,20 @@
 
                                                 <div class="col-7">
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Fecha Compra:</label> <input class="form-control" id="fechaCompra" name="fechaCompra" type="date" value="" />
+                                                        <label class="col-form-label" for="name">Fecha Compra:</label> <input class="form-control" id="fechaCompra" name="fechaCompra" type="date" value="" required />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar fecha de compra
+                                                        </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col">
 
                                                     <div class="form-group">
-                                                        <label class="col-form-label" for="name">Precio:</label> <input class="form-control" id="precio" name="precio" type="number" value="" />
+                                                        <label class="col-form-label" for="name">Precio:</label> <input class="form-control" id="precio" name="precio" type="number" value="" required min="200" />
+                                                        <div class="invalid-feedback">
+                                                            Debe ingresar el precio
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -405,7 +416,7 @@
                                                     <div class="form-group">
                                                         <label class="col-form-label" for="name">Espectador:</label>
 
-                                                        <select class="form-control " id="espectador" name="espectador.idPersona">
+                                                        <select class="form-control " id="espectador" name="espectador.idPersona" required>
                                                 <option th:each="es : ${espectadores}" th:value="${es.idPersona}"  th:text="${es.nombre} + ' ' + ${es.apellido}" ></option>
                                             </select>
 
@@ -421,7 +432,7 @@
 
                                                         <label class="col-form-label" for="name">Conferencia:</label>
 
-                                                        <select class="form-control " id="conferencia" name="conferencia.idConferencia">
+                                                        <select class="form-control " id="conferencia" name="conferencia.idConferencia" required>
                                                 <option th:each="c : ${conferencias}" th:value="${c.idConferencia}" th:text="${c.titulo}"></option>
                                             </select>
 
@@ -530,6 +541,27 @@
                 event.preventDefault();
                 $('.form-add #exampleModal-add').modal();
             });
+
+
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('formulario');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+
+
 
         });
     </script>
