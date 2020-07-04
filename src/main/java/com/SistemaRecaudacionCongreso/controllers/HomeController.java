@@ -39,6 +39,10 @@ public class HomeController {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.HOME_INDEX);
 		
 		mAV.addObject("costoSolventado", conferenciaService.costoSolventado());
+
+		mAV.addObject("gananciaEntradas", entradaService.getGananciaTotalEntradas());
+		
+		mAV.addObject("gananciaAportes", conferenciaService.getAportesTotales());
 		
 		mAV.addObject("imgUser",userService.getPhotoUser());
 		
