@@ -16,6 +16,8 @@ import com.SistemaRecaudacionCongreso.entities.Orador;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.OradorModel;
 import com.SistemaRecaudacionCongreso.services.IOradorService;
+import com.SistemaRecaudacionCongreso.services.implementation.UserService;
+
 
 @Controller
 @RequestMapping("/oradores")
@@ -24,11 +26,18 @@ public class OradorController {
 	@Autowired
 	@Qualifier("oradorService")
 	private IOradorService oradorService;
+
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 	
 	@GetMapping("")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelpers.ORADOR_INDEX);
 		mAV.addObject("oradores", oradorService.getAll());
+		mAV.addObject("imgUser",userService.getPhotoUser());
+
+		
 		
 		return mAV;
 	}
