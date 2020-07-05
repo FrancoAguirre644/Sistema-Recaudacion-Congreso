@@ -100,6 +100,12 @@ public class AuspicianteController {
         return new RedirectView(ViewRouteHelpers.AUSPICIANTE_ROOT);
     }
     
+    @PostMapping("/update")
+    public RedirectView update(@ModelAttribute("auspiciante") AuspicianteModel auspicianteModel, RedirectAttributes redirectAttrs){
+    	auspicianteService.insertOrUpdate(auspicianteModel);
+    	
+    	return new RedirectView(ViewRouteHelpers.AUSPICIANTE_ROOT);
+    }
 
     
 }

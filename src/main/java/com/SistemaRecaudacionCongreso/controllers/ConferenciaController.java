@@ -120,6 +120,13 @@ public class ConferenciaController {
 		return new RedirectView(ViewRouteHelpers.CONFERENCIA_ROOT);
 	}
 	
+	@PostMapping("/update")
+	public RedirectView update(@ModelAttribute("conferencia") ConferenciaModel conferenciaModel, RedirectAttributes redirectAttrs) {
+		conferenciaModel.setOrador(oradorConverter.modelToEntity(oradorService.findByIdPersona(conferenciaModel.getOrador().getIdPersona())));
+		conferenciaService.insertOrUpdate(conferenciaModel);
+		return new RedirectView(ViewRouteHelpers.CONFERENCIA_ROOT);
+	}
+	
 	@GetMapping("/listaAuspiciantes/{id}")
 	@ResponseBody
 	public ArrayList<Auspiciante> getAuspiciantesConferencia(@PathVariable("id") long idConferencia) {

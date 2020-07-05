@@ -86,5 +86,13 @@ public class OradorController {
         
 		return new RedirectView(ViewRouteHelpers.ORADOR_ROOT);
 	}
+	
+	@PostMapping("/update")
+	public RedirectView update(OradorModel oradorModel, RedirectAttributes redirectAttrs) {
+		oradorService.save(oradorModel);
+
+		return new RedirectView(ViewRouteHelpers.ORADOR_ROOT);
+
+	}
 
 }

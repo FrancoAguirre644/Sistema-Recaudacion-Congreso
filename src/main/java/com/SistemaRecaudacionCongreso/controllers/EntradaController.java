@@ -61,8 +61,6 @@ public class EntradaController {
 		mAV.addObject("entrada", new EntradaModel());
 		mAV.addObject("imgUser",userService.getPhotoUser());
 
-
-
 		return mAV;
 	}
 	
@@ -84,6 +82,17 @@ public class EntradaController {
 		entradaModel.setConferencia(conferenciaConverter.modelToEntity(conferenciaService.findByIdConferencia(entradaModel.getConferencia().getIdConferencia())));
 
 		entradaService.insertOrUpdate(entradaModel);
+		
+		return new RedirectView(ViewRouteHelpers.ENTRADA_ROOT);
+	}
+	
+	@PostMapping("/update")
+	public RedirectView update(EntradaModel entradaModel){
+		entradaModel.setEspectador(espectadorService.findByIdPersona(entradaModel.getEspectador().getIdPersona()));
+		entradaModel.setConferencia(conferenciaConverter.modelToEntity(conferenciaService.findByIdConferencia(entradaModel.getConferencia().getIdConferencia())));
+		
+		entradaService.insertOrUpdate(entradaModel);
+		
 		return new RedirectView(ViewRouteHelpers.ENTRADA_ROOT);
 	}
 
