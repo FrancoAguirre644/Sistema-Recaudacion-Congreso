@@ -1,6 +1,5 @@
 package com.SistemaRecaudacionCongreso.controllers;
 
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.SistemaRecaudacionCongreso.entities.Auspiciante;
 import com.SistemaRecaudacionCongreso.entities.Espectador;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.EspectadorModel;
@@ -96,7 +94,36 @@ public class EspectadorController {
     	return new RedirectView(ViewRouteHelpers.ESPECTADOR_ROOT);
     }
     
-    
+    @PostMapping("/update")
+	public RedirectView update(@ModelAttribute("espectador") EspectadorModel espectadorModel, RedirectAttributes redirectAttrs ) {
+    	boolean band = false;
+        int i=0;
+                
+        while(i<espectadorService.getAll().size() && !band) { 
+        	Espectador e =  espectadorService.getAll().get(i);
+        	        	
+        	if(e.getNroDocumento() == espectadorModel.getNroDocumento() && e.getIdPersona() != espectadorModel.getIdPersona()) {
+        		band = true;
+        	}
+        	
+        	i++;
+        }
+    	
+    	
+        if(band) {
+        	redirectAttrs.addFlashAttribute("mensaje","No se ha podido actualizar debido a que ya existe ese espectador");
+			redirectAttrs.addFlashAttribute("clase", "danger");
+        }else {
+        	espectadorService.insertOrUpdate(espectadorModel);
+        	redirectAttrs.addFlashAttribute("mensaje","Actualizado Correctamente");
+    		redirectAttrs.addFlashAttribute("clase", "success");
+    		
+        }
+
+    	
+    	return new RedirectView(ViewRouteHelpers.ESPECTADOR_ROOT);
+
+    }
 
 
     

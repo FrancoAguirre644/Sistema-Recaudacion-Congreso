@@ -190,9 +190,17 @@
 
 
                 <div class="container-fluid">
+                
+                     <div  class="alert" th:classappend="'alert-' + (${clase != null} ? ${clase} +' alert-dismissible' : info + ' alert-dismissible')" aria-hidden="true" th:if="${mensaje != null}">
+					       <button type="button" class="close " aria-hidden="true" data-dismiss="alert">&times;</button>
+					        <span th:text="${mensaje}"></span>
+					       
+					 </div>
 
-                    <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
-                    </div>
+                    
+
+                    
+
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -273,12 +281,12 @@
 
 
                     <div class="form-update">
-                        <form action="#" method="post" th:action="@{auspiciantes/save}" class="formulario-update" novalidate>
+                        <form action="#" method="post" th:action="@{auspiciantes/update}" class="formulario" novalidate>
                             <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" role="dialog" tabindex="-1">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Actualizar Auspiciante
+                                            <h5 class="modal-title" id="exampleModalLabel">Editar Auspiciante
                                             </h5>
                                             <button aria-label="Close" class="close" data-dismiss="modal" type="button">
 								<span aria-hidden="true">&times;</span>
@@ -365,9 +373,10 @@
                                 </div>
                         </form>
                         </div>
+                        </div>
 
                         <div class="form-add">
-                            <form action="#" method="post" novalidate th:action="@{auspiciantes/save}" class="formulario-add">
+                            <form action="#" method="post" novalidate th:action="@{auspiciantes/save}" class="formulario">
                                 <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal-add" role="dialog" tabindex="-1">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -554,9 +563,6 @@
             <script src="../../vendor/datatables/jquery.dataTables.min.js"></script>
             <script src="../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-            <!-- Page level custom scripts -->
-            <script src="../../js/demo/datatables-demo.js"></script>
-
             <script type="text/javascript">
                 $(document).ready(function() {
 
@@ -588,7 +594,7 @@
                         'use strict';
                         window.addEventListener('load', function() {
                             // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                            var forms = document.getElementsByClassName('formulario-add');
+                            var forms = document.getElementsByClassName('formulario');
                             // Loop over them and prevent submission
                             var validation = Array.prototype.filter.call(forms, function(form) {
                                 form.addEventListener('submit', function(event) {
@@ -602,24 +608,6 @@
                         }, false);
                     })();
 
-
-                    (function() {
-                        'use strict';
-                        window.addEventListener('load', function() {
-                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                            var forms = document.getElementsByClassName('formulario-update');
-                            // Loop over them and prevent submission
-                            var validation = Array.prototype.filter.call(forms, function(form) {
-                                form.addEventListener('submit', function(event) {
-                                    if (form.checkValidity() === false) {
-                                        event.preventDefault();
-                                        event.stopPropagation();
-                                    }
-                                    form.classList.add('was-validated');
-                                }, false);
-                            });
-                        }, false);
-                    })();
 
                     $('#btn-profile').on('click', function(event) {
                         event.preventDefault();
@@ -628,6 +616,9 @@
 
                 });
             </script>
+
+			<!-- Page level custom scripts -->
+            <script src="../../js/demo/datatables-demo.js"></script>
 
 </body>
 
