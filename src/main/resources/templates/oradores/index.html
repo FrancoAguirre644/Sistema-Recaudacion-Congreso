@@ -191,8 +191,13 @@
 
                 <div class="container-fluid">
 
-                    <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
-                    </div>
+					 <div  class="alert" th:classappend="'alert-' + (${clase != null} ? ${clase} +' alert-dismissible' : info + ' alert-dismissible')" aria-hidden="true" th:if="${mensaje != null}">
+					       <button type="button" class="close " aria-hidden="true" data-dismiss="alert">&times;</button>
+					        <span th:text="${mensaje}"></span>
+					       
+					 </div>
+
+                    
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
