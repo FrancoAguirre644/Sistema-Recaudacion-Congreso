@@ -88,9 +88,31 @@ public class OradorController {
 	}
 	
 	@PostMapping("/update")
-	public RedirectView update(OradorModel oradorModel, RedirectAttributes redirectAttrs) {
-		oradorService.save(oradorModel);
-
+	public RedirectView update(OradorModel oradorModel, RedirectAttributes redirectAttrs) {		
+		boolean band = false;
+        int i=0;
+                
+        while(i<oradorService.getAll().size() && !band) {
+        	Orador o =  oradorService.getAll().get(i);
+        	        	
+        	if(o.getEmail().equalsIgnoreCase(oradorModel.getEmail()) && o.getIdPersona() != oradorModel.getIdPersona()) {
+        		band = true;
+        	}
+        	
+        	i++;
+        }
+        
+        if(band) {
+        	redirectAttrs.addFlashAttribute("mensaje","No se ha podido actualizar debido a que ya existe ese orador");
+			redirectAttrs.addFlashAttribute("clase", "danger");
+        }else {
+    		oradorService.save(oradorModel);
+        	redirectAttrs.addFlashAttribute("mensaje","Actualizar Correctamente");
+    		redirectAttrs.addFlashAttribute("clase", "success");
+    		
+        }
+		
+		
 		return new RedirectView(ViewRouteHelpers.ORADOR_ROOT);
 
 	}

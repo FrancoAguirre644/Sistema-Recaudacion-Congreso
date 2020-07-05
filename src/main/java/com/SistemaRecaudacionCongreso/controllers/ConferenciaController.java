@@ -122,8 +122,33 @@ public class ConferenciaController {
 	
 	@PostMapping("/update")
 	public RedirectView update(@ModelAttribute("conferencia") ConferenciaModel conferenciaModel, RedirectAttributes redirectAttrs) {
-		conferenciaModel.setOrador(oradorConverter.modelToEntity(oradorService.findByIdPersona(conferenciaModel.getOrador().getIdPersona())));
-		conferenciaService.insertOrUpdate(conferenciaModel);
+		boolean band = false;
+        int i=0;
+                
+        while(i<conferenciaService.getAll().size() && !band) {
+        	Conferencia c =  conferenciaService.getAll().get(i);
+        	        	
+        	if(c.getTitulo().equalsIgnoreCase(conferenciaModel.getTitulo()) && c.getIdConferencia() != conferenciaModel.getIdConferencia()) {
+        		band = true;
+        	}
+        	
+        	i++;
+        }
+        
+        if(band) {
+        	redirectAttrs.addFlashAttribute("mensaje","No se ha podido actualizar debido a que ya existe esa conferencia");
+			redirectAttrs.addFlashAttribute("clase", "danger");
+        }else {
+        	
+    		conferenciaModel.setOrador(oradorConverter.modelToEntity(oradorService.findByIdPersona(conferenciaModel.getOrador().getIdPersona())));
+    		conferenciaService.insertOrUpdate(conferenciaModel);
+    		
+        	redirectAttrs.addFlashAttribute("mensaje","Actualizar Correctamente");
+    		redirectAttrs.addFlashAttribute("clase", "success");
+    		
+        }
+		
+		
 		return new RedirectView(ViewRouteHelpers.CONFERENCIA_ROOT);
 	}
 	

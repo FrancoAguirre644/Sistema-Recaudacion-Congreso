@@ -1,6 +1,5 @@
 package com.SistemaRecaudacionCongreso.controllers;
 
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,10 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.SistemaRecaudacionCongreso.entities.Auspiciante;
-import com.SistemaRecaudacionCongreso.entities.Conferencia;
 import com.SistemaRecaudacionCongreso.helpers.ViewRouteHelpers;
 import com.SistemaRecaudacionCongreso.models.AuspicianteModel;
-import com.SistemaRecaudacionCongreso.models.PorcentajeSolventado;
 import com.SistemaRecaudacionCongreso.services.IAuspicianteService;
 import com.SistemaRecaudacionCongreso.services.IConferenciaService;
 import com.SistemaRecaudacionCongreso.services.implementation.UserService;
@@ -102,8 +99,31 @@ public class AuspicianteController {
     
     @PostMapping("/update")
     public RedirectView update(@ModelAttribute("auspiciante") AuspicianteModel auspicianteModel, RedirectAttributes redirectAttrs){
-    	auspicianteService.insertOrUpdate(auspicianteModel);
+    	boolean band = false;
+        int i=0;
+                
+        while(i<auspicianteService.getAll().size() && !band) {
+        	Auspiciante a =  auspicianteService.getAll().get(i);
+        	        	
+        	if(a.getCuit().equalsIgnoreCase(auspicianteModel.getCuit()) && a.getIdPersona() != auspicianteModel.getIdPersona()) {
+        		band = true;
+        	}
+        	
+        	i++;
+        }
+        
+        
+        if(band) {
+        	redirectAttrs.addFlashAttribute("mensaje","No se ha podido actualizar debido a que ya existe ese auspiciante");
+			redirectAttrs.addFlashAttribute("clase", "danger");
+        }else {
+        	auspicianteService.insertOrUpdate(auspicianteModel);
+        	redirectAttrs.addFlashAttribute("mensaje","Actualizar Correctamente");
+    		redirectAttrs.addFlashAttribute("clase", "success");
+    		
+        }
     	
+	
     	return new RedirectView(ViewRouteHelpers.AUSPICIANTE_ROOT);
     }
 

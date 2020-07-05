@@ -96,7 +96,31 @@ public class EspectadorController {
     
     @PostMapping("/update")
 	public RedirectView update(@ModelAttribute("espectador") EspectadorModel espectadorModel, RedirectAttributes redirectAttrs ) {
-    	espectadorService.insertOrUpdate(espectadorModel);
+    	boolean band = false;
+        int i=0;
+                
+        while(i<espectadorService.getAll().size() && !band) { 
+        	Espectador e =  espectadorService.getAll().get(i);
+        	        	
+        	if(e.getNroDocumento() == espectadorModel.getNroDocumento() && e.getIdPersona() != espectadorModel.getIdPersona()) {
+        		band = true;
+        	}
+        	
+        	i++;
+        }
+    	
+    	
+        if(band) {
+        	redirectAttrs.addFlashAttribute("mensaje","No se ha podido actualizar debido a que ya existe ese espectador");
+			redirectAttrs.addFlashAttribute("clase", "danger");
+        }else {
+        	espectadorService.insertOrUpdate(espectadorModel);
+        	redirectAttrs.addFlashAttribute("mensaje","Actualizado Correctamente");
+    		redirectAttrs.addFlashAttribute("clase", "success");
+    		
+        }
+
+    	
     	return new RedirectView(ViewRouteHelpers.ESPECTADOR_ROOT);
 
     }

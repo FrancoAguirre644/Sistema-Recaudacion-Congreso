@@ -44,6 +44,8 @@ public class HomeController {
 		
 		mAV.addObject("gananciaAportes", conferenciaService.getAportesTotales());
 		
+		mAV.addObject("costoConferencias", conferenciaService.getCostoConferencias());
+		
 		mAV.addObject("imgUser",userService.getPhotoUser());
 		
 		return mAV;
